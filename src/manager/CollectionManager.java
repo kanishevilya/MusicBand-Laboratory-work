@@ -64,12 +64,16 @@ public class CollectionManager {
         return before - collection.size();
     }
 
-    public boolean replaceIfGreater(Long key, MusicBand newBand) {
+    public boolean replaceIfGreater(Long key, MusicBand newBand, boolean isAutoId) {
         MusicBand existing = collection.get(key);
         if (existing == null)
             return false;
         if (newBand.compareTo(existing) > 0) {
-            newBand.setId(existing.getId());
+            if(isAutoId){
+                newBand.setId(IdGenerator.nextId());
+            }else{
+                newBand.setId(existing.getId());
+            }
             newBand.setCreationDate(existing.getCreationDate());
             collection.put(key, newBand);
             return true;
@@ -77,12 +81,16 @@ public class CollectionManager {
         return false;
     }
 
-    public boolean replaceIfLower(Long key, MusicBand newBand) {
+    public boolean replaceIfLower(Long key, MusicBand newBand, boolean isAutoId) {
         MusicBand existing = collection.get(key);
         if (existing == null)
             return false;
         if (newBand.compareTo(existing) < 0) {
-            newBand.setId(existing.getId());
+            if(isAutoId) {
+                newBand.setId(IdGenerator.nextId());
+            }else {
+                newBand.setId(existing.getId());
+            }
             newBand.setCreationDate(existing.getCreationDate());
             collection.put(key, newBand);
             return true;

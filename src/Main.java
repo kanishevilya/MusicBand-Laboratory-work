@@ -11,7 +11,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         InputHandler inputHandler = new InputHandler(scanner, true);
 
-
         CommandManager commandManager = new CommandManager(inputHandler);
 
         commandManager.register(new HelpCommand(commandManager.getCommands()));
@@ -21,6 +20,13 @@ public class Main {
         commandManager.register(new UpdateCommand(collectionManager, commandManager));
         commandManager.register(new RemoveCommand(collectionManager));
         commandManager.register(new ClearCommand(collectionManager));
+        commandManager.register(new ExitCommand());
+        commandManager.register(new RemoveGreaterCommand(collectionManager,commandManager));
+        commandManager.register(new ReplaceGreaterCommand(collectionManager,commandManager));
+        commandManager.register(new ReplaceLowerCommand(collectionManager,commandManager));
+        commandManager.register(new AverageOfAlbumsCountCommand(collectionManager));
+        commandManager.register(new FilterByAlbumsCountCommand(collectionManager));
+        commandManager.register(new PrintFieldDescendingAlbumsCountCommand(collectionManager));
 
         System.out.println("Введите 'help' для получения справки.");
 
