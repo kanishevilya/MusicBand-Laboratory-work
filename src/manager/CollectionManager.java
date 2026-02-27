@@ -4,25 +4,25 @@ import model.MusicBand;
 import util.IdGenerator;
 
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class CollectionManager {
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
     private TreeMap<Long, MusicBand> collection;
     private final ZonedDateTime initializationDate;
-
-    private Long idCounter;
 
     public CollectionManager() {
         this.collection = new TreeMap<>();
         this.initializationDate = ZonedDateTime.now();
-        this.idCounter = IdGenerator.nextId();
     }
 
     public long generateId() {
         long id;
         do {
             id = IdGenerator.nextId();
-        } while (collection.containsKey(id)); // O(log n) вместо O(n) stream
+        } while (collection.containsKey(id));
         return id;
     }
 
