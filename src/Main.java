@@ -47,6 +47,7 @@ public class Main {
         commandManager.register(new FilterByAlbumsCountCommand(collectionManager));
         commandManager.register(new PrintFieldDescendingAlbumsCountCommand(collectionManager));
         commandManager.register(new SaveCommand(collectionManager, filePath, xmlWriter));
+        commandManager.register(new ExecuteScriptCommand(commandManager));
 
         System.out.println("Введите 'help' для получения справки.");
 

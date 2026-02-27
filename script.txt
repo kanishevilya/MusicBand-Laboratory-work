@@ -1,0 +1,35 @@
+insert 3
+Metallica
+10.5
+20
+4
+10
+POST_ROCK
+James Hetfield
+1963-08-03 10:10:10
+185
+AB123456
+insert 4
+Nirvana
+5.2
+15
+3
+3
+POST_ROCK
+Kurt Cobain
+1967-02-20 10:10:10
+175
+CD654321
+show
+update 1
+Metallica Updated
+11.0
+25
+4
+11
+RAP
+James Hetfield
+1963-08-03 10:10:10
+185
+AB123456
+save

@@ -22,6 +22,9 @@ public class InputHandler {
     public String readLine() {
         if (scanner.hasNextLine())
             return scanner.nextLine();
+        if(!interactive){
+            throw new ScriptEndException("Выполнение скрипта закончилось");
+        }
         return null;
     }
     
@@ -136,13 +139,13 @@ public class InputHandler {
 
     public LocalDateTime readBirthdayOrNull(String message) {
         while (true) {
-            String value = rawScan(message + " (формат: yyyy-MM-dd'T'HH:mm:ss, или Enter для пропуска)");
+            String value = rawScan(message + " (формат: yyyy-MM-dd, или Enter для пропуска)");
             if (value == null || value.isEmpty())
                 return null;
             try {
                 return LocalDateTime.parse(value, Person.DATE_FORMATTER);
             } catch (DateTimeParseException e) {
-                System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd'T'HH:mm:ss");
+                System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd");
             }
         }
     }

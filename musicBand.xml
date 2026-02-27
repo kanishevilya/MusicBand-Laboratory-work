@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<collection>
+  <entry>
+    <key>3</key>
+    <band>
+      <id>1</id>
+      <name>Metallica Updated</name>
+      <coordinates>
+        <x>11.0</x>
+        <y>25.0</y>
+      </coordinates>
+      <creationDate>2026-02-28 01:08:40+03:00</creationDate>
+      <numberOfParticipants>4</numberOfParticipants>
+      <albumsCount>11</albumsCount>
+      <genre>RAP</genre>
+      <frontMan>
+        <personName>James Hetfield</personName>
+        <birthday>1963-08-03 10:10:10</birthday>
+        <height>185</height>
+        <passportID>AB123456</passportID>
+      </frontMan>
+    </band>
+  </entry>
+  <entry>
+    <key>4</key>
+    <band>
+      <id>2</id>
+      <name>Nirvana</name>
+      <coordinates>
+        <x>5.2</x>
+        <y>15.0</y>
+      </coordinates>
+      <creationDate>2026-02-28 01:08:40+03:00</creationDate>
+      <numberOfParticipants>3</numberOfParticipants>
+      <albumsCount>3</albumsCount>
+      <genre>POST_ROCK</genre>
+      <frontMan>
+        <personName>Kurt Cobain</personName>
+        <birthday>1967-02-20 10:10:10</birthday>
+        <height>175</height>
+        <passportID>CD654321</passportID>
+      </frontMan>
+    </band>
+  </entry>
+</collection>

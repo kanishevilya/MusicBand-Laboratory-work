@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Person {
 
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     private String name; //Поле не может быть null, Строка не может быть пустой
 
