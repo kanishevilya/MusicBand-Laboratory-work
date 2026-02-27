@@ -1,5 +1,6 @@
 import command.HelpCommand;
 import command.InfoCommand;
+import command.ShowCommand;
 import manager.CollectionManager;
 import manager.CommandManager;
 import util.InputHandler;
@@ -17,6 +18,7 @@ public class Main {
 
         commandManager.register(new HelpCommand(commandManager.getCommands()));
         commandManager.register(new InfoCommand(collectionManager));
+        commandManager.register(new ShowCommand(collectionManager));
 
         System.out.println("Введите 'help' для получения справки.");
 
