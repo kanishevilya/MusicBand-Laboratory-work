@@ -34,22 +34,20 @@ public class CollectionManager {
                 .ifPresent(IdGenerator::syncTo);
     }
 
-    public void insert(MusicBand band) {
-        collection.put(band.getId(), band);
+    public void insert(Long key, MusicBand band) {
+        collection.put(key, band);
     }
 
     public boolean updateById(long id, MusicBand newBand) {
-        if (!collection.containsKey(id)) {
-            return false;
+        for (Map.Entry<Long, MusicBand> entry : collection.entrySet()) {
+            if (entry.getValue().getId() == id) {
+                newBand.setId(id);
+                newBand.setCreationDate(entry.getValue().getCreationDate());
+                collection.put(entry.getKey(), newBand);
+                return true;
+            }
         }
-
-        MusicBand oldBand = collection.get(id);
-
-        newBand.setId(id);
-        newBand.setCreationDate(oldBand.getCreationDate());
-
-        collection.put(id, newBand);
-        return true;
+        return false;
     }
 
     public boolean removeByKey(Long key) {
@@ -71,6 +69,7 @@ public class CollectionManager {
         if (existing == null)
             return false;
         if (newBand.compareTo(existing) > 0) {
+            newBand.setId(existing.getId());
             newBand.setCreationDate(existing.getCreationDate());
             collection.put(key, newBand);
             return true;
@@ -83,6 +82,7 @@ public class CollectionManager {
         if (existing == null)
             return false;
         if (newBand.compareTo(existing) < 0) {
+            newBand.setId(existing.getId());
             newBand.setCreationDate(existing.getCreationDate());
             collection.put(key, newBand);
             return true;
@@ -116,7 +116,11 @@ public class CollectionManager {
     }
 
     public MusicBand getById(long id) {
-        return collection.get(id);
+        return collection.values().stream().filter(b -> b.getId() == id).findFirst().orElse(null);
+    }
+
+    public MusicBand getByKey(Long key) {
+        return collection.get(key);
     }
 
     public boolean containsKey(Long key) {

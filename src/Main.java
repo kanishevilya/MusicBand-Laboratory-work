@@ -1,6 +1,4 @@
-import command.HelpCommand;
-import command.InfoCommand;
-import command.ShowCommand;
+import command.*;
 import manager.CollectionManager;
 import manager.CommandManager;
 import util.InputHandler;
@@ -19,6 +17,10 @@ public class Main {
         commandManager.register(new HelpCommand(commandManager.getCommands()));
         commandManager.register(new InfoCommand(collectionManager));
         commandManager.register(new ShowCommand(collectionManager));
+        commandManager.register(new InsertCommand(collectionManager, commandManager));
+        commandManager.register(new UpdateCommand(collectionManager, commandManager));
+        commandManager.register(new RemoveCommand(collectionManager));
+        commandManager.register(new ClearCommand(collectionManager));
 
         System.out.println("Введите 'help' для получения справки.");
 

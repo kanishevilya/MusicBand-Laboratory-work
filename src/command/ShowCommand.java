@@ -6,7 +6,7 @@ import model.MusicBand;
 import java.util.Map;
 
 public class ShowCommand implements Command {
-    private CollectionManager collectionManager;
+    private final CollectionManager collectionManager;
     public ShowCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }

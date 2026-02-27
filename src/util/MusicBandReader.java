@@ -27,10 +27,13 @@ public class MusicBandReader {
         band.setGenre(input.readMusicGenreOrNull("Введите жанр (или Enter для пропуска)"));
 
         String frontManName = input.rawScan("Введите имя фронтмена (или Enter для пропуска)");
-        Person frontMan = PersonReader.read(input, "фронтмена", frontManName);
-        if(frontMan != null){
-            band.setFrontMan(frontMan);
+        if(frontManName != null && !frontManName.isEmpty()){
+            Person frontMan = PersonReader.read(input, "фронтмена", frontManName);
+            if(frontMan != null){
+                band.setFrontMan(frontMan);
+            }
         }
+
 
         return band;
     }
