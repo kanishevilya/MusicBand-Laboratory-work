@@ -2,14 +2,33 @@ import command.*;
 import manager.CollectionManager;
 import manager.CommandManager;
 import util.InputHandler;
+import util.XmlParser;
+import util.XmlWriter;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length < 1) {
+            System.out.println("Использование: java -jar lab1.jar <путь_к_файлу>");
+            System.exit(1);
+        }
+
+        String filePath = args[0];
+
         CollectionManager collectionManager = new CollectionManager();
         Scanner scanner = new Scanner(System.in);
         InputHandler inputHandler = new InputHandler(scanner, true);
+        XmlWriter xmlWriter = new XmlWriter();
+        XmlParser xmlParser = new XmlParser();
+
+        try {
+            xmlParser.load(filePath, collectionManager);
+        } catch (IOException e) {
+            System.out.println("Предупреждение: не удалось загрузить коллекцию из файла: " + e.getMessage());
+            System.out.println("Начата работа с пустой коллекцией.");
+        }
 
         CommandManager commandManager = new CommandManager(inputHandler);
 
@@ -27,6 +46,7 @@ public class Main {
         commandManager.register(new AverageOfAlbumsCountCommand(collectionManager));
         commandManager.register(new FilterByAlbumsCountCommand(collectionManager));
         commandManager.register(new PrintFieldDescendingAlbumsCountCommand(collectionManager));
+        commandManager.register(new SaveCommand(collectionManager, filePath, xmlWriter));
 
         System.out.println("Введите 'help' для получения справки.");
 

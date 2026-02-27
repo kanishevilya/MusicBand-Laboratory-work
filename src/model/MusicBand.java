@@ -123,18 +123,17 @@ public class MusicBand implements Comparable<MusicBand> {
     public int compareTo(MusicBand other) {
         return this.name.compareToIgnoreCase(other.name);
     }
-
     @Override
     public String toString() {
-        return "MusicBand{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", coordinates=" + coordinates +
-                ", creationDate=" + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null") +
-                ", numberOfParticipants=" + numberOfParticipants +
-                ", albumsCount=" + albumsCount +
-                ", genre=" + genre +
-                ", frontMan=" + frontMan +
+        return "MusicBand {\n" +
+                "  id                   = " + id + "\n" +
+                "  name                 = \"" + name + "\"\n" +
+                "  coordinates          = " + coordinates + "\n" +
+                "  creationDate         = " + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null") + "\n" +
+                "  numberOfParticipants = " + numberOfParticipants + "\n" +
+                "  albumsCount          = " + albumsCount + "\n" +
+                "  genre                = " + genre + "\n" +
+                "  frontMan             = " + frontMan + "\n" +
                 "}";
     }
 }

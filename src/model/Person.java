@@ -77,11 +77,11 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", birthday=" + (birthday != null ? birthday.format(DATE_FORMATTER) : "null") +
-                ", height=" + height +
-                ", passportID='" + passportID + '\'' +
+        return "Person {\n" +
+                "  name       = \"" + name + "\"\n" +
+                "  birthday   = " + (birthday != null ? birthday.format(DATE_FORMATTER) : "null") + "\n" +
+                "  height     = " + height + "\n" +
+                "  passportID = \"" + passportID + "\"\n" +
                 "}";
     }
 }

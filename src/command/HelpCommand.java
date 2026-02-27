@@ -24,6 +24,6 @@ public class HelpCommand implements Command {
         System.out.println("Доступные команды:");
         commands.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
-                .forEach(e -> System.out.printf("  %-10s: %s%n", e.getKey(), e.getValue().getDescription()));
+                .forEach(e -> System.out.printf("  %-36s: %s%n", e.getKey(), e.getValue().getDescription()));
     }
 }
