@@ -3,12 +3,18 @@ package command;
 import manager.CollectionManager;
 import util.XmlWriter;
 
+/**
+ * Команда save для сохранения коллекции в файл
+ */
 public class SaveCommand implements Command {
 
     private final CollectionManager collectionManager;
 
     private final String filePath;
 
+    /**
+     * XML-писатель
+     */
     private final XmlWriter xmlWriter;
 
     public SaveCommand(CollectionManager collectionManager, String filePath, XmlWriter xmlWriter) {

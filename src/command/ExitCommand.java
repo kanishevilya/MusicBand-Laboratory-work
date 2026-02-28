@@ -1,5 +1,8 @@
 package command;
 
+/**
+ * Команда exit для завершения программы
+ */
 public class ExitCommand implements Command {
     @Override
     public String getName() {

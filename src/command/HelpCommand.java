@@ -2,6 +2,9 @@ package command;
 
 import java.util.Map;
 
+/**
+ * Команда help для вывода справки по доступным командам
+ */
 public class HelpCommand implements Command {
     private final Map<String, Command> commands;
 
