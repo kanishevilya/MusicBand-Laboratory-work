@@ -9,19 +9,29 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Управляет командами
+ */
 public class CommandManager {
 
     private final Map<String, Command> commands = new LinkedHashMap<>();
 
     private InputHandler inputHandler;
 
+    /**
+     * Множество запущенных скриптов (для избежание рекурсии)
+     */
     private final Set<String> runningScripts = new HashSet<>();
 
     public CommandManager(InputHandler inputHandler) {
         this.inputHandler = inputHandler;
     }
 
-
+    /**
+     * Регистрирует команду
+     * 
+     * @param command команда
+     */
     public void register(Command command) {
         commands.put(command.getName(), command);
     }
@@ -30,6 +40,11 @@ public class CommandManager {
         return commands;
     }
 
+    /**
+     * Обрабатывает строку команды
+     * 
+     * @param line строка команды
+     */
     public void dispatchLine(String line) {
         try {
             if (line == null || line.trim().isEmpty())
@@ -42,7 +57,7 @@ public class CommandManager {
                 return;
             }
             command.execute(parts);
-        } catch (ScriptEndException ex){
+        } catch (ScriptEndException ex) {
             System.out.println(ex.getMessage());
         }
     }

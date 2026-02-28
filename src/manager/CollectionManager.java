@@ -7,7 +7,13 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * Управляет коллекцией музыкальных групп
+ */
 public class CollectionManager {
+    /**
+     * Форматтер даты
+     */
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private TreeMap<Long, MusicBand> collection;
@@ -18,6 +24,11 @@ public class CollectionManager {
         this.initializationDate = ZonedDateTime.now();
     }
 
+    /**
+     * Генерирует уникальный ID
+     * 
+     * @return уникальный ID
+     */
     public long generateId() {
         while (true) {
             long newId = IdGenerator.nextId();
@@ -30,7 +41,9 @@ public class CollectionManager {
         }
     }
 
-
+    /**
+     * Синхронизирует счетчик ID (используется при загрузке коллекции)
+     */
     public void syncIdCounter() {
         collection.values().stream()
                 .mapToLong(MusicBand::getId)
@@ -62,21 +75,35 @@ public class CollectionManager {
         collection.clear();
     }
 
+    /**
+     * Удаляет элементы, большие заданного (по алфавиту)
+     * 
+     * @param band элемент для сравнения
+     * @return количество удаленных элементов
+     */
     public int removeGreater(MusicBand band) {
         int before = collection.size();
         collection.entrySet().removeIf(e -> e.getValue().compareTo(band) > 0);
         return before - collection.size();
     }
 
+    /**
+     * Заменяет элемент, если он больше заданного (по алфавиту)
+     * 
+     * @param key      ключ элемента
+     * @param newBand  новый элемент
+     * @param isAutoId флаг, указывающий, нужно ли генерировать новый ID
+     * @return true, если элемент был заменен, false в противном случае
+     */
     public boolean replaceIfGreater(Long key, MusicBand newBand, boolean isAutoId) {
         MusicBand existing = collection.get(key);
         if (existing == null)
             return false;
         System.out.println(newBand.compareTo(existing));
         if (newBand.compareTo(existing) > 0) {
-            if(isAutoId){
+            if (isAutoId) {
                 newBand.setId(IdGenerator.nextId());
-            }else{
+            } else {
                 newBand.setId(existing.getId());
             }
             newBand.setCreationDate(existing.getCreationDate());
@@ -86,14 +113,22 @@ public class CollectionManager {
         return false;
     }
 
+    /**
+     * Заменяет элемент, если он меньше заданного (по алфавиту)
+     * 
+     * @param key      ключ элемента
+     * @param newBand  новый элемент
+     * @param isAutoId флаг, указывающий, нужно ли генерировать новый ID
+     * @return true, если элемент был заменен, false в противном случае
+     */
     public boolean replaceIfLower(Long key, MusicBand newBand, boolean isAutoId) {
         MusicBand existing = collection.get(key);
         if (existing == null)
             return false;
         if (newBand.compareTo(existing) < 0) {
-            if(isAutoId) {
+            if (isAutoId) {
                 newBand.setId(IdGenerator.nextId());
-            }else {
+            } else {
                 newBand.setId(existing.getId());
             }
             newBand.setCreationDate(existing.getCreationDate());
