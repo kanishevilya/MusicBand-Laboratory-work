@@ -26,7 +26,7 @@ public class ReplaceLowerCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "replace_if_lower <ключ> - заменить значение, если новое меньше старого";
+        return "replace_if_lower <ключ> - заменить значение, если новое меньше старого (сравнение элементов производится на основе их алфавитного порядка)";
     }
 
     /**

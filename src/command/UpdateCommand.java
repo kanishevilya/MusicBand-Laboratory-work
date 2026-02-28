@@ -43,8 +43,9 @@ public class UpdateCommand implements Command {
         long id;
         try {
             id = Long.parseLong(args[1]);
+            if(id<0){throw new NumberFormatException();}
         } catch (NumberFormatException e) {
-            System.out.println("Ошибка: ID должен быть целым числом.");
+            System.out.println("Ошибка: ID должен быть целым положительным числом.");
             return;
         }
         if (collectionManager.getById(id) == null) {

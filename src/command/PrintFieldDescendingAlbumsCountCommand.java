@@ -32,6 +32,9 @@ public class PrintFieldDescendingAlbumsCountCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         if (collectionManager.isEmpty()) {
             System.out.println("Коллекция пуста.");
             return;

@@ -40,6 +40,9 @@ public class SaveCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         try {
             xmlWriter.save(filePath, collectionManager);
             System.out.println("Коллекция успешно сохранена в файл: " + filePath);

@@ -27,7 +27,7 @@ public class RemoveGreaterCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "remove_greater — удалить все элементы, превышающие заданный";
+        return "remove_greater - удалить все элементы, превышающие заданный (сравнение элементов производится на основе их алфавитного порядка)";
     }
 
     /**
@@ -37,6 +37,9 @@ public class RemoveGreaterCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         System.out.println("Введите эталонный элемент для сравнения");
         MusicBand reference = MusicBandReader.read(commandManager.getInputHandler());
         reference.setId(1L);

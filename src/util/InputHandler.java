@@ -1,5 +1,6 @@
 package util;
 
+import exception.CancelInputException;
 import exception.ScriptEndException;
 import model.*;
 
@@ -28,8 +29,12 @@ public class InputHandler {
      * @throws ScriptEndException если ввод завершён (EOF)
      */
     public String readLine() {
-        if (scanner.hasNextLine())
-            return scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            if(line.equalsIgnoreCase("/cancel"))
+                throw new CancelInputException("Ввод завершён (/cancel).");
+            return line;
+        }
         throw new ScriptEndException("Ввод завершён (EOF).");
     }
 
@@ -72,11 +77,19 @@ public class InputHandler {
      */
     public double readDouble(String message) {
         while (true) {
-            String value = rawScan(message);
+            String value = rawScan(message+" (максимум 14 знаков после запятой)");
             if (value == null) {
                 System.out.println("Ошибка: введите число.");
                 continue;
             }
+            value = value.replace(',', '.');
+
+            String[] parts = value.split("\\.");
+            if (parts.length == 2 && parts[1].length() > 15) {
+                System.out.println("Ошибка: слишком много знаков после запятой (максимум 14).");
+                continue;
+            }
+
             try {
                 return Double.parseDouble(value);
             } catch (NumberFormatException e) {
@@ -104,13 +117,21 @@ public class InputHandler {
      */
     public Float readFloatLessThanMax(String message, Float maxValue) {
         while (true) {
-            String value = rawScan(message);
+            String value = rawScan(message+" (максимум 5 знаков после запятой)");
             if (value == null) {
                 System.out.println("Ошибка: поле не может быть пустым.");
                 continue;
             }
+            value = value.replace(',', '.');
+
+            String[] parts = value.split("\\.");
+            if (parts.length == 2 && parts[1].length() > 7) {
+                System.out.println("Ошибка: слишком много знаков после запятой (максимум 5).");
+                continue;
+            }
+
             try {
-                Float f = Float.parseFloat(value);
+                float f= Float.parseFloat(value);
                 if (maxValue != null && f > maxValue) {
                     System.out.println("Ошибка: значение не должно превышать " + maxValue + ".");
                     continue;
@@ -174,6 +195,10 @@ public class InputHandler {
             if (value == null || value.isEmpty())
                 return null;
             try {
+                try{
+                    int integer=Integer.parseInt(value)-1;
+                    return MusicGenre.fromOrdinal(integer);
+                }catch (NumberFormatException ignored){}
                 return MusicGenre.valueOf(value.toUpperCase());
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: неверный жанр. Доступные: " + MusicGenre.valuesString());

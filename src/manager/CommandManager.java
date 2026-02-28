@@ -1,5 +1,6 @@
 package manager;
 
+import exception.CancelInputException;
 import exception.ScriptEndException;
 import util.InputHandler;
 import command.Command;
@@ -57,8 +58,12 @@ public class CommandManager {
                 return;
             }
             command.execute(parts);
-        } catch (ScriptEndException ex) {
-            System.out.println(ex.getMessage());
+
+        }catch (CancelInputException e){
+            System.out.println("Ввод отменён. Возврат в меню.");
+        }
+        catch (ScriptEndException ignore) {
+//            System.out.println("EOF. Завершение программы.");
         }
     }
 

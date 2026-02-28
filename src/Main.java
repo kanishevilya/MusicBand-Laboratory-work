@@ -4,8 +4,8 @@ import manager.CommandManager;
 import util.InputHandler;
 import util.XmlParser;
 import util.XmlWriter;
-
 import java.io.IOException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -58,19 +58,19 @@ public class Main {
 
         while (true) {
             System.out.print("\n> ");
-            String line;
             try {
-                if (!scanner.hasNextLine()) {
-                    System.out.println("\nПоток ввода закончен. Завершение программы.");
-                    break;
+                String line = scanner.nextLine().trim();
+
+                if (!line.isEmpty()) {
+                    commandManager.dispatchLine(line);
                 }
-                line = scanner.nextLine().trim();
-            } catch (Exception e) {
-                System.out.println("Ошибка чтения ввода: " + e.getMessage());
+
+            }catch (NoSuchElementException e) {
+                System.out.println("\nEOF обнаружен. Завершение программы.");
                 break;
             }
-            if (!line.isEmpty()) {
-                commandManager.dispatchLine(line);
+            catch (Exception e) {
+                System.out.println("Ошибка чтения ввода: " + e.getMessage());
             }
         }
     }

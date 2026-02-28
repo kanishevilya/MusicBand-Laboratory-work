@@ -29,6 +29,9 @@ public class ClearCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         collectionManager.clear();
         System.out.println("Коллекция очищена.");
     }

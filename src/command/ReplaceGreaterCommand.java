@@ -26,7 +26,7 @@ public class ReplaceGreaterCommand implements Command {
 
     @Override
     public String getDescription() {
-        return "replace_if_greater <ключ> - заменить значение, если новое больше старого";
+        return "replace_if_greater <ключ> - заменить значение, если новое больше старого (сравнение элементов производится на основе их алфавитного порядка)";
     }
 
     /**

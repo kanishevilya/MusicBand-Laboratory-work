@@ -29,9 +29,13 @@ public class HelpCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         System.out.println("Доступные команды:");
         commands.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(e -> System.out.printf("  %-36s: %s%n", e.getKey(), e.getValue().getDescription()));
+        System.out.println("Введите '/cancel' при вводе чтобы вернуться в главное меню");
     }
 }

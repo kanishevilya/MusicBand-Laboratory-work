@@ -20,9 +20,8 @@ public class FilterByAlbumsCountCommand implements Command {
         return "filter_by_albums_count";
     }
 
-    @Override
     public String getDescription() {
-        return "filter_by_albums_count <значение> — вывести элементы с данным albumsCount";
+        return "filter_by_albums_count <значение> - вывести элементы с данным albumsCount";
     }
 
     /**

@@ -21,6 +21,9 @@ public class ExitCommand implements Command {
      */
     @Override
     public void execute(String[] args) {
+        if (args.length > 1) {
+            System.out.println("Предупреждение: в данной команде не используются аргументы");
+        }
         System.out.println("Завершение программы.");
         System.exit(0);
     }
