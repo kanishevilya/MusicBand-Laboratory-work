@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.out.println("Использование: java -jar lab1.jar <путь_к_файлу>");
+            System.out.println("Введите аргумент командной строки, использование: java -jar MusicBand.jar <путь_к_файлу>");
             System.exit(1);
         }
 
