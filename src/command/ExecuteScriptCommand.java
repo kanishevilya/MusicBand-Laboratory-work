@@ -9,10 +9,12 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Set;
 
+/**
+ * Команда execute_script для выполнения скрипта
+ */
 public class ExecuteScriptCommand implements Command {
 
     private final CommandManager commandManager;
-
 
     public ExecuteScriptCommand(CommandManager commandManager) {
         this.commandManager = commandManager;

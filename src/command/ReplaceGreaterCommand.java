@@ -3,8 +3,6 @@ package command;
 import manager.CollectionManager;
 import manager.CommandManager;
 import model.MusicBand;
-import util.IdGenerator;
-import util.InputHandler;
 import util.MusicBandReader;
 
 import java.time.ZonedDateTime;
@@ -12,6 +10,7 @@ import java.time.ZonedDateTime;
 public class ReplaceGreaterCommand implements Command {
     private final CollectionManager collectionManager;
     private final CommandManager commandManager;
+
     public ReplaceGreaterCommand(CollectionManager collectionManager, CommandManager commandManager) {
         this.collectionManager = collectionManager;
         this.commandManager = commandManager;
