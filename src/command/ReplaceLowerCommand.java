@@ -7,6 +7,9 @@ import util.MusicBandReader;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Команда replace_if_lower для замены элемента коллекции по ID
+ */
 public class ReplaceLowerCommand implements Command {
     private final CollectionManager collectionManager;
     private final CommandManager commandManager;

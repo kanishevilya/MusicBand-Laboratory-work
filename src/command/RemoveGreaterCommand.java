@@ -7,6 +7,9 @@ import util.MusicBandReader;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Команда remove_greater для удаления всех элементов, превышающих заданный
+ */
 public class RemoveGreaterCommand implements Command {
 
     private final CollectionManager collectionManager;

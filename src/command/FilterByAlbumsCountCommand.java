@@ -5,6 +5,9 @@ import model.MusicBand;
 
 import java.util.List;
 
+/**
+ * Команда filter_by_albums_count для вывода элементов с заданным albumsCount
+ */
 public class FilterByAlbumsCountCommand implements Command {
     private final CollectionManager collectionManager;
 

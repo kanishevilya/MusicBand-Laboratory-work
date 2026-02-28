@@ -5,6 +5,9 @@ import manager.CommandManager;
 import model.MusicBand;
 import util.MusicBandReader;
 
+/**
+ * Команда update для обновления элемента коллекции по ID
+ */
 public class UpdateCommand implements Command {
 
     private final CollectionManager collectionManager;

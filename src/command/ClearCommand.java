@@ -2,8 +2,12 @@ package command;
 
 import manager.CollectionManager;
 
-public class ClearCommand implements Command{
+/**
+ * Команда clear для очистки коллекции
+ */
+public class ClearCommand implements Command {
     private final CollectionManager collectionManager;
+
     public ClearCommand(CollectionManager collectionManager) {
         this.collectionManager = collectionManager;
     }

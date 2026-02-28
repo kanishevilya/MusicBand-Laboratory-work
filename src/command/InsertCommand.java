@@ -7,6 +7,9 @@ import util.MusicBandReader;
 
 import java.time.ZonedDateTime;
 
+/**
+ * Команда insert для добавления нового элемента в коллекцию
+ */
 public class InsertCommand implements Command {
 
     private final CollectionManager collectionManager;

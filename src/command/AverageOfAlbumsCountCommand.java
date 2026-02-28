@@ -2,6 +2,9 @@ package command;
 
 import manager.CollectionManager;
 
+/**
+ * Команда average_of_albums_count для вывода среднего значения поля albumsCount
+ */
 public class AverageOfAlbumsCountCommand implements Command {
 
     private final CollectionManager collectionManager;

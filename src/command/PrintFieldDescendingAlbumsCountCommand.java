@@ -4,6 +4,10 @@ import manager.CollectionManager;
 
 import java.util.List;
 
+/**
+ * Команда print_field_descending_albums_count для вывода значений albumsCount
+ * всех элементов в порядке убывания
+ */
 public class PrintFieldDescendingAlbumsCountCommand implements Command {
     private final CollectionManager collectionManager;
 

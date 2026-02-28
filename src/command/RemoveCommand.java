@@ -1,10 +1,10 @@
 package command;
 
 import manager.CollectionManager;
-import manager.CommandManager;
-import model.MusicBand;
-import util.MusicBandReader;
 
+/**
+ * Команда remove_key для удаления элемента коллекции по ID
+ */
 public class RemoveCommand implements Command {
     private final CollectionManager collectionManager;
 
