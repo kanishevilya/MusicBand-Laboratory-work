@@ -29,7 +29,7 @@ public class ShowCommand implements Command {
         }
         System.out.println("Элементы коллекции:");
         for (Map.Entry<Long, MusicBand> entry : collectionManager.getCollection().entrySet()) {
-            System.out.println("Ключ (id) " + entry.getKey() + ": \n" + entry.getValue());
+            System.out.println("Ключ " + entry.getKey() + ": \n" + entry.getValue());
         }
     }
 }

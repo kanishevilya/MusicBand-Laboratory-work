@@ -48,9 +48,9 @@ public class ReplaceLowerCommand implements Command {
         newBand.setCreationDate(ZonedDateTime.now());
 
         if (collectionManager.replaceIfLower(key, newBand, true)) {
-            System.out.println("Элемент заменён (новое значение больше старого).");
+            System.out.println("Элемент заменён (новое значение меньше старого).");
         } else {
-            System.out.println("Замена не выполнена: новое значение не превышает старое.");
+            System.out.println("Замена не выполнена: новое значение не меньше старого.");
         }
     }
 }

@@ -29,7 +29,7 @@ public class RemoveGreaterCommand implements Command {
 
     @Override
     public void execute(String[] args) {
-        System.out.println("Введите эталонный элемент для сравнения:");
+        System.out.println("Введите эталонный элемент для сравнения");
         MusicBand reference = MusicBandReader.read(commandManager.getInputHandler());
         reference.setId(1L);
         reference.setCreationDate(ZonedDateTime.now());

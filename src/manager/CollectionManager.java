@@ -72,6 +72,7 @@ public class CollectionManager {
         MusicBand existing = collection.get(key);
         if (existing == null)
             return false;
+        System.out.println(newBand.compareTo(existing));
         if (newBand.compareTo(existing) > 0) {
             if(isAutoId){
                 newBand.setId(IdGenerator.nextId());
