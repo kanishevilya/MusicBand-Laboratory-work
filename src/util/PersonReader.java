@@ -2,16 +2,29 @@ package util;
 
 import model.Person;
 
+/**
+ * Читает человека
+ */
 public class PersonReader {
-    private PersonReader() {}
+    private PersonReader() {
+    }
 
+    /**
+     * Читает человека
+     * 
+     * @param input обработчик ввода
+     * @param label метка (например, "фронтмена")
+     * @param name  имя
+     * @return человек
+     */
     public static Person read(InputHandler input, String label, String name) {
         String personName = name != null ? name : input.rawScan(String.format("Введите имя %s", label));
         if (personName != null && !personName.isEmpty()) {
             Person frontMan = new Person();
             frontMan.setName(personName);
             frontMan.setBirthday(input.readBirthdayOrNull(String.format("Введите дату рождения %s", label)));
-            frontMan.setHeight(input.readPositiveIntOrNull(String.format("Введите рост %s (или Enter для пропуска)", label)));
+            frontMan.setHeight(
+                    input.readPositiveIntOrNull(String.format("Введите рост %s (или Enter для пропуска)", label)));
             frontMan.setPassportID(input.readPassportId(String.format("Введите ID паспорта %s)", label)));
             return frontMan;
         }

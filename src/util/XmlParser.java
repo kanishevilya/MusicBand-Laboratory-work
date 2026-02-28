@@ -10,8 +10,18 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+/**
+ * Парсит XML-файл
+ */
 public class XmlParser {
 
+    /**
+     * Загружает коллекцию из XML-файла
+     * 
+     * @param filePath          путь к файлу
+     * @param collectionManager менеджер коллекции
+     * @throws IOException если произошла ошибка ввода-вывода
+     */
     public void load(String filePath, CollectionManager collectionManager) throws IOException {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -34,6 +44,12 @@ public class XmlParser {
         System.out.println("Загружено " + loaded.size() + " элементов из файла: " + filePath);
     }
 
+    /**
+     * Парсит XML-строку
+     * 
+     * @param xml XML-строка
+     * @return коллекция музыкальных групп
+     */
     private TreeMap<Long, MusicBand> parseCollection(String xml) {
         TreeMap<Long, MusicBand> result = new TreeMap<>();
         int start = 0;
@@ -58,6 +74,12 @@ public class XmlParser {
         return result;
     }
 
+    /**
+     * Парсит XML-строку музыкальной группы
+     * 
+     * @param xml XML-строка музыкальной группы
+     * @return музыкальная группа
+     */
     private MusicBand parseBand(String xml) {
         MusicBand band = new MusicBand();
 
@@ -104,7 +126,14 @@ public class XmlParser {
         return band;
     }
 
-    private String extract(String xml, String tagName){
+    /**
+     * Извлекает значение из XML-строки
+     * 
+     * @param xml     XML-строка
+     * @param tagName имя тега
+     * @return значение
+     */
+    private String extract(String xml, String tagName) {
         String open = "<" + tagName + ">";
         String close = "</" + tagName + ">";
         int start = xml.indexOf(open);
@@ -114,7 +143,13 @@ public class XmlParser {
         return xml.substring(start + open.length(), end).trim();
     }
 
-
+    /**
+     * Извлекает значение из XML-строки
+     * 
+     * @param xml     XML-строка
+     * @param tagName имя тега
+     * @return значение или null
+     */
     private String extractNullable(String xml, String tagName) {
         String open = "<" + tagName + ">";
         String close = "</" + tagName + ">";

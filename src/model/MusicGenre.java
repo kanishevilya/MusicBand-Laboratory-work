@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Перечисление, представляющее жанры музыки
+ */
 public enum MusicGenre {
     RAP,
     HIP_HOP,

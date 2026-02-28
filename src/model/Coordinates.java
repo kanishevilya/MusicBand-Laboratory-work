@@ -1,11 +1,13 @@
 package model;
 
-
+/**
+ * Класс представляющий координаты
+ */
 public class Coordinates {
 
     private double x;
 
-    private Float y; //Максимальное значение поля: 968, Поле не может быть null
+    private Float y; // Максимальное значение поля: 968, Поле не может быть null
 
     public Coordinates() {
     }

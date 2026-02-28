@@ -3,26 +3,31 @@ package model;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Класс представляющий музыкальную группу
+ * Реализует интерфейс @link{Comparable} для возможности сортировки групп по
+ * названию
+ */
 public class MusicBand implements Comparable<MusicBand> {
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ssXXX");
 
-    private long id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private Integer numberOfParticipants; //Поле может быть null, Значение поля должно быть больше 0
-    private Integer albumsCount; //Поле не может быть null, Значение поля должно быть больше 0
-    private MusicGenre genre; //Поле может быть null
-    private Person frontMan; //Поле может быть null
-
+    private long id; // Значение поля должно быть больше 0, Значение этого поля должно быть
+                     // уникальным, Значение этого поля должно генерироваться автоматически
+    private String name; // Поле не может быть null, Строка не может быть пустой
+    private Coordinates coordinates; // Поле не может быть null
+    private ZonedDateTime creationDate; // Поле не может быть null, Значение этого поля должно генерироваться
+                                        // автоматически
+    private Integer numberOfParticipants; // Поле может быть null, Значение поля должно быть больше 0
+    private Integer albumsCount; // Поле не может быть null, Значение поля должно быть больше 0
+    private MusicGenre genre; // Поле может быть null
+    private Person frontMan; // Поле может быть null
 
     public MusicBand() {
     }
 
     public MusicBand(long id, String name, Coordinates coordinates, ZonedDateTime creationDate,
-                     Integer numberOfParticipants, Integer albumsCount, MusicGenre genre, Person frontMan) {
+            Integer numberOfParticipants, Integer albumsCount, MusicGenre genre, Person frontMan) {
         setId(id);
         setName(name);
         setCoordinates(coordinates);
@@ -118,18 +123,22 @@ public class MusicBand implements Comparable<MusicBand> {
         this.frontMan = frontMan;
     }
 
-
+    /**
+     * Сравнивает две группы по названию
+     */
     @Override
     public int compareTo(MusicBand other) {
         return this.name.compareToIgnoreCase(other.name);
     }
+
     @Override
     public String toString() {
         return "MusicBand {\n" +
                 "  id                   = " + id + "\n" +
                 "  name                 = \"" + name + "\"\n" +
                 "  coordinates          = " + coordinates + "\n" +
-                "  creationDate         = " + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null") + "\n" +
+                "  creationDate         = " + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null")
+                + "\n" +
                 "  numberOfParticipants = " + numberOfParticipants + "\n" +
                 "  albumsCount          = " + albumsCount + "\n" +
                 "  genre                = " + genre + "\n" +

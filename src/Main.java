@@ -8,6 +8,11 @@ import util.XmlWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Точка входа в приложение для управления коллекцией музыкальных групп.
+ * Программа ожидает один аргумент командной строки — путь к XML-файлу,
+ * из которого загружается начальное состояние коллекции.
+ */
 public class Main {
     public static void main(String[] args) {
         if (args.length < 1) {
@@ -40,9 +45,9 @@ public class Main {
         commandManager.register(new RemoveCommand(collectionManager));
         commandManager.register(new ClearCommand(collectionManager));
         commandManager.register(new ExitCommand());
-        commandManager.register(new RemoveGreaterCommand(collectionManager,commandManager));
-        commandManager.register(new ReplaceGreaterCommand(collectionManager,commandManager));
-        commandManager.register(new ReplaceLowerCommand(collectionManager,commandManager));
+        commandManager.register(new RemoveGreaterCommand(collectionManager, commandManager));
+        commandManager.register(new ReplaceGreaterCommand(collectionManager, commandManager));
+        commandManager.register(new ReplaceLowerCommand(collectionManager, commandManager));
         commandManager.register(new AverageOfAlbumsCountCommand(collectionManager));
         commandManager.register(new FilterByAlbumsCountCommand(collectionManager));
         commandManager.register(new PrintFieldDescendingAlbumsCountCommand(collectionManager));

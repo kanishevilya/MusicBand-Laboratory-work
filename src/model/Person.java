@@ -3,19 +3,20 @@ package model;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Класс, представляющий человека
+ */
 public class Person {
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    private String name; //Поле не может быть null, Строка не может быть пустой
+    private String name; // Поле не может быть null, Строка не может быть пустой
 
-    private LocalDateTime birthday; //Поле может быть null
+    private LocalDateTime birthday; // Поле может быть null
 
-    private Integer height; //Поле может быть null, Значение поля должно быть больше 0
+    private Integer height; // Поле может быть null, Значение поля должно быть больше 0
 
-    private String passportID; //Длина строки не должна быть больше 28, Поле не может быть null
-
+    private String passportID; // Длина строки не должна быть больше 28, Поле не может быть null
 
     public Person() {
     }
@@ -27,11 +28,9 @@ public class Person {
         setPassportID(passportID);
     }
 
-
     public String getName() {
         return name;
     }
-
 
     public void setName(String name) {
         if (name == null || name.trim().isEmpty()) {
@@ -40,7 +39,6 @@ public class Person {
         this.name = name;
     }
 
-
     public LocalDateTime getBirthday() {
         return birthday;
     }
@@ -48,7 +46,6 @@ public class Person {
     public void setBirthday(LocalDateTime birthday) {
         this.birthday = birthday;
     }
-
 
     public Integer getHeight() {
         return height;

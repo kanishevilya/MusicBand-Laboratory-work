@@ -7,9 +7,18 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-
+/**
+ * Записывает коллекцию в XML-файл
+ */
 public class XmlWriter {
 
+    /**
+     * Записывает коллекцию в XML-файл
+     * 
+     * @param filePath          путь к файлу
+     * @param collectionManager менеджер коллекции
+     * @throws IOException если произошла ошибка ввода-вывода
+     */
     public void save(String filePath, CollectionManager collectionManager) throws IOException {
         File file = new File(filePath);
         if (file.exists() && !file.canWrite()) {
@@ -23,6 +32,12 @@ public class XmlWriter {
         }
     }
 
+    /**
+     * Строит XML-строку из коллекции
+     * 
+     * @param collectionManager менеджер коллекции
+     * @return XML-строка
+     */
     private String buildXml(CollectionManager collectionManager) {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -37,6 +52,12 @@ public class XmlWriter {
         return sb.toString();
     }
 
+    /**
+     * Строит XML-строку из музыкальной группы
+     * 
+     * @param band музыкальная группа
+     * @return XML-строка
+     */
     private String buildBandXml(MusicBand band) {
         StringBuilder sb = new StringBuilder();
         sb.append("    <band>\n");
@@ -65,6 +86,12 @@ public class XmlWriter {
         return sb.toString();
     }
 
+    /**
+     * Строит XML-строку из человека
+     * 
+     * @param person человек
+     * @return XML-строка
+     */
     private String buildPersonXml(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append("      <frontMan>\n");
@@ -82,6 +109,12 @@ public class XmlWriter {
         return sb.toString();
     }
 
+    /**
+     * Экранирует XML-строку
+     * 
+     * @param s строка
+     * @return экранированная строка
+     */
     private String escapeXml(String s) {
         if (s == null)
             return "";

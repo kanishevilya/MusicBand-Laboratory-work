@@ -7,7 +7,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
-
+/**
+ * Обработчик ввода данных
+ */
 public class InputHandler {
 
     private final Scanner scanner;
@@ -19,12 +21,24 @@ public class InputHandler {
         this.interactive = interactive;
     }
 
+    /**
+     * Читает строку ввода
+     * 
+     * @return введенная строка
+     * @throws ScriptEndException если ввод завершён (EOF)
+     */
     public String readLine() {
         if (scanner.hasNextLine())
             return scanner.nextLine();
         throw new ScriptEndException("Ввод завершён (EOF).");
     }
-    
+
+    /**
+     * Читает строку ввода
+     * 
+     * @param message сообщение для пользователя
+     * @return введенная строка
+     */
     public String rawScan(String message) {
         if (interactive)
             System.out.print(message + ": ");
@@ -34,26 +48,28 @@ public class InputHandler {
         return line.trim().isEmpty() ? null : line.trim();
     }
 
-    private String rawScanOrThrow(String message) {
-        String val = rawScan(message    );
-        if (val == null) {
-            throw new ScriptEndException(
-                    "Неожиданный конец ввода при запросе поля: \"" + message + "\"");
-        }
-        return val;
-    }
-
+    /**
+     * Читает строку ввода, требуя непустой строки
+     * 
+     * @param message сообщение для пользователя
+     * @return введенная строка
+     */
     public String readRequiredString(String message) {
         while (true) {
             String value = rawScan(message);
-            if (value != null && !value.isEmpty()){
+            if (value != null && !value.isEmpty()) {
                 return value;
             }
             System.out.println("Ошибка: поле не может быть пустым. Попробуйте снова.");
         }
     }
 
-
+    /**
+     * Читает вещественное число
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное число
+     */
     public double readDouble(String message) {
         while (true) {
             String value = rawScan(message);
@@ -69,10 +85,23 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Читает вещественное число
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное число
+     */
     public Float readFloat(String message) {
         return readFloatLessThanMax(message, null);
     }
 
+    /**
+     * Читает вещественное число, не превышающее заданное
+     * 
+     * @param message  сообщение для пользователя
+     * @param maxValue максимальное значение
+     * @return введенное число
+     */
     public Float readFloatLessThanMax(String message, Float maxValue) {
         while (true) {
             String value = rawScan(message);
@@ -92,7 +121,13 @@ public class InputHandler {
             }
         }
     }
-    
+
+    /**
+     * Читает целое число, не меньшее 1 или null
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное число
+     */
     public Integer readPositiveIntOrNull(String message) {
         while (true) {
             String value = rawScan(message);
@@ -111,6 +146,12 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Читает целое число, не меньшее 1
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное число
+     */
     public Integer readRequiredPositiveInt(String message) {
         while (true) {
             Integer value = readPositiveIntOrNull(message);
@@ -120,6 +161,12 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Читает жанр музыки
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное значение
+     */
     public MusicGenre readMusicGenreOrNull(String message) {
         System.out.println("Доступные жанры: " + MusicGenre.valuesString());
         while (true) {
@@ -134,6 +181,12 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Читает дату рождения
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное значение
+     */
     public LocalDateTime readBirthdayOrNull(String message) {
         while (true) {
             String value = rawScan(message + " (формат: yyyy-MM-dd HH:mm:ss, или Enter для пропуска)");
@@ -147,7 +200,12 @@ public class InputHandler {
         }
     }
 
-
+    /**
+     * Читает ID паспорта
+     * 
+     * @param message сообщение для пользователя
+     * @return введенное значение
+     */
     public String readPassportId(String message) {
         while (true) {
             String value = readRequiredString(message);
@@ -159,6 +217,11 @@ public class InputHandler {
         }
     }
 
+    /**
+     * Устанавливает режим интерактивного ввода
+     * 
+     * @param interactive режим интерактивного ввода
+     */
     public void setInteractive(boolean interactive) {
         this.interactive = interactive;
     }

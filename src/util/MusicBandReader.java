@@ -4,11 +4,20 @@ import model.Coordinates;
 import model.MusicBand;
 import model.Person;
 
+/**
+ * Читает музыкальную группу
+ */
 public class MusicBandReader {
 
     private MusicBandReader() {
     }
 
+    /**
+     * Читает музыкальную группу
+     * 
+     * @param input обработчик ввода
+     * @return музыкальная группа
+     */
     public static MusicBand read(InputHandler input) {
         MusicBand band = new MusicBand();
 
@@ -27,13 +36,12 @@ public class MusicBandReader {
         band.setGenre(input.readMusicGenreOrNull("Введите жанр"));
 
         String frontManName = input.rawScan("Введите имя фронтмена (или Enter для пропуска)");
-        if(frontManName != null && !frontManName.isEmpty()){
+        if (frontManName != null && !frontManName.isEmpty()) {
             Person frontMan = PersonReader.read(input, "фронтмена", frontManName);
-            if(frontMan != null){
+            if (frontMan != null) {
                 band.setFrontMan(frontMan);
             }
         }
-
 
         return band;
     }
