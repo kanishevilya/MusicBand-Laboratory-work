@@ -24,7 +24,7 @@ public class MusicBandReader {
         band.setAlbumsCount(
                 input.readRequiredPositiveInt("Введите количество альбомов"));
 
-        band.setGenre(input.readMusicGenreOrNull("Введите жанр (или Enter для пропуска)"));
+        band.setGenre(input.readMusicGenreOrNull("Введите жанр"));
 
         String frontManName = input.rawScan("Введите имя фронтмена (или Enter для пропуска)");
         if(frontManName != null && !frontManName.isEmpty()){

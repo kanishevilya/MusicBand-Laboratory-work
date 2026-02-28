@@ -19,11 +19,15 @@ public class CollectionManager {
     }
 
     public long generateId() {
-        long id;
-        do {
-            id = IdGenerator.nextId();
-        } while (collection.containsKey(id));
-        return id;
+        while (true) {
+            long newId = IdGenerator.nextId();
+            boolean exists = collection.values()
+                    .stream()
+                    .anyMatch(b -> b.getId() == newId);
+            if (!exists) {
+                return newId;
+            }
+        }
     }
 
 

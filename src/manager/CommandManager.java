@@ -1,5 +1,6 @@
 package manager;
 
+import exception.ScriptEndException;
 import util.InputHandler;
 import command.Command;
 
@@ -30,16 +31,20 @@ public class CommandManager {
     }
 
     public void dispatchLine(String line) {
-        if (line == null || line.trim().isEmpty())
-            return;
-        String[] parts = line.trim().split("\\s+");
-        String commandName = parts[0].toLowerCase();
-        Command command = commands.get(commandName);
-        if (command == null) {
-            System.out.println("Неизвестная команда: '" + commandName + "'. Введите 'help' для справки.");
-            return;
+        try {
+            if (line == null || line.trim().isEmpty())
+                return;
+            String[] parts = line.trim().split("\\s+");
+            String commandName = parts[0].toLowerCase();
+            Command command = commands.get(commandName);
+            if (command == null) {
+                System.out.println("Неизвестная команда: '" + commandName + "'. Введите 'help' для справки.");
+                return;
+            }
+            command.execute(parts);
+        } catch (ScriptEndException ex){
+            System.out.println(ex.getMessage());
         }
-        command.execute(parts);
     }
 
     public InputHandler getInputHandler() {

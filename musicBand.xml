@@ -42,4 +42,23 @@
       </frontMan>
     </band>
   </entry>
+  <entry>
+    <key>5</key>
+    <band>
+      <id>4</id>
+      <name>Temo</name>
+      <coordinates>
+        <x>33.0</x>
+        <y>23.0</y>
+      </coordinates>
+      <creationDate>2026-02-28 08:55:51+03:00</creationDate>
+      <albumsCount>1</albumsCount>
+      <genre>SOUL</genre>
+      <frontMan>
+        <personName>FrontMan</personName>
+        <birthday>1920-10-10 10:10:10</birthday>
+        <passportID>12312312</passportID>
+      </frontMan>
+    </band>
+  </entry>
 </collection>

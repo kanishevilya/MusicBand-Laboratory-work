@@ -22,10 +22,7 @@ public class InputHandler {
     public String readLine() {
         if (scanner.hasNextLine())
             return scanner.nextLine();
-        if(!interactive){
-            throw new ScriptEndException("Выполнение скрипта закончилось");
-        }
-        return null;
+        throw new ScriptEndException("Ввод завершён (EOF).");
     }
     
     public String rawScan(String message) {
@@ -139,13 +136,13 @@ public class InputHandler {
 
     public LocalDateTime readBirthdayOrNull(String message) {
         while (true) {
-            String value = rawScan(message + " (формат: yyyy-MM-dd, или Enter для пропуска)");
+            String value = rawScan(message + " (формат: yyyy-MM-dd HH:mm:ss, или Enter для пропуска)");
             if (value == null || value.isEmpty())
                 return null;
             try {
                 return LocalDateTime.parse(value, Person.DATE_FORMATTER);
             } catch (DateTimeParseException e) {
-                System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd");
+                System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd HH:mm:ss");
             }
         }
     }
