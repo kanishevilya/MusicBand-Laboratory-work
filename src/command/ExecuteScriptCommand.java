@@ -30,6 +30,11 @@ public class ExecuteScriptCommand implements Command {
         return "execute_script <файл> — считать и исполнить скрипт";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

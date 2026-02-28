@@ -23,6 +23,11 @@ public class AverageOfAlbumsCountCommand implements Command {
         return "вывести среднее значение поля albumsCount";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (collectionManager.isEmpty()) {

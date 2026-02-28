@@ -33,6 +33,11 @@ public class SaveCommand implements Command {
         return "сохранить коллекцию в файл";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         try {

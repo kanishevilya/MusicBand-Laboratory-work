@@ -25,6 +25,11 @@ public class FilterByAlbumsCountCommand implements Command {
         return "filter_by_albums_count <значение> — вывести элементы с данным albumsCount";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

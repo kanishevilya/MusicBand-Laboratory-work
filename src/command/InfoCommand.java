@@ -23,6 +23,11 @@ public class InfoCommand implements Command {
         return "вывести информацию о коллекции";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         System.out.println("Информация о коллекции:");

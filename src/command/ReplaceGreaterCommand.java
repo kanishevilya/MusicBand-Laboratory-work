@@ -26,6 +26,11 @@ public class ReplaceGreaterCommand implements Command {
         return "replace_if_greater <ключ> - заменить значение, если новое больше старого";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

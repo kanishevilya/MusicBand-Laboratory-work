@@ -29,6 +29,11 @@ public class ReplaceLowerCommand implements Command {
         return "replace_if_lower <ключ> - заменить значение, если новое меньше старого";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

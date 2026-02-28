@@ -25,6 +25,11 @@ public class PrintFieldDescendingAlbumsCountCommand implements Command {
         return "вывести значения albumsCount всех элементов в порядке убывания";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (collectionManager.isEmpty()) {

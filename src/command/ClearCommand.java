@@ -22,6 +22,11 @@ public class ClearCommand implements Command {
         return "очистить коллекцию";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         collectionManager.clear();

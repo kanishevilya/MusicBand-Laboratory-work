@@ -25,6 +25,11 @@ public class ShowCommand implements Command {
         return "вывести все элементы коллекции";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (collectionManager.isEmpty()) {

@@ -30,6 +30,11 @@ public class RemoveGreaterCommand implements Command {
         return "remove_greater — удалить все элементы, превышающие заданный";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         System.out.println("Введите эталонный элемент для сравнения");

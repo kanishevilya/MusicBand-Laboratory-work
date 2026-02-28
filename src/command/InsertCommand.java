@@ -31,6 +31,11 @@ public class InsertCommand implements Command {
         return "insert <ключ> - добавить новый элемент с заданным ключом";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

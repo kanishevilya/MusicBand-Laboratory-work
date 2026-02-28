@@ -22,6 +22,11 @@ public class RemoveCommand implements Command {
         return "remove_key <key> - удалить элемент из коллекции по его ключу";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {

@@ -14,6 +14,11 @@ public class ExitCommand implements Command {
         return "завершить программу (без сохранения)";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         System.out.println("Завершение программы.");

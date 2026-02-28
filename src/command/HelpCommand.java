@@ -22,6 +22,11 @@ public class HelpCommand implements Command {
         return "вывести справку по доступным командам";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         System.out.println("Доступные команды:");

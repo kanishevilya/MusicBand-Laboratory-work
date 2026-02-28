@@ -29,6 +29,11 @@ public class UpdateCommand implements Command {
         return "update <id> - обновить элемент коллекции по ID";
     }
 
+    /**
+     * Выполняет команду
+     * 
+     * @param args аргументы команды
+     */
     @Override
     public void execute(String[] args) {
         if (args.length < 2) {
