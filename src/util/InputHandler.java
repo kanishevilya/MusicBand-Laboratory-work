@@ -155,7 +155,13 @@ public class InputHandler {
             if (value == null || value.isEmpty())
                 return null;
             try {
-                int i = Integer.parseInt(value);
+                double d = Double.parseDouble(value);
+                int i;
+                if((int)d==d){
+                    i=(int)d;
+                }else{
+                    i = Integer.parseInt(value);
+                }
                 if (i <= 0) {
                     System.out.println("Ошибка: значение должно быть больше 0.");
                     continue;
@@ -217,9 +223,23 @@ public class InputHandler {
             String value = rawScan(message + " (формат: yyyy-MM-dd HH:mm:ss, или Enter для пропуска)");
             if (value == null || value.isEmpty())
                 return null;
+
+            String[] parts = value.split("[- :]");
+            if (parts.length != 6) {
+                System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd HH:mm:ss");
+                continue;
+            }
+
             try {
+                int year = Integer.parseInt(parts[0]);
+                if (year > 9999) {
+                    System.out.println("Ошибка: год не может быть больше 9999.");
+                    continue;
+                }
+
                 return LocalDateTime.parse(value, Person.DATE_FORMATTER);
-            } catch (DateTimeParseException e) {
+
+            } catch (NumberFormatException | DateTimeParseException e) {
                 System.out.println("Ошибка: неверный формат даты. Используйте: yyyy-MM-dd HH:mm:ss");
             }
         }
@@ -240,6 +260,67 @@ public class InputHandler {
                 return value;
             }
         }
+    }
+
+    public static boolean confirmNull(InputHandler input) {
+        String confirm = input.rawScan("Установить значение null? (yes/no)");
+        return confirm != null && confirm.equalsIgnoreCase("yes");
+    }
+
+    public static Integer readNullableInteger(
+            InputHandler input,
+            String message,
+            Integer current,
+            boolean allowNull,
+            boolean positiveOnly
+    ) {
+
+        String raw = input.rawScan(message + " [" + (current == null ? "null" : current) + "]");
+
+        if (raw == null || raw.isEmpty())
+            return current;
+
+        if (raw.equalsIgnoreCase("null")) {
+            if (!allowNull) {
+                System.out.println("Поле не может быть null");
+                return current;
+            }
+            return confirmNull(input) ? null : current;
+        }
+
+        Integer value = Integer.parseInt(raw);
+
+        if (positiveOnly && value <= 0)
+            throw new IllegalArgumentException("Значение должно быть > 0");
+
+        return value;
+    }
+
+    public static String readString(
+            InputHandler input,
+            String message,
+            String current,
+            boolean allowNull,
+            boolean allowEmpty,
+            int maxLength
+    ) {
+
+        String raw = input.rawScan(message + " [" + (current == null ? "null" : current) + "]");
+
+        if (raw == null || raw.isEmpty())
+            return current;
+
+        if (raw.equalsIgnoreCase("null")) {
+            if (!allowNull)
+                throw new IllegalArgumentException("Поле не может быть null");
+
+            return confirmNull(input) ? null : current;
+        }
+
+        if (maxLength > 0 && raw.length() > maxLength)
+            throw new IllegalArgumentException("Слишком длинная строка");
+
+        return raw;
     }
 
     /**

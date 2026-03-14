@@ -51,7 +51,8 @@ public class ReplaceGreaterCommand implements Command {
             System.out.println("Ошибка: элемент с ключом " + key + " не найден.");
             return;
         }
-        MusicBand newBand = MusicBandReader.read(commandManager.getInputHandler());
+        MusicBand newBand = MusicBandReader.readWithNameCheck(commandManager.getInputHandler(),collectionManager.getByKey(key), false);
+        if(newBand==null) {return;}
         newBand.setId(1L);
         newBand.setCreationDate(ZonedDateTime.now());
 

@@ -53,7 +53,7 @@ public class UpdateCommand implements Command {
             return;
         }
 
-        MusicBand band = MusicBandReader.read(commandManager.getInputHandler());
+        MusicBand band = MusicBandReader.readForUpdate(commandManager.getInputHandler(), collectionManager.getById(id));
         boolean updated = collectionManager.updateById(id, band);
         if (updated) {
             System.out.println("Элемент с ID=" + id + " успешно обновлён.");

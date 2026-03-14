@@ -14,13 +14,14 @@ import java.util.Scanner;
  * из которого загружается начальное состояние коллекции.
  */
 public class Main {
+    public static String filePath;
     public static void main(String[] args) {
         if (args.length < 1) {
             System.out.println("Введите аргумент командной строки, использование: java -jar MusicBand.jar <путь_к_файлу>");
             System.exit(1);
         }
 
-        String filePath = args[0];
+        filePath = args[0];
 
         CollectionManager collectionManager = new CollectionManager();
         Scanner scanner = new Scanner(System.in);

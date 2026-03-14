@@ -3,6 +3,7 @@ package util;
 import manager.CollectionManager;
 import model.*;
 
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
@@ -19,10 +20,38 @@ public class XmlWriter {
      * @param collectionManager менеджер коллекции
      * @throws IOException если произошла ошибка ввода-вывода
      */
-    public void save(String filePath, CollectionManager collectionManager) throws IOException {
+    public String save(String filePath, CollectionManager collectionManager) throws IOException {
         File file = new File(filePath);
+
         if (file.exists() && !file.canWrite()) {
-            throw new IOException("Нет прав на запись в файл: " + filePath);
+            String parent = file.getParent();
+            String name = file.getName();
+            String baseName;
+            String ext = "";
+
+            int dotIndex = name.lastIndexOf('.');
+            if (dotIndex != -1) {
+                baseName = name.substring(0, dotIndex);
+                ext = name.substring(dotIndex);
+            } else {
+                baseName = name;
+            }
+
+            int counter = 1;
+            File newFile;
+            do {
+                String newName = baseName + "+" + counter + ext;
+                newFile = parent == null ? new File(newName) : new File(parent, newName);
+                counter++;
+            } while (newFile.exists());
+
+            file = newFile;
+            System.out.println("Нет прав на запись в исходный файл. Коллекция будет сохранена в новый файл: " + file.getAbsolutePath());
+            filePath=newFile.getAbsolutePath();
+        }
+
+        if (!file.exists()) {
+            file.createNewFile();
         }
 
         String xml = buildXml(collectionManager);
@@ -30,6 +59,7 @@ public class XmlWriter {
             bos.write(xml.getBytes(StandardCharsets.UTF_8));
             bos.flush();
         }
+        return filePath;
     }
 
     /**

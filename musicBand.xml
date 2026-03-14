@@ -42,4 +42,18 @@
       </frontMan>
     </band>
   </entry>
+  <entry>
+    <key>45</key>
+    <band>
+      <id>6</id>
+      <name>rvtbynum</name>
+      <coordinates>
+        <x>789.0</x>
+        <y>78.0</y>
+      </coordinates>
+      <creationDate>2026-03-11 22:17:59+03:00</creationDate>
+      <numberOfParticipants>4</numberOfParticipants>
+      <albumsCount>4</albumsCount>
+    </band>
+  </entry>
 </collection>

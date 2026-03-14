@@ -10,7 +10,7 @@ public class SaveCommand implements Command {
 
     private final CollectionManager collectionManager;
 
-    private final String filePath;
+    private String filePath;
 
     /**
      * XML-писатель
@@ -23,6 +23,9 @@ public class SaveCommand implements Command {
         this.xmlWriter = xmlWriter;
     }
 
+    private void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
     @Override
     public String getName() {
         return "save";
@@ -44,8 +47,9 @@ public class SaveCommand implements Command {
             System.out.println("Предупреждение: в данной команде не используются аргументы");
         }
         try {
-            xmlWriter.save(filePath, collectionManager);
-            System.out.println("Коллекция успешно сохранена в файл: " + filePath);
+            String path=xmlWriter.save(filePath, collectionManager);
+            setFilePath(path);
+            System.out.println("Коллекция успешно сохранена в файл: " + path);
         } catch (Exception e) {
             System.out.println("Ошибка при сохранении: " + e.getMessage());
         }
