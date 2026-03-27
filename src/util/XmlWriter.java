@@ -109,6 +109,8 @@ public class XmlWriter {
         if (band.getGenre() != null) {
             sb.append("      <genre>").append(band.getGenre().name()).append("</genre>\n");
         }
+        sb.append("      <price>").append(band.getPrice()).append("</price>\n");
+        sb.append("      <currency>").append(band.getCurrency().name()).append("</currency>\n");
         if (band.getFrontMan() != null) {
             sb.append(buildPersonXml(band.getFrontMan()));
         }

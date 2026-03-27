@@ -1,59 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <collection>
   <entry>
-    <key>3</key>
+    <key>1</key>
     <band>
-      <id>3</id>
-      <name>Metallica</name>
+      <id>1</id>
+      <name>Aaaa</name>
       <coordinates>
-        <x>10.5</x>
-        <y>20.0</y>
+        <x>3.0</x>
+        <y>3.0</y>
       </coordinates>
-      <creationDate>2026-02-28 09:27:26+03:00</creationDate>
-      <numberOfParticipants>4</numberOfParticipants>
-      <albumsCount>10</albumsCount>
-      <genre>POST_ROCK</genre>
-      <frontMan>
-        <personName>James Hetfield</personName>
-        <birthday>1963-08-03 10:10:10</birthday>
-        <height>185</height>
-        <passportID>AB123456</passportID>
-      </frontMan>
-    </band>
-  </entry>
-  <entry>
-    <key>4</key>
-    <band>
-      <id>4</id>
-      <name>Nirvana</name>
-      <coordinates>
-        <x>5.2</x>
-        <y>15.0</y>
-      </coordinates>
-      <creationDate>2026-02-28 09:27:26+03:00</creationDate>
-      <numberOfParticipants>3</numberOfParticipants>
-      <albumsCount>3</albumsCount>
-      <genre>POST_ROCK</genre>
-      <frontMan>
-        <personName>Kurt Cobain</personName>
-        <birthday>1967-02-20 10:10:10</birthday>
-        <height>175</height>
-        <passportID>CD654321</passportID>
-      </frontMan>
-    </band>
-  </entry>
-  <entry>
-    <key>45</key>
-    <band>
-      <id>6</id>
-      <name>rvtbynum</name>
-      <coordinates>
-        <x>789.0</x>
-        <y>78.0</y>
-      </coordinates>
-      <creationDate>2026-03-11 22:17:59+03:00</creationDate>
-      <numberOfParticipants>4</numberOfParticipants>
+      <creationDate>2026-03-27 17:31:40+03:00</creationDate>
       <albumsCount>4</albumsCount>
+      <price>100</price>
+      <currency>GBP</currency>
     </band>
   </entry>
 </collection>

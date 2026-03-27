@@ -4,6 +4,7 @@ import exception.CancelInputException;
 import exception.ScriptEndException;
 import model.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -94,6 +95,48 @@ public class InputHandler {
                 return Double.parseDouble(value);
             } catch (NumberFormatException e) {
                 System.out.println("Ошибка: требуется вещественное число. Попробуйте снова.");
+            }
+        }
+    }
+
+    public BigDecimal readRequiredPositiveBigDecimal(String message) {
+        while (true) {
+            String value = rawScan(message);
+            if (value == null || value.isEmpty()) {
+                System.out.println("Ошибка: поле не может быть пустым.");
+                continue;
+            }
+            value = value.replace(',', '.');
+            try {
+                BigDecimal bd = new BigDecimal(value);
+                if (bd.compareTo(BigDecimal.ZERO) <= 0) {
+                    System.out.println("Ошибка: значение должно быть больше 0.");
+                    continue;
+                }
+                return bd;
+            } catch (NumberFormatException e) {
+                System.out.println("Ошибка: требуется число. Попробуйте снова.");
+            }
+        }
+    }
+
+    public Currency readCurrency(String message) {
+        System.out.println("Доступные валюты: " + Currency.valuesString());
+        while (true) {
+            String value = rawScan(message);
+            if (value == null || value.isEmpty()) {
+                System.out.println("Ошибка: поле не может быть пустым.");
+                continue;
+            }
+            try {
+                try {
+                    int integer = Integer.parseInt(value) - 1;
+                    return Currency.fromOrdinal(integer);
+                } catch (NumberFormatException ignored) {
+                }
+                return Currency.valueOf(value.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка: неверная валюта. Доступные: " + Currency.valuesString());
             }
         }
     }

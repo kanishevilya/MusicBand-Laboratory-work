@@ -3,6 +3,7 @@ package model;
 /**
  * Класс представляющий координаты
  */
+
 public class Coordinates {
 
     private double x;
@@ -10,6 +11,7 @@ public class Coordinates {
     private Float y; // Максимальное значение поля: 968, Поле не может быть null
 
     public Coordinates() {
+
     }
 
     public Coordinates(double x, Float y) {
@@ -38,6 +40,7 @@ public class Coordinates {
         }
         this.y = y;
     }
+
 
     @Override
     public String toString() {

@@ -4,6 +4,7 @@ import manager.CollectionManager;
 import model.*;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
@@ -104,6 +105,12 @@ public class XmlParser {
         String genreStr = extractNullable(xml, "genre");
         if (genreStr != null)
             band.setGenre(MusicGenre.valueOf(genreStr));
+
+        String priceStr = extract(xml, "price");
+        band.setPrice(new BigDecimal(priceStr));
+
+        String currencyStr = extract(xml, "currency");
+        band.setCurrency(Currency.valueOf(currencyStr));
 
         String frontManXml = extractNullable(xml, "frontMan");
         if (frontManXml != null) {

@@ -1,5 +1,6 @@
 package model;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -22,12 +23,15 @@ public class MusicBand implements Comparable<MusicBand> {
     private Integer albumsCount; // Поле не может быть null, Значение поля должно быть больше 0
     private MusicGenre genre; // Поле может быть null
     private Person frontMan; // Поле может быть null
+    private BigDecimal price; // Поле не может быть null, Значение поля должно быть больше 0
+    private Currency currency; // Поле не может быть null
 
     public MusicBand() {
     }
 
     public MusicBand(long id, String name, Coordinates coordinates, ZonedDateTime creationDate,
-            Integer numberOfParticipants, Integer albumsCount, MusicGenre genre, Person frontMan) {
+            Integer numberOfParticipants, Integer albumsCount, MusicGenre genre, Person frontMan,
+            BigDecimal price, Currency currency) {
         setId(id);
         setName(name);
         setCoordinates(coordinates);
@@ -36,6 +40,8 @@ public class MusicBand implements Comparable<MusicBand> {
         setAlbumsCount(albumsCount);
         setGenre(genre);
         setFrontMan(frontMan);
+        setPrice(price);
+        setCurrency(currency);
     }
 
     public long getId() {
@@ -123,6 +129,31 @@ public class MusicBand implements Comparable<MusicBand> {
         this.frontMan = frontMan;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        if (price == null) {
+            throw new IllegalArgumentException("Стоимость не может быть null.");
+        }
+        if (price.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Стоимость должна быть больше 0.");
+        }
+        this.price = price;
+    }
+
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        if (currency == null) {
+            throw new IllegalArgumentException("Валюта не может быть null.");
+        }
+        this.currency = currency;
+    }
+
     /**
      * Сравнивает две группы по названию
      */
@@ -143,6 +174,8 @@ public class MusicBand implements Comparable<MusicBand> {
                 "  albumsCount          = " + albumsCount + "\n" +
                 "  genre                = " + genre + "\n" +
                 "  frontMan             = " + frontMan + "\n" +
+                "  price                = " + price + "\n" +
+                "  currency             = " + currency + "\n" +
                 "}";
     }
 }

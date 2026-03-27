@@ -15,7 +15,9 @@ import java.util.Scanner;
  */
 public class Main {
     public static String filePath;
+
     public static void main(String[] args) {
+
         if (args.length < 1) {
             System.out.println("Введите аргумент командной строки, использование: java -jar MusicBand.jar <путь_к_файлу>");
             System.exit(1);
@@ -54,6 +56,8 @@ public class Main {
         commandManager.register(new PrintFieldDescendingAlbumsCountCommand(collectionManager));
         commandManager.register(new SaveCommand(collectionManager, filePath, xmlWriter));
         commandManager.register(new ExecuteScriptCommand(commandManager));
+        commandManager.register(new ShowPricesCommand(collectionManager));
+        commandManager.register(new BenchmarkRatesCommand(collectionManager));
 
         System.out.println("Введите 'help' для получения справки.");
 

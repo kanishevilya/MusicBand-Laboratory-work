@@ -1,6 +1,8 @@
 package util;
 
+import java.math.BigDecimal;
 import model.Coordinates;
+import model.Currency;
 import model.MusicBand;
 import model.MusicGenre;
 import model.Person;
@@ -35,6 +37,11 @@ public class MusicBandReader {
                 input.readRequiredPositiveInt("Введите количество альбомов"));
 
         band.setGenre(input.readMusicGenreOrNull("Введите жанр"));
+
+        BigDecimal price = input.readRequiredPositiveBigDecimal("Введите стоимость (у.е.)");
+        Currency currency = input.readCurrency("Введите валюту");
+        band.setPrice(price);
+        band.setCurrency(currency);
 
         String frontManName = input.rawScan("Введите имя фронтмена (или Enter для пропуска)");
         if (frontManName != null && !frontManName.isEmpty()) {
@@ -73,6 +80,11 @@ public class MusicBandReader {
                 input.readRequiredPositiveInt("Введите количество альбомов"));
 
         band.setGenre(input.readMusicGenreOrNull("Введите жанр"));
+
+        BigDecimal price = input.readRequiredPositiveBigDecimal("Введите стоимость (у.е.)");
+        Currency currency = input.readCurrency("Введите валюту");
+        band.setPrice(price);
+        band.setCurrency(currency);
 
         String frontManName = input.rawScan("Введите имя фронтмена (или Enter для пропуска)");
         if (frontManName != null && !frontManName.isEmpty()) {
@@ -149,6 +161,40 @@ public class MusicBandReader {
             } catch (IllegalArgumentException e) {
                 System.out.println("Неизвестный жанр. Оставлено прежнее значение.");
                 band.setGenre(current.getGenre());
+            }
+        }
+
+        String priceStr = input.rawScan("Стоимость [" + current.getPrice() + "]");
+        if (priceStr == null || priceStr.isEmpty()) {
+            band.setPrice(current.getPrice());
+        } else {
+            priceStr = priceStr.replace(',', '.');
+            try {
+                BigDecimal price = new BigDecimal(priceStr);
+                if (price.compareTo(BigDecimal.ZERO) <= 0) {
+                    throw new IllegalArgumentException("Стоимость должна быть > 0");
+                }
+                band.setPrice(price);
+            } catch (Exception e) {
+                System.out.println("Неверное значение стоимости. Оставлено прежнее значение.");
+                band.setPrice(current.getPrice());
+            }
+        }
+
+        String currencyStr = input.rawScan("Валюта [" + current.getCurrency() + "]");
+        if (currencyStr == null || currencyStr.isEmpty()) {
+            band.setCurrency(current.getCurrency());
+        } else {
+            try {
+                try {
+                    int idx = Integer.parseInt(currencyStr) - 1;
+                    band.setCurrency(Currency.fromOrdinal(idx));
+                } catch (NumberFormatException ignored) {
+                    band.setCurrency(Currency.valueOf(currencyStr.toUpperCase()));
+                }
+            } catch (Exception e) {
+                System.out.println("Неверная валюта. Оставлено прежнее значение.");
+                band.setCurrency(current.getCurrency());
             }
         }
 
