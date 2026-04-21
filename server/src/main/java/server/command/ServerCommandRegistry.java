@@ -25,6 +25,9 @@ public final class ServerCommandRegistry {
     public List<CommandInfo> commandInfos() {
         List<CommandInfo> infos = new ArrayList<>();
         for (ServerCommandHandler<?> handler : handlers.values()) {
+            if (!handler.includeInHelp()) {
+                continue;
+            }
             infos.add(new CommandInfo(handler.commandName(), handler.commandDescription()));
         }
         return infos;

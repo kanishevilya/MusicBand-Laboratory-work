@@ -22,6 +22,15 @@ public final class ServerCommandBootstrap {
         registry.register(new InsertCommandHandler());
         registry.register(new RemoveCommandHandler());
         registry.register(new ClearCommandHandler());
+        registry.register(new GetByIdCommandHandler());
+        registry.register(new GetByKeyCommandHandler());
+        registry.register(new UpdateCommandHandler());
+        registry.register(new RemoveGreaterCommandHandler());
+        registry.register(new ReplaceGreaterCommandHandler());
+        registry.register(new ReplaceLowerCommandHandler());
+        registry.register(new AverageOfAlbumsCountCommandHandler());
+        registry.register(new FilterByAlbumsCountCommandHandler());
+        registry.register(new PrintFieldDescendingAlbumsCountCommandHandler());
         return registry;
     }
 }
