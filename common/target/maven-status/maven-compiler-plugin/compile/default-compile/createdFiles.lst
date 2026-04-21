@@ -1,0 +1,12 @@
+common\util\BinaryProtocol.class
+common\exception\DeserializationException.class
+common\util\MusicBandOrdering.class
+common\exception\ProtocolException.class
+common\model\MusicBand.class
+common\exception\ScriptEndException.class
+common\model\Coordinates.class
+common\exception\CancelInputException.class
+common\model\MusicGenre.class
+common\protocol\AbstractRequest.class
+common\protocol\AbstractResponse.class
+common\model\Person.class

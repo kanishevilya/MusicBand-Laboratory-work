@@ -11,8 +11,20 @@
       </coordinates>
       <creationDate>2026-03-27 17:31:40+03:00</creationDate>
       <albumsCount>4</albumsCount>
-      <price>100</price>
-      <currency>GBP</currency>
+    </band>
+  </entry>
+  <entry>
+    <key>5</key>
+    <band>
+      <id>3</id>
+      <name>Aaaa</name>
+      <coordinates>
+        <x>2.0</x>
+        <y>3.0</y>
+      </coordinates>
+      <creationDate>2026-03-28 13:55:11+03:00</creationDate>
+      <albumsCount>4</albumsCount>
+      <genre>HIP_HOP</genre>
     </band>
   </entry>
 </collection>
