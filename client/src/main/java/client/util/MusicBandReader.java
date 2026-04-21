@@ -41,18 +41,15 @@ public final class MusicBandReader {
         return band;
     }
 
-    /**
-     * @param checkLower true — для replace_if_lower (имя должно быть «меньше» текущего)
-     */
     public static MusicBand readWithNameCheck(InputHandler input, MusicBand current, boolean checkLower) {
         MusicBand band = new MusicBand();
 
         String name = input.readRequiredString("Введите название группы");
 
-        if (checkLower && name.compareToIgnoreCase(current.getName()) >= 0) {
+        if (checkLower && name.compareTo(current.getName()) >= 0) {
             System.out.println("Название не меньше текущего. Ввод прерван.");
             return null;
-        } else if (!checkLower && name.compareToIgnoreCase(current.getName()) <= 0) {
+        } else if (!checkLower && name.compareTo(current.getName()) <= 0) {
             System.out.println("Название не больше текущего. Ввод прерван.");
             return null;
         }

@@ -7,9 +7,6 @@ import common.protocol.AbstractRequest;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-/**
- * Команда, которая только отправляет один запрос на сервер без дополнительного ввода.
- */
 public abstract class AbstractRemoteClientCommand implements ClientCommand {
 
     private final String name;

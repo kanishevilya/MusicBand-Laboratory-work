@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Музыкальная группа. Сравнение по имени (без учёта регистра) — для логики replace/remove по «алфавиту».
- */
 public class MusicBand implements Comparable<MusicBand>, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -124,7 +121,7 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
 
     @Override
     public int compareTo(MusicBand other) {
-        return this.name.compareToIgnoreCase(other.name);
+        return this.name.compareTo(other.name);
     }
 
     @Override
@@ -133,7 +130,8 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
                 + "  id                   = " + id + "\n"
                 + "  name                 = \"" + name + "\"\n"
                 + "  coordinates          = " + coordinates + "\n"
-                + "  creationDate         = " + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null") + "\n"
+                + "  creationDate         = " + (creationDate != null ? creationDate.format(DATE_FORMATTER) : "null")
+                + "\n"
                 + "  numberOfParticipants = " + numberOfParticipants + "\n"
                 + "  albumsCount          = " + albumsCount + "\n"
                 + "  genre                = " + genre + "\n"

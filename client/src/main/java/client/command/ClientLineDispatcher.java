@@ -30,6 +30,13 @@ public final class ClientLineDispatcher implements LineDispatchHandler {
         registry.register(new ClearClientCommand());
         registry.register(new InsertClientCommand());
         registry.register(new RemoveClientCommand());
+        registry.register(new UpdateClientCommand());
+        registry.register(new RemoveGreaterClientCommand());
+        registry.register(new ReplaceGreaterClientCommand());
+        registry.register(new ReplaceLowerClientCommand());
+        registry.register(new AverageOfAlbumsCountClientCommand());
+        registry.register(new FilterByAlbumsCountClientCommand());
+        registry.register(new PrintFieldDescendingAlbumsCountClientCommand());
     }
 
     public ClientCommandContext getContext() {
@@ -40,19 +47,19 @@ public final class ClientLineDispatcher implements LineDispatchHandler {
         context.setInputHandler(inputHandler);
     }
 
-    /**
-     * Точка входа из консоли.
-     */
-    public void handleLine(String line) throws IOException, TimeoutException, ProtocolException, DeserializationException {
+    public void handleLine(String line)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
         dispatchLine(line);
     }
 
     @Override
-    public void dispatch(String line) throws IOException, TimeoutException, ProtocolException, DeserializationException {
+    public void dispatch(String line)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
         dispatchLine(line);
     }
 
-    private void dispatchLine(String line) throws IOException, TimeoutException, ProtocolException, DeserializationException {
+    private void dispatchLine(String line)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
         if (line == null || line.trim().isEmpty()) {
             return;
         }
