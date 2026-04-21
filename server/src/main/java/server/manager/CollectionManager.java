@@ -67,6 +67,7 @@ public class CollectionManager {
     }
 
     public int removeGreater(MusicBand band) {
+        System.out.println(band.toString());
         int before = collection.size();
         collection.entrySet().removeIf(e -> e.getValue().compareTo(band) > 0);
         return before - collection.size();

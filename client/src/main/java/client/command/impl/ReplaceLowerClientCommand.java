@@ -1,0 +1,45 @@
+package client.command.impl;
+
+import client.command.ClientCommand;
+import client.command.ClientCommandArgs;
+import client.command.ClientCommandContext;
+import client.util.MusicBandReader;
+import common.exception.DeserializationException;
+import common.exception.ProtocolException;
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.GetByKeyRequest;
+import common.protocol.request.ReplaceLowerRequest;
+import common.protocol.response.GetByKeyResponse;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
+public final class ReplaceLowerClientCommand implements ClientCommand {
+
+    @Override
+    public String name() {
+        return "replace_if_lower";
+    }
+
+    @Override
+    public void execute(String[] args, ClientCommandContext context)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
+        if (args.length < 2) {
+            System.out.println("Использование: replace_if_lower <ключ>");
+            return;
+        }
+        long key = ClientCommandArgs.parseLong(args[1], "ключ");
+        AbstractResponse getByKeyResponse = context.send(new GetByKeyRequest(context.nextId(), key));
+        if (!(getByKeyResponse instanceof GetByKeyResponse gkr) || !gkr.isSuccess() || gkr.getBand() == null) {
+            System.out.println(getByKeyResponse.getMessage());
+            return;
+        }
+        MusicBand nb = MusicBandReader.readWithNameCheck(context.inputHandler(), gkr.getBand(), true);
+        if (nb == null) {
+            return;
+        }
+        nb.setId(1L);
+        context.sendAndPrint(new ReplaceLowerRequest(context.nextId(), key, nb));
+    }
+}
