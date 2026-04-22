@@ -2,6 +2,7 @@ package client.network;
 
 import common.exception.DeserializationException;
 import common.exception.ProtocolException;
+import common.net.udp.SimpleUdpStreamFraming;
 import common.protocol.AbstractRequest;
 import common.protocol.AbstractResponse;
 import common.util.BinaryProtocol;
@@ -14,14 +15,16 @@ import java.nio.channels.DatagramChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 /**
- * Отправка запроса и приём ответа по UDP через {@link DatagramChannel} в неблокирующем режиме.
+ * Отправка запроса и приём ответа по UDP (неблокирующий канал + селектор) с простой нарезкой по
+ * {@link SimpleUdpStreamFraming}.
  */
 public class UdpClient implements AutoCloseable {
 
-    public static final int MAX_PACKET = 65507;
+    public static final int MAX_PACKET = SimpleUdpStreamFraming.PACKET_SIZE;
 
     private final SocketAddress serverAddress;
     private final int timeoutMs;
@@ -40,15 +43,15 @@ public class UdpClient implements AutoCloseable {
     public AbstractResponse sendAndReceive(AbstractRequest request)
             throws IOException, TimeoutException, ProtocolException, DeserializationException {
         byte[] payload = BinaryProtocol.serialize(request);
-        if (payload.length > MAX_PACKET) {
-            throw new ProtocolException("Запрос слишком велик для UDP: " + payload.length + " байт");
+        List<byte[]> chunks = SimpleUdpStreamFraming.split(payload);
+        for (byte[] chunk : chunks) {
+            ByteBuffer out = ByteBuffer.wrap(chunk);
+            while (out.hasRemaining()) {
+                channel.send(out, serverAddress);
+            }
         }
 
-        ByteBuffer out = ByteBuffer.wrap(payload);
-        while (out.hasRemaining()) {
-            channel.send(out, serverAddress);
-        }
-
+        SimpleUdpStreamFraming.StreamReceiver receiver = new SimpleUdpStreamFraming.StreamReceiver();
         ByteBuffer in = ByteBuffer.allocate(MAX_PACKET);
         long deadline = System.currentTimeMillis() + timeoutMs;
 
@@ -65,11 +68,14 @@ public class UdpClient implements AutoCloseable {
                 if (key.isReadable()) {
                     in.clear();
                     SocketAddress from = channel.receive(in);
-                    if (from != null && in.position() > 0) {
+                    if (from != null && in.position() > 0 && from.equals(serverAddress)) {
                         in.flip();
                         byte[] data = new byte[in.remaining()];
                         in.get(data);
-                        return BinaryProtocol.deserialize(data, AbstractResponse.class);
+                        byte[] complete = receiver.feed(data, data.length);
+                        if (complete != null) {
+                            return BinaryProtocol.deserialize(complete, AbstractResponse.class);
+                        }
                     }
                 }
             }

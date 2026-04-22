@@ -31,6 +31,8 @@ public final class ServerCommandBootstrap {
         registry.register(new AverageOfAlbumsCountCommandHandler());
         registry.register(new FilterByAlbumsCountCommandHandler());
         registry.register(new PrintFieldDescendingAlbumsCountCommandHandler());
+        registry.register(new ScriptSessionBeginCommandHandler());
+        registry.register(new ScriptSessionEndCommandHandler());
         return registry;
     }
 }

@@ -6,6 +6,7 @@ D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\model\Coord
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\model\MusicBand.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\model\MusicGenre.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\model\Person.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\net\udp\SimpleUdpStreamFraming.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\AbstractRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\AbstractResponse.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\AverageOfAlbumsCountRequest.java
@@ -21,6 +22,8 @@ D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\re
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\RemoveRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ReplaceGreaterRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ReplaceLowerRequest.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ScriptSessionBeginRequest.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ScriptSessionEndRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ShowRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\UpdateRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\response\AverageOfAlbumsCountResponse.java

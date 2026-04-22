@@ -13,7 +13,7 @@ public final class FilterByAlbumsCountCommandHandler extends AbstractServerComma
 
     public FilterByAlbumsCountCommandHandler() {
         super(FilterByAlbumsCountRequest.class, "filter_by_albums_count <n>",
-                "элементы, у которых albumsCount равен заданному (список отсортирован по имени, затем id)");
+                "элементы, у которых albumsCount равен заданному");
     }
 
     @Override

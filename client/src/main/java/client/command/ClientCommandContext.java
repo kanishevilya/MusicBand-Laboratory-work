@@ -8,6 +8,9 @@ import common.protocol.AbstractRequest;
 import common.protocol.AbstractResponse;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,6 +22,8 @@ public final class ClientCommandContext {
     private final UdpClient client;
     private InputHandler inputHandler;
     private final AtomicLong requestIds;
+    private LineDispatchHandler lineDispatcher;
+    private final Deque<Path> scriptDirectoryStack = new ArrayDeque<>();
 
     public ClientCommandContext(UdpClient client, InputHandler inputHandler, AtomicLong requestIds) {
         this.client = client;
@@ -45,6 +50,32 @@ public final class ClientCommandContext {
 
     public void setInputHandler(InputHandler inputHandler) {
         this.inputHandler = inputHandler;
+    }
+
+    public void setLineDispatcher(LineDispatchHandler lineDispatcher) {
+        this.lineDispatcher = lineDispatcher;
+    }
+
+    public LineDispatchHandler lineDispatcher() {
+        return lineDispatcher;
+    }
+
+    /**
+     * Каталог для разрешения относительных путей во вложенных {@code execute_script} (родительский каталог текущего файла).
+     */
+    public Path currentScriptBaseDirectory() {
+        Path top = scriptDirectoryStack.peek();
+        return top != null ? top : Path.of("").toAbsolutePath();
+    }
+
+    public void pushScriptBaseDirectory(Path directory) {
+        scriptDirectoryStack.push(directory);
+    }
+
+    public void popScriptBaseDirectory() {
+        if (!scriptDirectoryStack.isEmpty()) {
+            scriptDirectoryStack.pop();
+        }
     }
 
 }

@@ -5,7 +5,10 @@ import common.protocol.AbstractRequest;
 import common.protocol.AbstractResponse;
 import common.protocol.response.ErrorResponse;
 import common.util.BinaryProtocol;
+import server.command.CollectionCommandContext;
 import server.command.ServerCommandRegistry;
+
+import java.net.SocketAddress;
 
 /**
  * Разбор сырых байтов UDP в объект запроса и делегирование реестру команд.
@@ -19,7 +22,17 @@ public final class IncomingDatagramProcessor {
         this.commandRegistry = commandRegistry;
     }
 
-    public AbstractResponse process(byte[] payload) {
+    public AbstractResponse process(byte[] payload, SocketAddress clientAddress) {
+        CollectionCommandContext ctx = commandRegistry.context();
+        ctx.setCurrentClient(clientAddress);
+        try {
+            return processWithoutClientBinding(payload);
+        } finally {
+            ctx.clearCurrentClient();
+        }
+    }
+
+    private AbstractResponse processWithoutClientBinding(byte[] payload) {
         long fallbackRequestId = 0;
         try {
             AbstractRequest request = BinaryProtocol.deserialize(payload, AbstractRequest.class);

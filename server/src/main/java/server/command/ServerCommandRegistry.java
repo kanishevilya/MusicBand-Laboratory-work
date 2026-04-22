@@ -18,6 +18,10 @@ public final class ServerCommandRegistry {
         this.context = context;
     }
 
+    public CollectionCommandContext context() {
+        return context;
+    }
+
     public <T extends AbstractRequest> void register(ServerCommandHandler<T> handler) {
         handlers.put(handler.supportedRequestType(), handler);
     }

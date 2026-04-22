@@ -37,6 +37,8 @@ public final class ClientLineDispatcher implements LineDispatchHandler {
         registry.register(new AverageOfAlbumsCountClientCommand());
         registry.register(new FilterByAlbumsCountClientCommand());
         registry.register(new PrintFieldDescendingAlbumsCountClientCommand());
+        registry.register(new ExecuteScriptClientCommand());
+        context.setLineDispatcher(this);
     }
 
     public ClientCommandContext getContext() {

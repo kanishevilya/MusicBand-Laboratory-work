@@ -1,3 +1,4 @@
+execute_script script.txt
 insert 3
 Metallica
 10.5
@@ -32,4 +33,3 @@ James Hetfield
 1963-08-03 10:10:10
 185
 AB123456
-save

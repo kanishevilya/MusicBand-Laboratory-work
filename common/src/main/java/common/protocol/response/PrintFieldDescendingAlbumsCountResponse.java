@@ -5,6 +5,7 @@ import common.protocol.AbstractResponse;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class PrintFieldDescendingAlbumsCountResponse extends AbstractResponse {
 
@@ -25,6 +26,7 @@ public final class PrintFieldDescendingAlbumsCountResponse extends AbstractRespo
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "\n" + albumsCountsDescending;
+        return super.getMessage() + "\n"
+                + albumsCountsDescending.stream().map(String::valueOf).collect(Collectors.joining("\n"));
     }
 }

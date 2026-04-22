@@ -22,7 +22,7 @@ public final class HelpCommandHandler extends AbstractServerCommandHandler<HelpR
         String message = "Доступные команды:\n"
                 + context.commandRegistry().commandInfos().stream()
                         .sorted(Comparator.comparing(CommandInfo::name, String.CASE_INSENSITIVE_ORDER))
-                        .map(info -> String.format("  %-24s : %s", info.name(), info.description()))
+                        .map(info -> String.format("  %-37s : %s", info.name(), info.description()))
                         .collect(Collectors.joining(System.lineSeparator()));
         return new HelpResponse(rid, true, message);
     }

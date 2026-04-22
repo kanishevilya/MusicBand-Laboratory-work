@@ -4,6 +4,7 @@ import client.command.ClientLineDispatcher;
 import client.network.UdpClient;
 import client.util.InputHandler;
 import common.exception.CancelInputException;
+import common.exception.DeserializationException;
 import common.exception.ProtocolException;
 import common.exception.ScriptEndException;
 
@@ -47,7 +48,9 @@ public class ClientMain {
                         dispatcher.handleLine(line);
                     } catch (TimeoutException e) {
                         System.out.println(e.getMessage());
-                    } catch (ProtocolException e) {
+                    }  catch (DeserializationException e) {
+                        System.out.println("Ошибка разбора ответа: " + e.getMessage());
+                    }  catch (ProtocolException e) {
                         System.out.println("Ошибка протокола: " + e.getMessage());
                     } catch (IOException e) {
                         System.out.println("Ошибка обмена: " + e.getMessage());

@@ -1,15 +1,12 @@
 server\command\handlers\ShowCommandHandler.class
 server\manager\CollectionManager.class
-server\DatagramConnectionModule$ReceivedDatagram.class
 server\command\CollectionCommandContext.class
 server\command\ServerCommandRegistry.class
-server\DatagramConnectionModule.class
 server\util\XmlParser.class
 server\command\handlers\ClearCommandHandler.class
 server\ServerMain.class
 server\command\handlers\InsertCommandHandler.class
 server\command\AbstractServerCommandHandler.class
-server\DatagramResponseModule.class
 server\command\ServerCommandBootstrap.class
 server\command\handlers\InfoCommandHandler.class
 server\command\ServerCommandHandler.class

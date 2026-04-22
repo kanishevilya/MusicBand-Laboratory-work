@@ -5,8 +5,10 @@ D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\Cli
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\ClientCommandContext.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\ClientCommandRegistry.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\ClientLineDispatcher.java
+D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\ExecuteScriptRunner.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\AverageOfAlbumsCountClientCommand.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\ClearClientCommand.java
+D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\ExecuteScriptClientCommand.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\FilterByAlbumsCountClientCommand.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\HelpClientCommand.java
 D:\Programming\semester 2\lab6\MusicBand\client\src\main\java\client\command\impl\InfoClientCommand.java
