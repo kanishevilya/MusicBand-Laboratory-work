@@ -1,4 +1,4 @@
-package client.command.impl;
+package client.command.commands;
 
 import client.command.AbstractRemoteClientCommand;
 import client.command.ClientCommandContext;

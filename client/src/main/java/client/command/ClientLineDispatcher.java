@@ -1,6 +1,6 @@
 package client.command;
 
-import client.command.impl.*;
+import client.command.commands.*;
 import client.network.UdpClient;
 import client.util.InputHandler;
 import common.exception.DeserializationException;

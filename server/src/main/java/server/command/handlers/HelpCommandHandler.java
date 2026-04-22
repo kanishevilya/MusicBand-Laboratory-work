@@ -24,6 +24,7 @@ public final class HelpCommandHandler extends AbstractServerCommandHandler<HelpR
                         .sorted(Comparator.comparing(CommandInfo::name, String.CASE_INSENSITIVE_ORDER))
                         .map(info -> String.format("  %-37s : %s", info.name(), info.description()))
                         .collect(Collectors.joining(System.lineSeparator()));
+        message += "\n"+String.format("  %-37s : %s", "execute_script <path>", "выполнить скрипт из файла");
         return new HelpResponse(rid, true, message);
     }
 }

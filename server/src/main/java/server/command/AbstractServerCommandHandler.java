@@ -3,9 +3,6 @@ package server.command;
 import common.protocol.AbstractRequest;
 import common.protocol.AbstractResponse;
 
-/**
- * Базовая реализация {@link ServerCommandHandler} с хранением класса запроса.
- */
 public abstract class AbstractServerCommandHandler<T extends AbstractRequest> implements ServerCommandHandler<T> {
 
     private final Class<T> requestType;

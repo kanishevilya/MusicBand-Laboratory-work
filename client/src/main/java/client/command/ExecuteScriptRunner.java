@@ -13,11 +13,7 @@ import java.nio.file.Path;
 import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 
-/**
- * Чтение файла скрипта на клиенте: временно подменяет {@link InputHandler}, чтобы многострочные команды
- * (insert и т.д.) читали поля из того же файла; каждая строка-команда уходит на сервер через {@link LineDispatchHandler}.
- * Границы файла — {@link ScriptSessionBeginRequest} / {@link ScriptSessionEndRequest} для проверки рекурсии на сервере.
- */
+
 public final class ExecuteScriptRunner {
 
     private ExecuteScriptRunner() {

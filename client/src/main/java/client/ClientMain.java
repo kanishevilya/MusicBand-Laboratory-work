@@ -14,10 +14,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Клиент: консоль, валидация на стороне ввода, UDP (неблокирующий канал) к серверу.
- * Аргументы: {@code [хост] [порт] [таймаут_мс]} — по умолчанию 127.0.0.1, 5555, 5000.
- */
+
 public class ClientMain {
 
     public static void main(String[] args) {

@@ -1,6 +1,10 @@
 client\command\ClientLineDispatcher.class
+client\command\impl\ReplaceLowerClientCommand.class
+client\command\impl\AverageOfAlbumsCountClientCommand.class
 client\util\MusicBandReader.class
 client\command\impl\InfoClientCommand.class
+client\command\impl\PrintFieldDescendingAlbumsCountClientCommand.class
+client\command\ExecuteScriptRunner.class
 client\command\AbstractRemoteClientCommand.class
 client\command\ClientCommand.class
 client\command\ClientCommandArgs.class
@@ -8,11 +12,16 @@ client\network\UdpClient.class
 client\command\impl\HelpClientCommand.class
 client\command\ClientCommandRegistry.class
 client\command\impl\ShowClientCommand.class
+client\command\impl\RemoveGreaterClientCommand.class
+client\command\impl\ReplaceGreaterClientCommand.class
 client\command\impl\RemoveClientCommand.class
 client\ClientMain.class
 client\command\impl\InsertClientCommand.class
 client\util\InputHandler.class
 client\command\impl\ClearClientCommand.class
 client\command\LineDispatchHandler.class
+client\command\impl\ExecuteScriptClientCommand.class
 client\command\ClientCommandContext.class
+client\command\impl\FilterByAlbumsCountClientCommand.class
+client\command\impl\UpdateClientCommand.class
 client\util\PersonReader.class

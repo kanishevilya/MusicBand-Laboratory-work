@@ -5,7 +5,7 @@ import common.model.MusicBand;
 import java.util.Comparator;
 
 /**
- * Порядок выдачи коллекции клиенту: по имени, при равенстве — по id.
+ * Порядок выдачи коллекции клиенту: по имени, при равенстве - по id.
  */
 public final class MusicBandOrdering {
 

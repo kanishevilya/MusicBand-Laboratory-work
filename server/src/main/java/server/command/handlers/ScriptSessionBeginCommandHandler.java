@@ -33,7 +33,7 @@ public final class ScriptSessionBeginCommandHandler extends AbstractServerComman
             return new ErrorResponse(rid, "Внутренняя ошибка: адрес клиента не задан.");
         }
         if (ScriptRecursionGuard.contains(client, token)) {
-            return new ErrorResponse(rid, "Рекурсивный вызов скрипта: файл уже в стеке исполнения — " + token);
+            return new ErrorResponse(rid, "Рекурсивный вызов скрипта: файл уже в стеке исполнения - " + token);
         }
         ScriptRecursionGuard.push(client, token);
         return new HelpResponse(rid, true, "OK");

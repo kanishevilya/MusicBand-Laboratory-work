@@ -10,10 +10,7 @@ import server.command.ServerCommandRegistry;
 
 import java.net.SocketAddress;
 
-/**
- * Разбор сырых байтов UDP в объект запроса и делегирование реестру команд.
- * Отвечает только за транспортный слой (десериализация + dispatch).
- */
+
 public final class IncomingDatagramProcessor {
 
     private final ServerCommandRegistry commandRegistry;

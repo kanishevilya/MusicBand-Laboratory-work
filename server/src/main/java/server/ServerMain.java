@@ -10,7 +10,7 @@ import server.util.XmlWriter;
 import java.io.IOException;
 
 /**
- * Запуск сервера: {@code <путь_к_xml> [порт]} — порт по умолчанию 5555.
+ * Запуск сервера - порт по умолчанию 5555.
  */
 public class ServerMain {
 
@@ -22,8 +22,6 @@ public class ServerMain {
         String filePath = args[0];
         int port = args.length >= 2 ? parsePort(args[1]) : 5555;
 
-
-        
         CollectionManager collectionManager = new CollectionManager();
         XmlParser xmlParser = new XmlParser();
         XmlWriter xmlWriter = new XmlWriter();
@@ -36,6 +34,14 @@ public class ServerMain {
 
         ServerCommandRegistry commandRegistry = ServerCommandBootstrap.createRegistry(collectionManager);
         IncomingDatagramProcessor incomingProcessor = new IncomingDatagramProcessor(commandRegistry);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                xmlWriter.save(filePath, collectionManager);
+            } catch (IOException e) {
+                System.err.println("Ошибка при сохранении коллекции: " + e.getMessage());
+            }
+        }));
 
         try {
             UdpServer server = new UdpServer(port, incomingProcessor);

@@ -30,9 +30,6 @@ public final class ChunkedUdpSocketTransport {
     public record Received(byte[] payload, SocketAddress replyAddress) {
     }
 
-    /**
-     * Собирает одно сообщение подряд от одного клиента (все фрагменты с одного {@link SocketAddress}).
-     */
     public Received receiveComplete() throws IOException, ProtocolException {
         while (true) {
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length);

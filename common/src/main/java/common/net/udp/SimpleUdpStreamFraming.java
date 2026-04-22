@@ -6,10 +6,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Простая нарезка потока по UDP: пакет = до {@value #DATA_SIZE} байт данных + 1 байт-маркер
- * ({@value #CONTINUATION} — ещё есть продолжение, {@value #END} — последний фрагмент).
- */
+
 public final class SimpleUdpStreamFraming {
 
     public static final int PACKET_SIZE = 1024;
@@ -42,9 +39,6 @@ public final class SimpleUdpStreamFraming {
         return packets;
     }
 
-    /**
-     * Последовательная сборка одного сообщения из датаграмм.
-     */
     public static final class StreamReceiver {
 
         private final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -53,9 +47,7 @@ public final class SimpleUdpStreamFraming {
             buffer.reset();
         }
 
-        /**
-         * @return полное сообщение при маркере {@link #END}; {@code null}, если нужны ещё пакеты
-         */
+
         public byte[] feed(byte[] datagram, int length) throws ProtocolException {
             if (length < 1) {
                 reset();

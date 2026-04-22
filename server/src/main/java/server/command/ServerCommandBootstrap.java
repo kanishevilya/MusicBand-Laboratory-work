@@ -3,9 +3,6 @@ package server.command;
 import server.command.handlers.*;
 import server.manager.CollectionManager;
 
-/**
- * Собирает реестр всех серверных команд.
- */
 public final class ServerCommandBootstrap {
 
     private ServerCommandBootstrap() {

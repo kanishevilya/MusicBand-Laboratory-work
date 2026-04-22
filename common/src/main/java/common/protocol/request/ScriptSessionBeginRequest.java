@@ -4,7 +4,7 @@ import common.protocol.AbstractRequest;
 
 /**
  * Клиент входит в файл скрипта: сервер проверяет рекурсию и кладёт токен в стек.
- * Токен — нормализованный абсолютный путь к файлу на стороне клиента (строка).
+ * Токен - нормализованный абсолютный путь к файлу на стороне клиента (строка).
  */
 public final class ScriptSessionBeginRequest extends AbstractRequest {
 

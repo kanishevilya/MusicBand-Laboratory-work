@@ -6,6 +6,7 @@ import server.manager.CollectionManager;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
 import java.util.Map;
 
 /**
@@ -126,4 +127,15 @@ public class XmlWriter {
                 .replace("\"", "&quot;")
                 .replace("'", "&apos;");
     }
+
+    private int fact(int n){
+        return tailfact(n,1);
+    }
+
+    private int tailfact(int n, int res){
+        if(n==1) return res;
+        return tailfact(n-1, n*res);
+    }
 }
+
+

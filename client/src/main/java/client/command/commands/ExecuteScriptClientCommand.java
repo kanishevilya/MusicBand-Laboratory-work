@@ -1,4 +1,4 @@
-package client.command.impl;
+package client.command.commands;
 
 import client.command.ClientCommand;
 import client.command.ClientCommandContext;
