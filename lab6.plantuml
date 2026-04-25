@@ -1,0 +1,1177 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class AbstractRemoteClientCommand {
+  # AbstractRemoteClientCommand(String): 
+  - name: String
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class AbstractRequest {
+  # AbstractRequest(long): 
+  - serialVersionUID: long
+  - requestId: long
+  + getRequestId(): long
+}
+class AbstractResponse {
+  # AbstractResponse(long, boolean, String): 
+  - success: boolean
+  - message: String
+  - requestId: long
+  - serialVersionUID: long
+  + getRequestId(): long
+  + isSuccess(): boolean
+  + getMessage(): String
+}
+class AbstractServerCommandHandler<T> {
+  # AbstractServerCommandHandler(Class<T>, String, String): 
+  - requestType: Class<T>
+  - commandName: String
+  - commandDescription: String
+  + handle(T, CollectionCommandContext): AbstractResponse
+  + commandDescription(): String
+  + commandName(): String
+  + supportedRequestType(): Class<T>
+}
+class ApiRateProviderNoCache {
+  + ApiRateProviderNoCache(ExchangeRateClient): 
+  - client: ExchangeRateClient
+  - apiCalls: AtomicLong
+  + rateToRub(Currency): BigDecimal
+  + getApiCalls(): long
+}
+class ApiRateProviderRedisCache {
+  + ApiRateProviderRedisCache(ExchangeRateClient, String, int, Duration, int): 
+  - client: ExchangeRateClient
+  - apiCalls: AtomicLong
+  - cacheMisses: AtomicLong
+  - redis: RedisRespClient
+  - cacheHits: AtomicLong
+  - ttlSeconds: int
+  + rateToRub(Currency): BigDecimal
+  + getApiCalls(): long
+  + close(): void
+  + getCacheHits(): long
+  + getCacheMisses(): long
+}
+class AverageOfAlbumsCountClientCommand {
+  + AverageOfAlbumsCountClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class AverageOfAlbumsCountCommand {
+  + AverageOfAlbumsCountCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+class AverageOfAlbumsCountCommandHandler {
+  + AverageOfAlbumsCountCommandHandler(): 
+  + handle(AverageOfAlbumsCountRequest, CollectionCommandContext): AbstractResponse
+}
+class AverageOfAlbumsCountRequest {
+  + AverageOfAlbumsCountRequest(long): 
+  - serialVersionUID: long
+}
+class AverageOfAlbumsCountResponse {
+  + AverageOfAlbumsCountResponse(long, boolean, String, double): 
+  - average: double
+  - serialVersionUID: long
+  + getAverage(): double
+  + getMessage(): String
+}
+class BenchmarkRatesCommand {
+  + BenchmarkRatesCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + execute(String[]): void
+  - print(String, BenchmarkResult, long, long, long): void
+  + getDescription(): String
+  - run(List<MusicBand>, RateProvider): BenchmarkResult
+  - buildDataset(int): List<MusicBand>
+  + getName(): String
+}
+class BinaryProtocol {
+  - BinaryProtocol(): 
+  + serialize(Serializable): byte[]
+  + deserialize(byte[], Class<T>): T
+}
+class CancelInputException {
+  + CancelInputException(String): 
+}
+class CancelInputException {
+  + CancelInputException(String): 
+}
+class ChunkedUdpSocketTransport {
+  + ChunkedUdpSocketTransport(DatagramSocket, int): 
+  - expectedSender: SocketAddress
+  - socket: DatagramSocket
+  - buffer: byte[]
+  - receiver: StreamReceiver
+  + sendComplete(SocketAddress, Serializable): void
+  + receiveComplete(): Received
+}
+class ClearClientCommand {
+  + ClearClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class ClearCommand {
+  + ClearCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getDescription(): String
+  + getName(): String
+  + execute(String[]): void
+}
+class ClearCommandHandler {
+  + ClearCommandHandler(): 
+  + handle(ClearRequest, CollectionCommandContext): AbstractResponse
+}
+class ClearRequest {
+  + ClearRequest(long): 
+  - serialVersionUID: long
+}
+class ClearResponse {
+  + ClearResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+interface ClientCommand << interface >> {
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+}
+class ClientCommandArgs {
+  - ClientCommandArgs(): 
+  + parseLong(String, String): long
+}
+class ClientCommandContext {
+  + ClientCommandContext(UdpClient, InputHandler, AtomicLong): 
+  - inputHandler: InputHandler
+  - lineDispatcher: LineDispatchHandler
+  - client: UdpClient
+  - requestIds: AtomicLong
+  - scriptDirectoryStack: Deque<Path>
+  + inputHandler(): InputHandler
+  + setLineDispatcher(LineDispatchHandler): void
+  + currentScriptBaseDirectory(): Path
+  + pushScriptBaseDirectory(Path): void
+  + send(AbstractRequest): AbstractResponse
+  + lineDispatcher(): LineDispatchHandler
+  + popScriptBaseDirectory(): void
+  + setInputHandler(InputHandler): void
+  + nextId(): long
+  + sendAndPrint(AbstractRequest): void
+}
+class ClientCommandRegistry {
+  + ClientCommandRegistry(): 
+  - commands: Map<String, ClientCommand>
+  + get(String): ClientCommand
+  + register(ClientCommand): void
+}
+class ClientLineDispatcher {
+  + ClientLineDispatcher(UdpClient, InputHandler, AtomicLong): 
+  - registry: ClientCommandRegistry
+  - context: ClientCommandContext
+  + setInputHandler(InputHandler): void
+  + getContext(): ClientCommandContext
+  + handleLine(String): void
+  - dispatchLine(String): void
+  - registerCommands(): void
+  + dispatch(String): void
+}
+class ClientMain {
+  + ClientMain(): 
+  - PORT: int
+  - TIMEOUT_MS: int
+  - HOST: String
+  - parseInt(String, String): int
+  + main(String[]): void
+}
+class CollectionCommandContext {
+  + CollectionCommandContext(CollectionManager): 
+  - collectionManager: CollectionManager
+  - currentClient: SocketAddress
+  - commandRegistry: ServerCommandRegistry
+  + currentClient(): SocketAddress
+  + collectionManager(): CollectionManager
+  + setCurrentClient(SocketAddress): void
+  + commandRegistry(): ServerCommandRegistry
+  + setCommandRegistry(ServerCommandRegistry): void
+  + clearCurrentClient(): void
+}
+class CollectionManager {
+  + CollectionManager(): 
+  - collection: TreeMap<Long, MusicBand>
+  + DATE_FORMATTER: DateTimeFormatter
+  - initializationDate: ZonedDateTime
+  + isEmpty(): boolean
+  + size(): int
+  + removeByKey(Long): boolean
+  + filterByAlbumsCount(int): List<MusicBand>
+  + getInitializationDate(): ZonedDateTime
+  + updateById(long, MusicBand): boolean
+  + averageOfAlbumsCount(): double
+  + setCollection(TreeMap<Long, MusicBand>): void
+  + insert(Long, MusicBand): void
+  + replaceIfGreater(Long, MusicBand, boolean): boolean
+  + replaceIfLower(Long, MusicBand, boolean): boolean
+  + removeGreater(MusicBand): int
+  + getById(long): MusicBand
+  + getByKey(Long): MusicBand
+  + containsKey(Long): boolean
+  + getAlbumsCountDescending(): List<Integer>
+  + getCollection(): TreeMap<Long, MusicBand>
+  + syncIdCounter(): void
+  + generateId(): long
+  + clear(): void
+}
+class CollectionManager {
+  + CollectionManager(): 
+  + DATE_FORMATTER: DateTimeFormatter
+  - collection: TreeMap<Long, MusicBand>
+  - initializationDate: ZonedDateTime
+  - log: Logger
+  + getByKey(Long): MusicBand
+  + syncIdCounter(): void
+  + isEmpty(): boolean
+  + averageOfAlbumsCount(): double
+  + getById(long): MusicBand
+  + generateId(): long
+  + insert(Long, MusicBand): void
+  + replaceIfLower(Long, MusicBand, boolean): boolean
+  + setCollection(TreeMap<Long, MusicBand>): void
+  + replaceIfGreater(Long, MusicBand, boolean): boolean
+  + clear(): void
+  + getAlbumsCountDescending(): List<Integer>
+  + containsKey(Long): boolean
+  + bandsSortedForClient(): Stream<Entry<Long, MusicBand>>
+  + updateById(long, MusicBand): boolean
+  + filterByAlbumsCount(int): List<MusicBand>
+  + getCollection(): TreeMap<Long, MusicBand>
+  + removeByKey(Long): boolean
+  + getInitializationDate(): ZonedDateTime
+  + size(): int
+  + removeGreater(MusicBand): int
+}
+interface Command << interface >> {
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+entity CommandInfo << record >> {
+  + CommandInfo(String, String): 
+  - name: String
+  - description: String
+  + name(): String
+  + description(): String
+}
+class CommandManager {
+  + CommandManager(InputHandler): 
+  - runningScripts: Set<String>
+  - inputHandler: InputHandler
+  - commands: Map<String, Command>
+  + setInputHandler(InputHandler): void
+  + getCommands(): Map<String, Command>
+  + getInputHandler(): InputHandler
+  + getRunningScripts(): Set<String>
+  + register(Command): void
+  + dispatchLine(String): void
+}
+class Coordinates {
+  + Coordinates(double, Float): 
+  + Coordinates(): 
+  - x: double
+  - y: Float
+  + getY(): Float
+  + getX(): double
+  + setX(double): void
+  + setY(Float): void
+  + toString(): String
+}
+class Coordinates {
+  + Coordinates(): 
+  + Coordinates(double, Float): 
+  - serialVersionUID: long
+  - y: Float
+  - x: double
+  + toString(): String
+  + setY(Float): void
+  + getX(): double
+  + getY(): Float
+  + setX(double): void
+}
+enum Currency << enumeration >> {
+  - Currency(): 
+  + USD: 
+  + EUR: 
+  + RUB: 
+  + GBP: 
+  + CNY: 
+  + fromOrdinal(int): Currency
+  + valueOf(String): Currency
+  + valuesString(): String
+  + values(): Currency[]
+}
+class DeserializationException {
+  + DeserializationException(String, Throwable): 
+}
+class ErrorResponse {
+  + ErrorResponse(long, String): 
+  - serialVersionUID: long
+}
+class ExchangeRateClient {
+  + ExchangeRateClient(): 
+  - BASE_URL: String
+  - httpClient: HttpClient
+  + fetchRateToRub(Currency): BigDecimal
+  - extractRate(String, String): BigDecimal
+}
+class ExecuteScriptClientCommand {
+  + ExecuteScriptClientCommand(): 
+  + name(): String
+  + execute(String[], ClientCommandContext): void
+}
+class ExecuteScriptCommand {
+  + ExecuteScriptCommand(CommandManager): 
+  - commandManager: CommandManager
+  + getName(): String
+  + execute(String[]): void
+  + getDescription(): String
+}
+class ExecuteScriptRunner {
+  - ExecuteScriptRunner(): 
+  + runScriptFile(Path, ClientCommandContext, LineDispatchHandler): void
+}
+class ExitCommand {
+  + ExitCommand(): 
+  + getDescription(): String
+  + execute(String[]): void
+  + getName(): String
+}
+class FilterByAlbumsCountClientCommand {
+  + FilterByAlbumsCountClientCommand(): 
+  + name(): String
+  + execute(String[], ClientCommandContext): void
+}
+class FilterByAlbumsCountCommand {
+  + FilterByAlbumsCountCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+class FilterByAlbumsCountCommandHandler {
+  + FilterByAlbumsCountCommandHandler(): 
+  + handle(FilterByAlbumsCountRequest, CollectionCommandContext): AbstractResponse
+}
+class FilterByAlbumsCountRequest {
+  + FilterByAlbumsCountRequest(long, int): 
+  - serialVersionUID: long
+  - albumsCount: int
+  + getAlbumsCount(): int
+}
+class FilterByAlbumsCountResponse {
+  + FilterByAlbumsCountResponse(long, boolean, String, List<MusicBand>): 
+  - serialVersionUID: long
+  - bands: List<MusicBand>
+  + getBands(): List<MusicBand>
+  + getMessage(): String
+}
+class GetByIdCommandHandler {
+  + GetByIdCommandHandler(): 
+  + includeInHelp(): boolean
+  + handle(GetByIdRequest, CollectionCommandContext): AbstractResponse
+}
+class GetByIdRequest {
+  + GetByIdRequest(long, long): 
+  - serialVersionUID: long
+  - bandId: long
+  + getBandId(): long
+}
+class GetByIdResponse {
+  + GetByIdResponse(long, boolean, String, MusicBand): 
+  - band: MusicBand
+  - serialVersionUID: long
+  + getBand(): MusicBand
+}
+class GetByKeyCommandHandler {
+  + GetByKeyCommandHandler(): 
+  + includeInHelp(): boolean
+  + handle(GetByKeyRequest, CollectionCommandContext): AbstractResponse
+}
+class GetByKeyRequest {
+  + GetByKeyRequest(long, long): 
+  - serialVersionUID: long
+  - key: long
+  + getKey(): long
+}
+class GetByKeyResponse {
+  + GetByKeyResponse(long, boolean, String, MusicBand): 
+  - band: MusicBand
+  - serialVersionUID: long
+  + getBand(): MusicBand
+}
+class HelpClientCommand {
+  + HelpClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class HelpCommand {
+  + HelpCommand(Map<String, Command>): 
+  - commands: Map<String, Command>
+  + execute(String[]): void
+  + getName(): String
+  + getDescription(): String
+}
+class HelpCommandHandler {
+  + HelpCommandHandler(): 
+  + handle(HelpRequest, CollectionCommandContext): AbstractResponse
+}
+class HelpRequest {
+  + HelpRequest(long): 
+  - serialVersionUID: long
+}
+class HelpResponse {
+  + HelpResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class IdGenerator {
+  - IdGenerator(): 
+  - counter: long
+  + nextId(): long
+  + syncTo(long): void
+}
+class IdGenerator {
+  - IdGenerator(): 
+  - counter: long
+  + nextId(): long
+  + syncTo(long): void
+}
+class IncomingDatagramProcessor {
+  + IncomingDatagramProcessor(ServerCommandRegistry): 
+  - commandRegistry: ServerCommandRegistry
+  - log: Logger
+  - processWithoutClientBinding(byte[]): AbstractResponse
+  + process(byte[], SocketAddress): AbstractResponse
+}
+class InfoClientCommand {
+  + InfoClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class InfoCommand {
+  + InfoCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + execute(String[]): void
+  + getName(): String
+  + getDescription(): String
+}
+class InfoCommandHandler {
+  + InfoCommandHandler(): 
+  + handle(InfoRequest, CollectionCommandContext): AbstractResponse
+}
+class InfoRequest {
+  + InfoRequest(long): 
+  - serialVersionUID: long
+}
+class InfoResponse {
+  + InfoResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class InputHandler {
+  + InputHandler(Scanner, boolean): 
+  - scanner: Scanner
+  - interactive: boolean
+  + readMusicGenreOrNull(String): MusicGenre
+  + confirmNull(InputHandler): boolean
+  + readRequiredPositiveInt(String): Integer
+  + getScanner(): Scanner
+  + rawScan(String): String
+  + readLine(): String
+  + readPassportId(String): String
+  + readDouble(String): double
+  + readFloatLessThanMax(String, Float): Float
+  + readBirthdayOrNull(String): LocalDateTime
+  + readRequiredString(String): String
+  + setInteractive(boolean): void
+  + readPositiveIntOrNull(String): Integer
+}
+class InputHandler {
+  + InputHandler(Scanner, boolean): 
+  - scanner: Scanner
+  - interactive: boolean
+  + readFloatLessThanMax(String, Float): Float
+  + readNullableInteger(InputHandler, String, Integer, boolean, boolean): Integer
+  + readRequiredPositiveInt(String): Integer
+  + readString(InputHandler, String, String, boolean, boolean, int): String
+  + readDouble(String): double
+  + readBirthdayOrNull(String): LocalDateTime
+  + readRequiredPositiveBigDecimal(String): BigDecimal
+  + readMusicGenreOrNull(String): MusicGenre
+  + confirmNull(InputHandler): boolean
+  + readCurrency(String): Currency
+  + setInteractive(boolean): void
+  + rawScan(String): String
+  + readRequiredString(String): String
+  + readFloat(String): Float
+  + getScanner(): Scanner
+  + readLine(): String
+  + readPositiveIntOrNull(String): Integer
+  + readPassportId(String): String
+}
+class InsertClientCommand {
+  + InsertClientCommand(): 
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+}
+class InsertCommand {
+  + InsertCommand(CollectionManager, CommandManager): 
+  - commandManager: CommandManager
+  - collectionManager: CollectionManager
+  + getDescription(): String
+  + execute(String[]): void
+  + getName(): String
+}
+class InsertCommandHandler {
+  + InsertCommandHandler(): 
+  + handle(InsertRequest, CollectionCommandContext): AbstractResponse
+}
+class InsertRequest {
+  + InsertRequest(long, long, MusicBand): 
+  - serialVersionUID: long
+  - band: MusicBand
+  - key: long
+  + getKey(): long
+  + getBand(): MusicBand
+}
+class InsertResponse {
+  + InsertResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+interface LineDispatchHandler << interface >> {
+  + dispatch(String): void
+}
+class Main {
+  + Main(): 
+  + filePath: String
+  + main(String[]): void
+}
+class MusicBand {
+  + MusicBand(long, String, Coordinates, ZonedDateTime, Integer, Integer, MusicGenre, Person): 
+  + MusicBand(): 
+  - creationDate: ZonedDateTime
+  - numberOfParticipants: Integer
+  + DATE_FORMATTER: DateTimeFormatter
+  - name: String
+  - frontMan: Person
+  - genre: MusicGenre
+  - coordinates: Coordinates
+  - id: long
+  - albumsCount: Integer
+  - serialVersionUID: long
+  + getGenre(): MusicGenre
+  + getId(): long
+  + toString(): String
+  + setGenre(MusicGenre): void
+  + setCoordinates(Coordinates): void
+  + setAlbumsCount(Integer): void
+  + compareTo(MusicBand): int
+  + getCreationDate(): ZonedDateTime
+  + getNumberOfParticipants(): Integer
+  + getName(): String
+  + getCoordinates(): Coordinates
+  + getAlbumsCount(): Integer
+  + setFrontMan(Person): void
+  + getFrontMan(): Person
+  + setName(String): void
+  + setCreationDate(ZonedDateTime): void
+  + setNumberOfParticipants(Integer): void
+  + setId(long): void
+}
+class MusicBand {
+  + MusicBand(): 
+  + MusicBand(long, String, Coordinates, ZonedDateTime, Integer, Integer, MusicGenre, Person, BigDecimal, Currency): 
+  - albumsCount: Integer
+  + DATE_FORMATTER: DateTimeFormatter
+  - price: BigDecimal
+  - creationDate: ZonedDateTime
+  - id: long
+  - coordinates: Coordinates
+  - numberOfParticipants: Integer
+  - frontMan: Person
+  - genre: MusicGenre
+  - currency: Currency
+  - name: String
+  + compareTo(MusicBand): int
+  + getFrontMan(): Person
+  + getId(): long
+  + setName(String): void
+  + setCoordinates(Coordinates): void
+  + getGenre(): MusicGenre
+  + toString(): String
+  + setCurrency(Currency): void
+  + getCurrency(): Currency
+  + getPrice(): BigDecimal
+  + getNumberOfParticipants(): Integer
+  + setGenre(MusicGenre): void
+  + setNumberOfParticipants(Integer): void
+  + getCoordinates(): Coordinates
+  + getCreationDate(): ZonedDateTime
+  + getAlbumsCount(): Integer
+  + setId(long): void
+  + setCreationDate(ZonedDateTime): void
+  + setAlbumsCount(Integer): void
+  + setPrice(BigDecimal): void
+  + setFrontMan(Person): void
+  + getName(): String
+}
+class MusicBandOrdering {
+  - MusicBandOrdering(): 
+  + BY_NAME_THEN_ID: Comparator<MusicBand>
+}
+class MusicBandReader {
+  - MusicBandReader(): 
+  + read(InputHandler): MusicBand
+  + readForUpdate(InputHandler, MusicBand): MusicBand
+  + readWithNameCheck(InputHandler, MusicBand, boolean): MusicBand
+}
+class MusicBandReader {
+  - MusicBandReader(): 
+  + readWithNameCheck(InputHandler, MusicBand, boolean): MusicBand
+  + read(InputHandler): MusicBand
+  + readForUpdate(InputHandler, MusicBand): MusicBand
+  - confirmNull(InputHandler): boolean
+}
+enum MusicGenre << enumeration >> {
+  - MusicGenre(): 
+  + RAP: 
+  + POST_ROCK: 
+  + HIP_HOP: 
+  + SOUL: 
+  + PSYCHEDELIC_CLOUD_RAP: 
+  + valueOf(String): MusicGenre
+  + values(): MusicGenre[]
+  + fromOrdinal(int): MusicGenre
+  + valuesString(): String
+}
+enum MusicGenre << enumeration >> {
+  - MusicGenre(): 
+  + HIP_HOP: 
+  + RAP: 
+  + PSYCHEDELIC_CLOUD_RAP: 
+  + POST_ROCK: 
+  + SOUL: 
+  + fromOrdinal(int): MusicGenre
+  + values(): MusicGenre[]
+  + valueOf(String): MusicGenre
+  + valuesString(): String
+}
+class Person {
+  + Person(): 
+  + Person(String, LocalDateTime, Integer, String): 
+  - name: String
+  - birthday: LocalDateTime
+  - passportID: String
+  + DATE_FORMATTER: DateTimeFormatter
+  - height: Integer
+  + setBirthday(LocalDateTime): void
+  + getName(): String
+  + setName(String): void
+  + setPassportID(String): void
+  + getHeight(): Integer
+  + getBirthday(): LocalDateTime
+  + getPassportID(): String
+  + toString(): String
+  + setHeight(Integer): void
+}
+class Person {
+  + Person(): 
+  + Person(String, LocalDateTime, Integer, String): 
+  + DATE_FORMATTER: DateTimeFormatter
+  - height: Integer
+  - serialVersionUID: long
+  - name: String
+  - birthday: LocalDateTime
+  - passportID: String
+  + getHeight(): Integer
+  + getPassportID(): String
+  + setBirthday(LocalDateTime): void
+  + getName(): String
+  + setHeight(Integer): void
+  + toString(): String
+  + setName(String): void
+  + setPassportID(String): void
+  + getBirthday(): LocalDateTime
+}
+class PersonReader {
+  - PersonReader(): 
+  + read(InputHandler, String, String): Person
+  + readForUpdate(InputHandler, Person, String): Person
+}
+class PersonReader {
+  - PersonReader(): 
+  + read(InputHandler, String, String): Person
+  + readForUpdate(InputHandler, Person, String): Person
+}
+class PrintFieldDescendingAlbumsCountClientCommand {
+  + PrintFieldDescendingAlbumsCountClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class PrintFieldDescendingAlbumsCountCommand {
+  + PrintFieldDescendingAlbumsCountCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getName(): String
+  + execute(String[]): void
+  + getDescription(): String
+}
+class PrintFieldDescendingAlbumsCountCommandHandler {
+  + PrintFieldDescendingAlbumsCountCommandHandler(): 
+  + handle(PrintFieldDescendingAlbumsCountRequest, CollectionCommandContext): AbstractResponse
+}
+class PrintFieldDescendingAlbumsCountRequest {
+  + PrintFieldDescendingAlbumsCountRequest(long): 
+  - serialVersionUID: long
+}
+class PrintFieldDescendingAlbumsCountResponse {
+  + PrintFieldDescendingAlbumsCountResponse(long, boolean, String, List<Integer>): 
+  - albumsCountsDescending: List<Integer>
+  - serialVersionUID: long
+  + getMessage(): String
+  + getAlbumsCountsDescending(): List<Integer>
+}
+class ProtocolException {
+  + ProtocolException(String): 
+  + ProtocolException(String, Throwable): 
+}
+interface RateProvider << interface >> {
+  + rateToRub(Currency): BigDecimal
+}
+class RedisRespClient {
+  + RedisRespClient(String, int, Duration): 
+  - socket: Socket
+  - out: BufferedOutputStream
+  - in: BufferedInputStream
+  - soTimeoutMs: int
+  - host: String
+  - port: int
+  + ping(): String
+  + connect(): void
+  + setex(String, int, String): String
+  + get(String): String
+  - readBytes(int): byte[]
+  - readLine(): String
+  + close(): void
+  - readResp(): Object
+  - writeArray(String[]): void
+}
+class RemoveClientCommand {
+  + RemoveClientCommand(): 
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+}
+class RemoveCommand {
+  + RemoveCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+class RemoveCommandHandler {
+  + RemoveCommandHandler(): 
+  + handle(RemoveRequest, CollectionCommandContext): AbstractResponse
+}
+class RemoveGreaterClientCommand {
+  + RemoveGreaterClientCommand(): 
+  + name(): String
+  + execute(String[], ClientCommandContext): void
+}
+class RemoveGreaterCommand {
+  + RemoveGreaterCommand(CollectionManager, CommandManager): 
+  - commandManager: CommandManager
+  - collectionManager: CollectionManager
+  + getDescription(): String
+  + execute(String[]): void
+  + getName(): String
+}
+class RemoveGreaterCommandHandler {
+  + RemoveGreaterCommandHandler(): 
+  + handle(RemoveGreaterRequest, CollectionCommandContext): AbstractResponse
+}
+class RemoveGreaterRequest {
+  + RemoveGreaterRequest(long, MusicBand): 
+  - serialVersionUID: long
+  - referenceBand: MusicBand
+  + getReferenceBand(): MusicBand
+}
+class RemoveGreaterResponse {
+  + RemoveGreaterResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class RemoveRequest {
+  + RemoveRequest(long, long): 
+  - serialVersionUID: long
+  - key: long
+  + getKey(): long
+}
+class RemoveResponse {
+  + RemoveResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class ReplaceGreaterClientCommand {
+  + ReplaceGreaterClientCommand(): 
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+}
+class ReplaceGreaterCommand {
+  + ReplaceGreaterCommand(CollectionManager, CommandManager): 
+  - commandManager: CommandManager
+  - collectionManager: CollectionManager
+  + getDescription(): String
+  + execute(String[]): void
+  + getName(): String
+}
+class ReplaceGreaterCommandHandler {
+  + ReplaceGreaterCommandHandler(): 
+  + handle(ReplaceGreaterRequest, CollectionCommandContext): AbstractResponse
+}
+class ReplaceGreaterRequest {
+  + ReplaceGreaterRequest(long, long, MusicBand): 
+  - band: MusicBand
+  - serialVersionUID: long
+  - key: long
+  + getBand(): MusicBand
+  + getKey(): long
+}
+class ReplaceGreaterResponse {
+  + ReplaceGreaterResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class ReplaceLowerClientCommand {
+  + ReplaceLowerClientCommand(): 
+  + name(): String
+  + execute(String[], ClientCommandContext): void
+}
+class ReplaceLowerCommand {
+  + ReplaceLowerCommand(CollectionManager, CommandManager): 
+  - collectionManager: CollectionManager
+  - commandManager: CommandManager
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+class ReplaceLowerCommandHandler {
+  + ReplaceLowerCommandHandler(): 
+  + handle(ReplaceLowerRequest, CollectionCommandContext): AbstractResponse
+}
+class ReplaceLowerRequest {
+  + ReplaceLowerRequest(long, long, MusicBand): 
+  - serialVersionUID: long
+  - key: long
+  - band: MusicBand
+  + getKey(): long
+  + getBand(): MusicBand
+}
+class ReplaceLowerResponse {
+  + ReplaceLowerResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class SaveCommand {
+  + SaveCommand(CollectionManager, String, XmlWriter): 
+  - filePath: String
+  - collectionManager: CollectionManager
+  - xmlWriter: XmlWriter
+  + execute(String[]): void
+  + getName(): String
+  + getDescription(): String
+  - setFilePath(String): void
+}
+class ScriptEndException {
+  + ScriptEndException(String): 
+}
+class ScriptEndException {
+  + ScriptEndException(String): 
+}
+class ScriptRecursionGuard {
+  - ScriptRecursionGuard(): 
+  - STACKS: ConcurrentHashMap<String, Deque<String>>
+  + contains(SocketAddress, String): boolean
+  + push(SocketAddress, String): void
+  + tryPop(SocketAddress, String): String
+  + key(SocketAddress): String
+}
+class ScriptSessionBeginCommandHandler {
+  + ScriptSessionBeginCommandHandler(): 
+  + includeInHelp(): boolean
+  + handle(ScriptSessionBeginRequest, CollectionCommandContext): AbstractResponse
+}
+class ScriptSessionBeginRequest {
+  + ScriptSessionBeginRequest(long, String): 
+  - serialVersionUID: long
+  - scriptPathToken: String
+  + getScriptPathToken(): String
+}
+class ScriptSessionEndCommandHandler {
+  + ScriptSessionEndCommandHandler(): 
+  + includeInHelp(): boolean
+  + handle(ScriptSessionEndRequest, CollectionCommandContext): AbstractResponse
+}
+class ScriptSessionEndRequest {
+  + ScriptSessionEndRequest(long, String): 
+  - serialVersionUID: long
+  - scriptPathToken: String
+  + getScriptPathToken(): String
+}
+class ServerCommandBootstrap {
+  - ServerCommandBootstrap(): 
+  + createRegistry(CollectionManager): ServerCommandRegistry
+}
+interface ServerCommandHandler<T> << interface >> {
+  + includeInHelp(): boolean
+  + commandDescription(): String
+  + supportedRequestType(): Class<T>
+  + commandName(): String
+  + handle(T, CollectionCommandContext): AbstractResponse
+}
+class ServerCommandRegistry {
+  + ServerCommandRegistry(CollectionCommandContext): 
+  - log: Logger
+  - context: CollectionCommandContext
+  - handlers: Map<Class<AbstractRequest>, ServerCommandHandler<?>>
+  + commandInfos(): List<CommandInfo>
+  - invoke(ServerCommandHandler<T>, AbstractRequest): AbstractResponse
+  + context(): CollectionCommandContext
+  + register(ServerCommandHandler<T>): void
+  + dispatch(AbstractRequest): AbstractResponse
+}
+class ServerMain {
+  + ServerMain(): 
+  - log: Logger
+  - DEFAULT_PORT: int
+  + main(String[]): void
+  - parsePort(String): int
+}
+class ShowClientCommand {
+  + ShowClientCommand(): 
+  # createRequest(ClientCommandContext): AbstractRequest
+}
+class ShowCommand {
+  + ShowCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + execute(String[]): void
+  + getName(): String
+  + getDescription(): String
+}
+class ShowCommandHandler {
+  + ShowCommandHandler(): 
+  + handle(ShowRequest, CollectionCommandContext): AbstractResponse
+}
+class ShowPricesCommand {
+  + ShowPricesCommand(CollectionManager): 
+  - collectionManager: CollectionManager
+  + getDescription(): String
+  + getName(): String
+  + execute(String[]): void
+}
+class ShowRequest {
+  + ShowRequest(long): 
+  - serialVersionUID: long
+}
+class ShowResponse {
+  + ShowResponse(long, boolean, String, TreeMap<Long, MusicBand>): 
+  - serialVersionUID: long
+  - bands: TreeMap<Long, MusicBand>
+  + getBands(): Map<Long, MusicBand>
+  + getMessage(): String
+}
+class SimpleUdpStreamFraming {
+  - SimpleUdpStreamFraming(): 
+  + CONTINUATION: byte
+  + PACKET_SIZE: int
+  + END: byte
+  + MAX_MESSAGE_BYTES: int
+  + DATA_SIZE: int
+  + split(byte[]): List<byte[]>
+}
+class UdpClient {
+  + UdpClient(String, int, int): 
+  + MAX_PACKET: int
+  - serverAddress: SocketAddress
+  - channel: DatagramChannel
+  - selector: Selector
+  - timeoutMs: int
+  + close(): void
+  + sendAndReceive(AbstractRequest): AbstractResponse
+}
+class UdpServer {
+  + UdpServer(DatagramSocket, IncomingDatagramProcessor): 
+  + UdpServer(int, IncomingDatagramProcessor): 
+  - socket: DatagramSocket
+  - log: Logger
+  + DEFAULT_MAX_PACKET: int
+  - transport: ChunkedUdpSocketTransport
+  - incomingProcessor: IncomingDatagramProcessor
+  + run(): void
+  + close(): void
+  + getLocalPort(): int
+}
+class UpdateClientCommand {
+  + UpdateClientCommand(): 
+  + execute(String[], ClientCommandContext): void
+  + name(): String
+}
+class UpdateCommand {
+  + UpdateCommand(CollectionManager, CommandManager): 
+  - commandManager: CommandManager
+  - collectionManager: CollectionManager
+  + getName(): String
+  + getDescription(): String
+  + execute(String[]): void
+}
+class UpdateCommandHandler {
+  + UpdateCommandHandler(): 
+  + handle(UpdateRequest, CollectionCommandContext): AbstractResponse
+}
+class UpdateRequest {
+  + UpdateRequest(long, long, MusicBand): 
+  - serialVersionUID: long
+  - id: long
+  - band: MusicBand
+  + getBand(): MusicBand
+  + getId(): long
+}
+class UpdateResponse {
+  + UpdateResponse(long, boolean, String): 
+  - serialVersionUID: long
+}
+class XmlParser {
+  + XmlParser(): 
+  - log: Logger
+  + load(String, CollectionManager): void
+  - parseCollection(String): TreeMap<Long, MusicBand>
+  - parseBand(String): MusicBand
+  - extract(String, String): String
+  - extractNullable(String, String): String
+}
+class XmlParser {
+  + XmlParser(): 
+  - extract(String, String): String
+  - parseCollection(String): TreeMap<Long, MusicBand>
+  - parseBand(String): MusicBand
+  + load(String, CollectionManager): void
+  - extractNullable(String, String): String
+}
+class XmlWriter {
+  + XmlWriter(): 
+  - buildPersonXml(Person): String
+  - buildXml(CollectionManager): String
+  - escapeXml(String): String
+  + save(String, CollectionManager): String
+  - buildBandXml(MusicBand): String
+}
+class XmlWriter {
+  + XmlWriter(): 
+  - buildXml(CollectionManager): String
+  - buildPersonXml(Person): String
+  - escapeXml(String): String
+  - fact(int): int
+  - tailfact(int, int): int
+  - buildBandXml(MusicBand): String
+  + save(String, CollectionManager): String
+}
+
+AbstractRemoteClientCommand                    -[#008200,dashed]-^  ClientCommand                                 
+AbstractServerCommandHandler                   -[#595959,dashed]->  AbstractRequest                               
+AbstractServerCommandHandler                   -[#008200,dashed]-^  ServerCommandHandler                          
+AverageOfAlbumsCountClientCommand              -[#000082,plain]-^  AbstractRemoteClientCommand                   
+AverageOfAlbumsCountCommandHandler             -[#000082,plain]-^  AbstractServerCommandHandler                  
+AverageOfAlbumsCountRequest                    -[#000082,plain]-^  AbstractRequest                               
+AverageOfAlbumsCountResponse                   -[#000082,plain]-^  AbstractResponse                              
+ClearClientCommand                             -[#000082,plain]-^  AbstractRemoteClientCommand                   
+ClearCommandHandler                            -[#000082,plain]-^  AbstractServerCommandHandler                  
+ClearRequest                                   -[#000082,plain]-^  AbstractRequest                               
+ClearResponse                                  -[#000082,plain]-^  AbstractResponse                              
+ClientCommandContext                          "1" *-[#595959,plain]-> "inputHandler\n1" InputHandler                                  
+ClientCommandContext                          "1" *-[#595959,plain]-> "lineDispatcher\n1" LineDispatchHandler                           
+ClientCommandContext                          "1" *-[#595959,plain]-> "client\n1" UdpClient                                     
+ClientCommandRegistry                         "1" *-[#595959,plain]-> "commands\n*" ClientCommand                                 
+ClientLineDispatcher                          "1" *-[#595959,plain]-> "context\n1" ClientCommandContext                          
+ClientLineDispatcher                          "1" *-[#595959,plain]-> "registry\n1" ClientCommandRegistry                         
+ClientLineDispatcher                           -[#008200,dashed]-^  LineDispatchHandler                           
+CollectionCommandContext                      "1" *-[#595959,plain]-> "collectionManager\n1" CollectionManager                             
+CollectionCommandContext                      "1" *-[#595959,plain]-> "commandRegistry\n1" ServerCommandRegistry                         
+CollectionManager                             "1" *-[#595959,plain]-> "collection\n*" MusicBand                                     
+DeserializationException                       -[#000082,plain]-^  ProtocolException                             
+ErrorResponse                                  -[#000082,plain]-^  AbstractResponse                              
+ExecuteScriptClientCommand                     -[#008200,dashed]-^  ClientCommand                                 
+FilterByAlbumsCountClientCommand               -[#008200,dashed]-^  ClientCommand                                 
+FilterByAlbumsCountCommandHandler              -[#000082,plain]-^  AbstractServerCommandHandler                  
+FilterByAlbumsCountRequest                     -[#000082,plain]-^  AbstractRequest                               
+FilterByAlbumsCountResponse                    -[#000082,plain]-^  AbstractResponse                              
+FilterByAlbumsCountResponse                   "1" *-[#595959,plain]-> "bands\n*" MusicBand                                     
+GetByIdCommandHandler                          -[#000082,plain]-^  AbstractServerCommandHandler                  
+GetByIdRequest                                 -[#000082,plain]-^  AbstractRequest                               
+GetByIdResponse                                -[#000082,plain]-^  AbstractResponse                              
+GetByIdResponse                               "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+GetByKeyCommandHandler                         -[#000082,plain]-^  AbstractServerCommandHandler                  
+GetByKeyRequest                                -[#000082,plain]-^  AbstractRequest                               
+GetByKeyResponse                               -[#000082,plain]-^  AbstractResponse                              
+GetByKeyResponse                              "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+HelpClientCommand                              -[#000082,plain]-^  AbstractRemoteClientCommand                   
+HelpCommandHandler                             -[#000082,plain]-^  AbstractServerCommandHandler                  
+HelpRequest                                    -[#000082,plain]-^  AbstractRequest                               
+HelpResponse                                   -[#000082,plain]-^  AbstractResponse                              
+IncomingDatagramProcessor                     "1" *-[#595959,plain]-> "commandRegistry\n1" ServerCommandRegistry                         
+InfoClientCommand                              -[#000082,plain]-^  AbstractRemoteClientCommand                   
+InfoCommandHandler                             -[#000082,plain]-^  AbstractServerCommandHandler                  
+InfoRequest                                    -[#000082,plain]-^  AbstractRequest                               
+InfoResponse                                   -[#000082,plain]-^  AbstractResponse                              
+InsertClientCommand                            -[#008200,dashed]-^  ClientCommand                                 
+InsertCommandHandler                           -[#000082,plain]-^  AbstractServerCommandHandler                  
+InsertRequest                                  -[#000082,plain]-^  AbstractRequest                               
+InsertRequest                                 "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+InsertResponse                                 -[#000082,plain]-^  AbstractResponse                              
+MusicBand                                     "1" *-[#595959,plain]-> "coordinates\n1" Coordinates                                   
+MusicBand                                     "1" *-[#595959,plain]-> "genre\n1" MusicGenre                                    
+MusicBand                                     "1" *-[#595959,plain]-> "frontMan\n1" Person                                        
+PrintFieldDescendingAlbumsCountClientCommand   -[#000082,plain]-^  AbstractRemoteClientCommand                   
+PrintFieldDescendingAlbumsCountCommandHandler  -[#000082,plain]-^  AbstractServerCommandHandler                  
+PrintFieldDescendingAlbumsCountRequest         -[#000082,plain]-^  AbstractRequest                               
+PrintFieldDescendingAlbumsCountResponse        -[#000082,plain]-^  AbstractResponse                              
+RemoveClientCommand                            -[#008200,dashed]-^  ClientCommand                                 
+RemoveCommandHandler                           -[#000082,plain]-^  AbstractServerCommandHandler                  
+RemoveGreaterClientCommand                     -[#008200,dashed]-^  ClientCommand                                 
+RemoveGreaterCommandHandler                    -[#000082,plain]-^  AbstractServerCommandHandler                  
+RemoveGreaterRequest                           -[#000082,plain]-^  AbstractRequest                               
+RemoveGreaterRequest                          "1" *-[#595959,plain]-> "referenceBand\n1" MusicBand                                     
+RemoveGreaterResponse                          -[#000082,plain]-^  AbstractResponse                              
+RemoveRequest                                  -[#000082,plain]-^  AbstractRequest                               
+RemoveResponse                                 -[#000082,plain]-^  AbstractResponse                              
+ReplaceGreaterClientCommand                    -[#008200,dashed]-^  ClientCommand                                 
+ReplaceGreaterCommandHandler                   -[#000082,plain]-^  AbstractServerCommandHandler                  
+ReplaceGreaterRequest                          -[#000082,plain]-^  AbstractRequest                               
+ReplaceGreaterRequest                         "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+ReplaceGreaterResponse                         -[#000082,plain]-^  AbstractResponse                              
+ReplaceLowerClientCommand                      -[#008200,dashed]-^  ClientCommand                                 
+ReplaceLowerCommandHandler                     -[#000082,plain]-^  AbstractServerCommandHandler                  
+ReplaceLowerRequest                            -[#000082,plain]-^  AbstractRequest                               
+ReplaceLowerRequest                           "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+ReplaceLowerResponse                           -[#000082,plain]-^  AbstractResponse                              
+ScriptSessionBeginCommandHandler               -[#000082,plain]-^  AbstractServerCommandHandler                  
+ScriptSessionBeginRequest                      -[#000082,plain]-^  AbstractRequest                               
+ScriptSessionEndCommandHandler                 -[#000082,plain]-^  AbstractServerCommandHandler                  
+ScriptSessionEndRequest                        -[#000082,plain]-^  AbstractRequest                               
+ServerCommandHandler                           -[#595959,dashed]->  AbstractRequest                               
+ServerCommandRegistry                         "1" *-[#595959,plain]-> "context\n1" CollectionCommandContext                      
+ServerCommandRegistry                         "1" *-[#595959,plain]-> "handlers\n*" ServerCommandHandler                          
+ShowClientCommand                              -[#000082,plain]-^  AbstractRemoteClientCommand                   
+ShowCommandHandler                             -[#000082,plain]-^  AbstractServerCommandHandler                  
+ShowRequest                                    -[#000082,plain]-^  AbstractRequest                               
+ShowResponse                                   -[#000082,plain]-^  AbstractResponse                              
+ShowResponse                                  "1" *-[#595959,plain]-> "bands\n*" MusicBand                                     
+UdpServer                                     "1" *-[#595959,plain]-> "transport\n1" ChunkedUdpSocketTransport                     
+UdpServer                                     "1" *-[#595959,plain]-> "incomingProcessor\n1" IncomingDatagramProcessor                     
+UpdateClientCommand                            -[#008200,dashed]-^  ClientCommand                                 
+UpdateCommandHandler                           -[#000082,plain]-^  AbstractServerCommandHandler                  
+UpdateRequest                                  -[#000082,plain]-^  AbstractRequest                               
+UpdateRequest                                 "1" *-[#595959,plain]-> "band\n1" MusicBand                                     
+UpdateResponse                                 -[#000082,plain]-^  AbstractResponse                              
+@enduml

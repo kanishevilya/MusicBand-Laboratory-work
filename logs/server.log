@@ -1,2 +1,6 @@
 2026-04-25 11:47:33 [INFO ] server.util.XmlParser - Загружено 1 элементов из файла: musicBand.xml
 2026-04-25 11:47:33 [INFO ] server.ServerMain - UDP-сервер слушает порт 5555, файл: musicBand.xml
+2026-04-25 11:48:01 [INFO ] server.UdpServer - Получено от: /127.0.0.1:62791
+2026-04-25 11:48:01 [DEBUG] server.transport.IncomingDatagramProcessor - Обработка запроса: HelpRequest (id=1)
+2026-04-25 11:48:01 [DEBUG] server.command.ServerCommandRegistry - Диспетчеризация команды: help (requestId=1)
+2026-04-25 11:48:01 [DEBUG] server.UdpServer - Ответ отправлен клиенту: /127.0.0.1:62791
