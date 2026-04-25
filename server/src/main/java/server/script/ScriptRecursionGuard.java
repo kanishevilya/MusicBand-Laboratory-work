@@ -5,9 +5,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Стек открытых скриптов по адресу клиента (только проверка рекурсии, без чтения файлов).
- */
+
 public final class ScriptRecursionGuard {
 
     private static final ConcurrentHashMap<String, Deque<String>> STACKS = new ConcurrentHashMap<>();
@@ -32,11 +30,6 @@ public final class ScriptRecursionGuard {
         STACKS.computeIfAbsent(k, x -> new ArrayDeque<>()).push(pathToken);
     }
 
-    /**
-     * Снимает вершину стека, если она совпадает с ожидаемым токеном.
-     *
-     * @return сообщение об ошибке или {@code null}, если всё корректно
-     */
     public static String tryPop(SocketAddress client, String pathToken) {
         String k = key(client);
         Deque<String> st = STACKS.get(k);

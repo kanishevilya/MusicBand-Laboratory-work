@@ -6,9 +6,6 @@ import common.exception.ProtocolException;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
-/**
- * Повторная диспетчеризация строки (для execute_script).
- */
 @FunctionalInterface
 public interface LineDispatchHandler {
 

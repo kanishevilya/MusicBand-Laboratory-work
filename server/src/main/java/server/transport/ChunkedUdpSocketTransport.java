@@ -11,9 +11,7 @@ import java.net.DatagramSocket;
 import java.net.SocketAddress;
 import java.util.Objects;
 
-/**
- * Приём и отправка сериализованных сообщений по UDP простым потоком чанков (см. {@link SimpleUdpStreamFraming}).
- */
+
 public final class ChunkedUdpSocketTransport {
 
     private final DatagramSocket socket;

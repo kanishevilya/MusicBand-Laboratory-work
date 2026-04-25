@@ -14,9 +14,6 @@ import java.util.Deque;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 
-/**
- * Контекст выполнения клиентской команды: сеть, id запросов, ввод, скрипты.
- */
 public final class ClientCommandContext {
 
     private final UdpClient client;
@@ -35,14 +32,15 @@ public final class ClientCommandContext {
         return requestIds.incrementAndGet();
     }
 
-    public AbstractResponse send(AbstractRequest request) throws IOException, TimeoutException, ProtocolException, DeserializationException {
+    public AbstractResponse send(AbstractRequest request)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
         return client.sendAndReceive(request);
     }
 
-    public void sendAndPrint(AbstractRequest request) throws IOException, TimeoutException, ProtocolException, DeserializationException {
+    public void sendAndPrint(AbstractRequest request)
+            throws IOException, TimeoutException, ProtocolException, DeserializationException {
         System.out.println(send(request).getMessage());
     }
-
 
     public InputHandler inputHandler() {
         return inputHandler;
@@ -61,7 +59,8 @@ public final class ClientCommandContext {
     }
 
     /**
-     * Каталог для разрешения относительных путей во вложенных {@code execute_script} (родительский каталог текущего файла).
+     * Каталог для разрешения относительных путей во вложенных
+     * {@code execute_script} (родительский каталог текущего файла).
      */
     public Path currentScriptBaseDirectory() {
         Path top = scriptDirectoryStack.peek();

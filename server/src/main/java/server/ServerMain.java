@@ -1,5 +1,7 @@
 package server;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.command.ServerCommandBootstrap;
 import server.command.ServerCommandRegistry;
 import server.manager.CollectionManager;
@@ -9,18 +11,18 @@ import server.util.XmlWriter;
 
 import java.io.IOException;
 
-/**
- * Запуск сервера - порт по умолчанию 5555.
- */
 public class ServerMain {
+
+    private static final Logger log = LogManager.getLogger(ServerMain.class);
+    private static final int DEFAULT_PORT = 5555;
 
     public static void main(String[] args) {
         if (args.length < 1) {
-            System.err.println("Использование: java -jar musicband-server.jar <путь_к_xml> [порт]");
+            log.error("Использование: java -jar musicband-server.jar <путь_к_xml> [порт]");
             System.exit(1);
         }
         String filePath = args[0];
-        int port = args.length >= 2 ? parsePort(args[1]) : 5555;
+        int port = args.length >= 2 ? parsePort(args[1]) : DEFAULT_PORT;
 
         CollectionManager collectionManager = new CollectionManager();
         XmlParser xmlParser = new XmlParser();
@@ -28,8 +30,7 @@ public class ServerMain {
         try {
             xmlParser.load(filePath, collectionManager);
         } catch (IOException e) {
-            System.out.println("Предупреждение: не удалось загрузить коллекцию: " + e.getMessage());
-            System.out.println("Начата работа с пустой коллекцией.");
+            log.warn("Не удалось загрузить коллекцию: {}. Начата работа с пустой коллекцией.", e.getMessage());
         }
 
         ServerCommandRegistry commandRegistry = ServerCommandBootstrap.createRegistry(collectionManager);
@@ -38,17 +39,18 @@ public class ServerMain {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 xmlWriter.save(filePath, collectionManager);
+                log.info("Коллекция сохранена в файл: {}", filePath);
             } catch (IOException e) {
-                System.err.println("Ошибка при сохранении коллекции: " + e.getMessage());
+                log.error("Ошибка при сохранении коллекции: {}", e.getMessage());
             }
         }));
 
         try {
             UdpServer server = new UdpServer(port, incomingProcessor);
-            System.out.println("UDP-сервер слушает порт " + server.getLocalPort() + ", файл: " + filePath);
+            log.info("UDP-сервер слушает порт {}, файл: {}", server.getLocalPort(), filePath);
             server.run();
         } catch (Exception e) {
-            System.err.println("Ошибка сервера: " + e.getMessage());
+            log.error("Ошибка сервера: {}", e.getMessage(), e);
             System.exit(1);
         }
     }
@@ -61,7 +63,7 @@ public class ServerMain {
             }
             return p;
         } catch (NumberFormatException e) {
-            System.err.println("Некорректный порт: " + s);
+            log.error("Некорректный порт: {}", s);
             System.exit(1);
             return 0;
         }

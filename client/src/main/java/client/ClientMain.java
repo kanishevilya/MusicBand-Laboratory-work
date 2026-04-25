@@ -14,13 +14,16 @@ import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicLong;
 
-
 public class ClientMain {
 
+    private static final String HOST = "127.0.0.1";
+    private static final int PORT = 5555;
+    private static final int TIMEOUT_MS = 5000;
+
     public static void main(String[] args) {
-        String host = args.length > 0 ? args[0] : "127.0.0.1";
-        int port = args.length > 1 ? parseInt(args[1], "порт") : 5555;
-        int timeoutMs = args.length > 2 ? parseInt(args[2], "таймаут") : 5000;
+        String host = args.length > 0 ? args[0] : HOST;
+        int port = args.length > 1 ? parseInt(args[1], "порт") : PORT;
+        int timeoutMs = args.length > 2 ? parseInt(args[2], "таймаут") : TIMEOUT_MS;
 
         AtomicLong requestIds = new AtomicLong(0);
         Scanner scanner = new Scanner(System.in);
@@ -45,9 +48,9 @@ public class ClientMain {
                         dispatcher.handleLine(line);
                     } catch (TimeoutException e) {
                         System.out.println(e.getMessage());
-                    }  catch (DeserializationException e) {
+                    } catch (DeserializationException e) {
                         System.out.println("Ошибка разбора ответа: " + e.getMessage());
-                    }  catch (ProtocolException e) {
+                    } catch (ProtocolException e) {
                         System.out.println("Ошибка протокола: " + e.getMessage());
                     } catch (IOException e) {
                         System.out.println("Ошибка обмена: " + e.getMessage());

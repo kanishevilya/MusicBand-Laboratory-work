@@ -1,6 +1,8 @@
 package server.util;
 
 import common.model.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.manager.CollectionManager;
 
 import java.io.*;
@@ -14,6 +16,8 @@ import java.util.TreeMap;
  * Загрузка коллекции из XML.
  */
 public class XmlParser {
+
+    private static final Logger log = LogManager.getLogger(XmlParser.class);
 
     public void load(String filePath, CollectionManager collectionManager) throws IOException {
         File file = new File(filePath);
@@ -34,7 +38,7 @@ public class XmlParser {
         TreeMap<Long, MusicBand> loaded = parseCollection(content.toString());
         collectionManager.setCollection(loaded);
         collectionManager.syncIdCounter();
-        System.out.println("Загружено " + loaded.size() + " элементов из файла: " + filePath);
+        log.info("Загружено {} элементов из файла: {}", loaded.size(), filePath);
     }
 
     private TreeMap<Long, MusicBand> parseCollection(String xml) {
@@ -56,7 +60,7 @@ public class XmlParser {
                 MusicBand band = parseBand(bandXml);
                 result.put(key, band);
             } catch (Exception e) {
-                System.err.println("Ошибка разбора элемента коллекции, пропускаем: " + e.getMessage());
+                log.warn("Ошибка разбора элемента коллекции, пропускаем: {}", e.getMessage());
             }
             start = entryEnd + 8;
         }

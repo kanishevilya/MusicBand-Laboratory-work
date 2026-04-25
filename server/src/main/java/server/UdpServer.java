@@ -2,6 +2,8 @@ package server;
 
 import common.exception.ProtocolException;
 import common.protocol.AbstractResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.transport.ChunkedUdpSocketTransport;
 import server.transport.IncomingDatagramProcessor;
 
@@ -9,11 +11,9 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.SocketException;
 
-/**
- * Транспорт: приём фрагментированных UDP-сообщений → обработка через
- * {@link IncomingDatagramProcessor} → ответ чанками.
- */
 public class UdpServer {
+
+    private static final Logger log = LogManager.getLogger(UdpServer.class);
 
     public static final int DEFAULT_MAX_PACKET = 65507;
 
@@ -35,11 +35,12 @@ public class UdpServer {
         while (true) {
             try {
                 ChunkedUdpSocketTransport.Received incoming = transport.receiveComplete();
-                System.out.println("Получено от: " + incoming.replyAddress());
+                log.info("Получено от: {}", incoming.replyAddress());
                 AbstractResponse response = incomingProcessor.process(incoming.payload(), incoming.replyAddress());
                 transport.sendComplete(incoming.replyAddress(), response);
+                log.debug("Ответ отправлен клиенту: {}", incoming.replyAddress());
             } catch (ProtocolException e) {
-                System.err.println("Ошибка протокола UDP: " + e.getMessage());
+                log.warn("Ошибка протокола UDP: {}", e.getMessage());
             }
         }
     }

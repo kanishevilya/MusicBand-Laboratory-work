@@ -1,8 +1,5 @@
 package client.command;
 
-/**
- * Разбор числовых аргументов командной строки.
- */
 public final class ClientCommandArgs {
 
     private ClientCommandArgs() {

@@ -3,9 +3,6 @@ package client.command;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Реестр клиентских команд по имени.
- */
 public final class ClientCommandRegistry {
 
     private final Map<String, ClientCommand> commands = new LinkedHashMap<>();

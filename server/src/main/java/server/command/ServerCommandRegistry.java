@@ -3,6 +3,8 @@ package server.command;
 import common.protocol.AbstractRequest;
 import common.protocol.AbstractResponse;
 import common.protocol.response.ErrorResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 public final class ServerCommandRegistry {
+
+    private static final Logger log = LogManager.getLogger(ServerCommandRegistry.class);
 
     private final CollectionCommandContext context;
     private final Map<Class<? extends AbstractRequest>, ServerCommandHandler<?>> handlers = new HashMap<>();
@@ -42,10 +46,13 @@ public final class ServerCommandRegistry {
         try {
             ServerCommandHandler<?> handler = handlers.get(request.getClass());
             if (handler == null) {
+                log.warn("Неизвестный тип запроса: {}", request.getClass().getName());
                 return new ErrorResponse(rid, "Неизвестный тип запроса: " + request.getClass().getName());
             }
+            log.debug("Диспетчеризация команды: {} (requestId={})", handler.commandName(), rid);
             return invoke(handler, request);
         } catch (Exception e) {
+            log.error("Ошибка выполнения команды (requestId={}): {}", rid, e.getMessage(), e);
             return new ErrorResponse(rid, "Ошибка выполнения: " + e.getMessage());
         }
     }

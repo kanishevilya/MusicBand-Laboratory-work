@@ -1,0 +1,2 @@
+2026-04-25 11:47:33 [INFO ] server.util.XmlParser - Загружено 1 элементов из файла: musicBand.xml
+2026-04-25 11:47:33 [INFO ] server.ServerMain - UDP-сервер слушает порт 5555, файл: musicBand.xml

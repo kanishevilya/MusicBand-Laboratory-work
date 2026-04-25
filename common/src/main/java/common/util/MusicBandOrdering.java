@@ -4,9 +4,6 @@ import common.model.MusicBand;
 
 import java.util.Comparator;
 
-/**
- * Порядок выдачи коллекции клиенту: по имени, при равенстве - по id.
- */
 public final class MusicBandOrdering {
 
     public static final Comparator<MusicBand> BY_NAME_THEN_ID =

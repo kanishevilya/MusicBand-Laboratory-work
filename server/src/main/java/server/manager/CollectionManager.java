@@ -2,6 +2,8 @@ package server.manager;
 
 import common.model.MusicBand;
 import common.util.MusicBandOrdering;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import server.util.IdGenerator;
 
 import java.time.ZonedDateTime;
@@ -14,6 +16,8 @@ import java.util.stream.Stream;
  * Управление коллекцией на сервере.
  */
 public class CollectionManager {
+
+    private static final Logger log = LogManager.getLogger(CollectionManager.class);
 
     public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
@@ -67,7 +71,7 @@ public class CollectionManager {
     }
 
     public int removeGreater(MusicBand band) {
-        System.out.println(band.toString());
+        log.debug("removeGreater вызван для: {}", band);
         int before = collection.size();
         collection.entrySet().removeIf(e -> e.getValue().compareTo(band) > 0);
         return before - collection.size();
