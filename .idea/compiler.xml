@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="musicband-client" />
-        <module name="musicband-common" />
+        <module name="musicband-rest-gateway" />
         <module name="musicband-server" />
+        <module name="musicband-common" />
       </profile>
     </annotationProcessing>
   </component>
