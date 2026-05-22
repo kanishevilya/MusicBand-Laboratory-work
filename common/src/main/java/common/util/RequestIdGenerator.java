@@ -1,4 +1,4 @@
-package restgateway.util;
+package common.util;
 
 import java.util.concurrent.atomic.AtomicLong;
 

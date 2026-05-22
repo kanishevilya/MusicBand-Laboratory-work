@@ -23,7 +23,7 @@ public class UdpGatewayImpl implements UdpGateway {
     }
 
     @Override
-    public AbstractResponse send(AbstractRequest request) throws Exception {
+    public AbstractResponse sendAndReceive(AbstractRequest request) throws Exception {
         byte[] requestBytes = BinaryProtocol.serialize(request);
 
         try (DatagramSocket socket = new DatagramSocket()) {
