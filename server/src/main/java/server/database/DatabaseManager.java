@@ -17,9 +17,9 @@ import org.apache.logging.log4j.Logger;
 public class DatabaseManager {
     private static final Logger logger = LogManager.getLogger(DatabaseManager.class);
 
-    private static final String URL = "***REMOVED***";
-    private static final String USER = "***REMOVED***";
-    private static final String PASSWORD = "***REMOVED***";
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
     private Connection connection;
 
