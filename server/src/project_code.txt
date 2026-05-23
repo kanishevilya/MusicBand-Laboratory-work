@@ -1,0 +1,2446 @@
+﻿========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\AverageOfAlbumsCountCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.AverageOfAlbumsCountRequest;
+import common.protocol.response.AverageOfAlbumsCountResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class AverageOfAlbumsCountCommandHandler
+        extends AbstractServerCommandHandler<AverageOfAlbumsCountRequest> {
+
+    public AverageOfAlbumsCountCommandHandler() {
+        super(AverageOfAlbumsCountRequest.class, "average_of_albums_count",
+                "СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РїРѕР»СЏ albumsCount РїРѕ РєРѕР»Р»РµРєС†РёРё");
+    }
+
+    @Override
+    public AbstractResponse handle(AverageOfAlbumsCountRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        double avg = context.collectionManager().averageOfAlbumsCount();
+        return new AverageOfAlbumsCountResponse(rid, true, "Р РµР·СѓР»СЊС‚Р°С‚ РїРѕ РєРѕР»Р»РµРєС†РёРё:", avg);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ClearCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.ClearRequest;
+import common.protocol.response.ClearResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class ClearCommandHandler extends AbstractServerCommandHandler<ClearRequest> {
+
+    public ClearCommandHandler() {
+        super(ClearRequest.class, "clear", "РѕС‡РёСЃС‚РёС‚СЊ РєРѕР»Р»РµРєС†РёСЋ");
+    }
+
+    @Override
+    public AbstractResponse handle(ClearRequest request, CollectionCommandContext context) {
+        context.collectionManager().clear();
+        return new ClearResponse(request.getRequestId(), true, "РљРѕР»Р»РµРєС†РёСЏ РѕС‡РёС‰РµРЅР°.");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\FilterByAlbumsCountCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.FilterByAlbumsCountRequest;
+import common.protocol.response.FilterByAlbumsCountResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+import java.util.List;
+
+public final class FilterByAlbumsCountCommandHandler extends AbstractServerCommandHandler<FilterByAlbumsCountRequest> {
+
+    public FilterByAlbumsCountCommandHandler() {
+        super(FilterByAlbumsCountRequest.class, "filter_by_albums_count <n>",
+                "СЌР»РµРјРµРЅС‚С‹, Сѓ РєРѕС‚РѕСЂС‹С… albumsCount СЂР°РІРµРЅ Р·Р°РґР°РЅРЅРѕРјСѓ");
+    }
+
+    @Override
+    public AbstractResponse handle(FilterByAlbumsCountRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        List<MusicBand> list = context.collectionManager().filterByAlbumsCount(request.getAlbumsCount());
+        return new FilterByAlbumsCountResponse(rid, true, "РќР°Р№РґРµРЅРѕ: " + list.size(), list);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\GetByIdCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.GetByIdRequest;
+import common.protocol.response.GetByIdResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class GetByIdCommandHandler extends AbstractServerCommandHandler<GetByIdRequest> {
+
+    public GetByIdCommandHandler() {
+        super(GetByIdRequest.class, "get_by_id", "СЃР»СѓР¶РµР±РЅС‹Р№ Р·Р°РїСЂРѕСЃ: СЌР»РµРјРµРЅС‚ РїРѕ id");
+    }
+
+    @Override
+    public boolean includeInHelp() {
+        return false;
+    }
+
+    @Override
+    public AbstractResponse handle(GetByIdRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        MusicBand b = context.collectionManager().getById(request.getBandId());
+        if (b == null) {
+            return new GetByIdResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ id " + request.getBandId() + " РЅРµ РЅР°Р№РґРµРЅ.", null);
+        }
+        return new GetByIdResponse(rid, true, "OK", b);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\GetByKeyCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.GetByKeyRequest;
+import common.protocol.response.GetByKeyResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class GetByKeyCommandHandler extends AbstractServerCommandHandler<GetByKeyRequest> {
+
+    public GetByKeyCommandHandler() {
+        super(GetByKeyRequest.class, "get_by_key", "СЃР»СѓР¶РµР±РЅС‹Р№ Р·Р°РїСЂРѕСЃ: СЌР»РµРјРµРЅС‚ РїРѕ РєР»СЋС‡Сѓ");
+    }
+
+    @Override
+    public boolean includeInHelp() {
+        return false;
+    }
+
+    @Override
+    public AbstractResponse handle(GetByKeyRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        MusicBand b = context.collectionManager().getByKey(request.getKey());
+        if (b == null) {
+            return new GetByKeyResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " РЅРµ РЅР°Р№РґРµРЅ.", null);
+        }
+        return new GetByKeyResponse(rid, true, "OK", b);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\HelpCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.HelpRequest;
+import common.protocol.response.HelpResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CommandInfo;
+import server.command.CollectionCommandContext;
+
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+public final class HelpCommandHandler extends AbstractServerCommandHandler<HelpRequest> {
+
+    public HelpCommandHandler() {
+        super(HelpRequest.class, "help", "РІС‹РІРµСЃС‚Рё СЃРїСЂР°РІРєСѓ РїРѕ РґРѕСЃС‚СѓРїРЅС‹Рј РєРѕРјР°РЅРґР°Рј");
+    }
+
+    @Override
+    public AbstractResponse handle(HelpRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        String message = "Р”РѕСЃС‚СѓРїРЅС‹Рµ РєРѕРјР°РЅРґС‹:\n"
+                + context.commandRegistry().commandInfos().stream()
+                        .sorted(Comparator.comparing(CommandInfo::name, String.CASE_INSENSITIVE_ORDER))
+                        .map(info -> String.format("  %-37s : %s", info.name(), info.description()))
+                        .collect(Collectors.joining(System.lineSeparator()));
+        message += "\n"+String.format("  %-37s : %s", "execute_script <path>", "РІС‹РїРѕР»РЅРёС‚СЊ СЃРєСЂРёРїС‚ РёР· С„Р°Р№Р»Р°");
+        return new HelpResponse(rid, true, message);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\InfoCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.InfoRequest;
+import common.protocol.response.InfoResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+import server.manager.CollectionManager;
+
+public final class InfoCommandHandler extends AbstractServerCommandHandler<InfoRequest> {
+
+    public InfoCommandHandler() {
+        super(InfoRequest.class, "info", "РІС‹РІРµСЃС‚Рё РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РєРѕР»Р»РµРєС†РёРё");
+    }
+
+    @Override
+    public AbstractResponse handle(InfoRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        var cm = context.collectionManager();
+        String message = "РРЅС„РѕСЂРјР°С†РёСЏ Рѕ РєРѕР»Р»РµРєС†РёРё:" + System.lineSeparator()
+                + "  РўРёРї РєРѕР»Р»РµРєС†РёРё   : java.util.TreeMap" + System.lineSeparator()
+                + "  РўРёРї СЌР»РµРјРµРЅС‚РѕРІ   : MusicBand" + System.lineSeparator()
+                + "  Р”Р°С‚Р° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё: "
+                + cm.getInitializationDate().format(CollectionManager.DATE_FORMATTER)
+                + System.lineSeparator()
+                + "  РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ: " + cm.size();
+        return new InfoResponse(rid, true, message);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\InsertCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.InsertRequest;
+import common.protocol.response.InsertResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+import java.time.ZonedDateTime;
+
+public final class InsertCommandHandler extends AbstractServerCommandHandler<InsertRequest> {
+
+    public InsertCommandHandler() {
+        super(InsertRequest.class, "insert <key>", "РґРѕР±Р°РІРёС‚СЊ РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ СЃ Р·Р°РґР°РЅРЅС‹Рј РєР»СЋС‡РѕРј");
+    }
+
+    @Override
+    public AbstractResponse handle(InsertRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        var cm = context.collectionManager();
+        if (cm.containsKey(request.getKey())) {
+            return new InsertResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.");
+        }
+        MusicBand band = request.getBand();
+        band.setId(cm.generateId());
+        band.setCreationDate(ZonedDateTime.now());
+        cm.insert(request.getKey(), band);
+        return new InsertResponse(rid, true, "Р­Р»РµРјРµРЅС‚ РґРѕР±Р°РІР»РµРЅ СЃ РєР»СЋС‡РѕРј " + request.getKey() + ".");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\PrintFieldDescendingAlbumsCountCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.PrintFieldDescendingAlbumsCountRequest;
+import common.protocol.response.PrintFieldDescendingAlbumsCountResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+import java.util.List;
+
+public final class PrintFieldDescendingAlbumsCountCommandHandler
+        extends AbstractServerCommandHandler<PrintFieldDescendingAlbumsCountRequest> {
+
+    public PrintFieldDescendingAlbumsCountCommandHandler() {
+        super(PrintFieldDescendingAlbumsCountRequest.class, "print_field_descending_albums_count",
+                "Р·РЅР°С‡РµРЅРёСЏ РїРѕР»СЏ albumsCount РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ РІ РїРѕСЂСЏРґРєРµ СѓР±С‹РІР°РЅРёСЏ");
+    }
+
+    @Override
+    public AbstractResponse handle(PrintFieldDescendingAlbumsCountRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        List<Integer> counts = context.collectionManager().getAlbumsCountDescending();
+        return new PrintFieldDescendingAlbumsCountResponse(rid, true, "Р—РЅР°С‡РµРЅРёСЏ albumsCount (РїРѕ СѓР±С‹РІР°РЅРёСЋ):", counts);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\RemoveCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.RemoveRequest;
+import common.protocol.response.RemoveResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class RemoveCommandHandler extends AbstractServerCommandHandler<RemoveRequest> {
+
+    public RemoveCommandHandler() {
+        super(RemoveRequest.class, "remove <key>", "СѓРґР°Р»РёС‚СЊ СЌР»РµРјРµРЅС‚ РёР· РєРѕР»Р»РµРєС†РёРё РїРѕ РєР»СЋС‡Сѓ");
+    }
+
+    @Override
+    public AbstractResponse handle(RemoveRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        if (context.collectionManager().removeByKey(request.getKey())) {
+            return new RemoveResponse(rid, true, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " СѓРґР°Р»С‘РЅ.");
+        }
+        return new RemoveResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " РЅРµ РЅР°Р№РґРµРЅ.");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\RemoveGreaterCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.RemoveGreaterRequest;
+import common.protocol.response.RemoveGreaterResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class RemoveGreaterCommandHandler extends AbstractServerCommandHandler<RemoveGreaterRequest> {
+
+    public RemoveGreaterCommandHandler() {
+        super(RemoveGreaterRequest.class, "remove_greater",
+                "СѓРґР°Р»РёС‚СЊ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ 'Р±РѕР»СЊС€Рµ' СЌС‚Р°Р»РѕРЅР° (СЃСЂР°РІРЅРµРЅРёРµ РїРѕ РЅР°Р·РІР°РЅРёСЋ)");
+    }
+
+    @Override
+    public AbstractResponse handle(RemoveGreaterRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        int n = context.collectionManager().removeGreater(request.getReferenceBand());
+        return new RemoveGreaterResponse(rid, true, "РЈРґР°Р»РµРЅРѕ СЌР»РµРјРµРЅС‚РѕРІ: " + n);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ReplaceGreaterCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.ReplaceGreaterRequest;
+import common.protocol.response.ReplaceGreaterResponse;
+import server.manager.CollectionManager;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class ReplaceGreaterCommandHandler extends AbstractServerCommandHandler<ReplaceGreaterRequest> {
+
+    public ReplaceGreaterCommandHandler() {
+        super(ReplaceGreaterRequest.class, "replace_if_greater <key>",
+                "Р·Р°РјРµРЅРёС‚СЊ РїРѕ РєР»СЋС‡Сѓ, РµСЃР»Рё РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ 'Р±РѕР»СЊС€Рµ' СЃС‚Р°СЂРѕРіРѕ (РїРѕ РЅР°Р·РІР°РЅРёСЋ)");
+    }
+
+    @Override
+    public AbstractResponse handle(ReplaceGreaterRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        CollectionManager cm = context.collectionManager();
+        if (!cm.containsKey(request.getKey())) {
+            return new ReplaceGreaterResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " РЅРµ РЅР°Р№РґРµРЅ.");
+        }
+        boolean replaceIfGreater = cm.replaceIfGreater(request.getKey(), request.getBand(), true);
+        if (replaceIfGreater) {
+            return new ReplaceGreaterResponse(rid, true, "Р­Р»РµРјРµРЅС‚ Р·Р°РјРµРЅС‘РЅ (РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ Р±РѕР»СЊС€Рµ СЃС‚Р°СЂРѕРіРѕ).");
+        }
+        return new ReplaceGreaterResponse(rid, true, "Р—Р°РјРµРЅР° РЅРµ РІС‹РїРѕР»РЅРµРЅР°: РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ РїСЂРµРІС‹С€Р°РµС‚ СЃС‚Р°СЂРѕРµ.");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ReplaceLowerCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.ReplaceLowerRequest;
+import common.protocol.response.ReplaceLowerResponse;
+import server.manager.CollectionManager;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class ReplaceLowerCommandHandler extends AbstractServerCommandHandler<ReplaceLowerRequest> {
+
+    public ReplaceLowerCommandHandler() {
+        super(ReplaceLowerRequest.class, "replace_if_lower <key>",
+                "Р·Р°РјРµРЅРёС‚СЊ РїРѕ РєР»СЋС‡Сѓ, РµСЃР»Рё РЅРѕРІС‹Р№ СЌР»РµРјРµРЅС‚ 'РјРµРЅСЊС€Рµ' СЃС‚Р°СЂРѕРіРѕ (РїРѕ РЅР°Р·РІР°РЅРёСЋ)");
+    }
+
+    @Override
+    public AbstractResponse handle(ReplaceLowerRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        CollectionManager cm = context.collectionManager();
+        if (!cm.containsKey(request.getKey())) {
+            return new ReplaceLowerResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ РєР»СЋС‡РѕРј " + request.getKey() + " РЅРµ РЅР°Р№РґРµРЅ.");
+        }
+        boolean replaceIfLower = cm.replaceIfLower(request.getKey(), request.getBand(), true);
+        if (replaceIfLower) {
+            return new ReplaceLowerResponse(rid, true, "Р­Р»РµРјРµРЅС‚ Р·Р°РјРµРЅС‘РЅ (РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РјРµРЅСЊС€Рµ СЃС‚Р°СЂРѕРіРѕ).");
+        }
+        return new ReplaceLowerResponse(rid, true, "Р—Р°РјРµРЅР° РЅРµ РІС‹РїРѕР»РЅРµРЅР°: РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РЅРµ РјРµРЅСЊС€Рµ СЃС‚Р°СЂРѕРіРѕ.");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ScriptSessionBeginCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.ScriptSessionBeginRequest;
+import common.protocol.response.ErrorResponse;
+import common.protocol.response.HelpResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+import server.script.ScriptRecursionGuard;
+
+import java.net.SocketAddress;
+
+public final class ScriptSessionBeginCommandHandler extends AbstractServerCommandHandler<ScriptSessionBeginRequest> {
+
+    public ScriptSessionBeginCommandHandler() {
+        super(ScriptSessionBeginRequest.class, "script_begin", "СЃР»СѓР¶РµР±РЅРѕ: РІС…РѕРґ РІ С„Р°Р№Р» СЃРєСЂРёРїС‚Р° РЅР° РєР»РёРµРЅС‚Рµ");
+    }
+
+    @Override
+    public boolean includeInHelp() {
+        return false;
+    }
+
+    @Override
+    public AbstractResponse handle(ScriptSessionBeginRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        String token = request.getScriptPathToken().trim();
+        if (token.isEmpty()) {
+            return new ErrorResponse(rid, "РџСѓСЃС‚РѕР№ С‚РѕРєРµРЅ РїСѓС‚Рё СЃРєСЂРёРїС‚Р°.");
+        }
+        SocketAddress client = context.currentClient();
+        if (client == null) {
+            return new ErrorResponse(rid, "Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР°: Р°РґСЂРµСЃ РєР»РёРµРЅС‚Р° РЅРµ Р·Р°РґР°РЅ.");
+        }
+        if (ScriptRecursionGuard.contains(client, token)) {
+            return new ErrorResponse(rid, "Р РµРєСѓСЂСЃРёРІРЅС‹Р№ РІС‹Р·РѕРІ СЃРєСЂРёРїС‚Р°: С„Р°Р№Р» СѓР¶Рµ РІ СЃС‚РµРєРµ РёСЃРїРѕР»РЅРµРЅРёСЏ - " + token);
+        }
+        ScriptRecursionGuard.push(client, token);
+        return new HelpResponse(rid, true, "OK");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ScriptSessionEndCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.ScriptSessionEndRequest;
+import common.protocol.response.ErrorResponse;
+import common.protocol.response.HelpResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+import server.script.ScriptRecursionGuard;
+
+import java.net.SocketAddress;
+
+public final class ScriptSessionEndCommandHandler extends AbstractServerCommandHandler<ScriptSessionEndRequest> {
+
+    public ScriptSessionEndCommandHandler() {
+        super(ScriptSessionEndRequest.class, "script_end", "СЃР»СѓР¶РµР±РЅРѕ: РІС‹С…РѕРґ РёР· С„Р°Р№Р»Р° СЃРєСЂРёРїС‚Р° РЅР° РєР»РёРµРЅС‚Рµ");
+    }
+
+    @Override
+    public boolean includeInHelp() {
+        return false;
+    }
+
+    @Override
+    public AbstractResponse handle(ScriptSessionEndRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        String token = request.getScriptPathToken().trim();
+        SocketAddress client = context.currentClient();
+        if (client == null) {
+            return new ErrorResponse(rid, "Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР°: Р°РґСЂРµСЃ РєР»РёРµРЅС‚Р° РЅРµ Р·Р°РґР°РЅ.");
+        }
+        String err = ScriptRecursionGuard.tryPop(client, token);
+        if (err != null) {
+            return new ErrorResponse(rid, err);
+        }
+        return new HelpResponse(rid, true, "OK");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\ShowCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.model.MusicBand;
+import common.protocol.AbstractResponse;
+import common.protocol.request.ShowRequest;
+import common.protocol.response.ShowResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+import java.util.Map;
+import java.util.TreeMap;
+
+public final class ShowCommandHandler extends AbstractServerCommandHandler<ShowRequest> {
+
+    public ShowCommandHandler() {
+        super(ShowRequest.class, "show", "РІС‹РІРµСЃС‚Рё РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РєРѕР»Р»РµРєС†РёРё");
+    }
+
+    @Override
+    public AbstractResponse handle(ShowRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        TreeMap<Long, MusicBand> bands = context.collectionManager().bandsSortedForClient()
+                .collect(TreeMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
+        return new ShowResponse(rid, true, "Р­Р»РµРјРµРЅС‚РѕРІ: " + bands.size(), bands);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\handlers\UpdateCommandHandler.java
+========================================
+package server.command.handlers;
+
+import common.protocol.AbstractResponse;
+import common.protocol.request.UpdateRequest;
+import common.protocol.response.UpdateResponse;
+import server.command.AbstractServerCommandHandler;
+import server.command.CollectionCommandContext;
+
+public final class UpdateCommandHandler extends AbstractServerCommandHandler<UpdateRequest> {
+
+    public UpdateCommandHandler() {
+        super(UpdateRequest.class, "update <id>", "РѕР±РЅРѕРІРёС‚СЊ СЌР»РµРјРµРЅС‚ РєРѕР»Р»РµРєС†РёРё РїРѕ id СЌР»РµРјРµРЅС‚Р° (MusicBand)");
+    }
+
+    @Override
+    public AbstractResponse handle(UpdateRequest request, CollectionCommandContext context) {
+        long rid = request.getRequestId();
+        if (!context.collectionManager().updateById(request.getId(), request.getBand())) {
+            return new UpdateResponse(rid, false, "Р­Р»РµРјРµРЅС‚ СЃ id " + request.getId() + " РЅРµ РЅР°Р№РґРµРЅ.");
+        }
+        return new UpdateResponse(rid, true, "Р­Р»РµРјРµРЅС‚ СЃ id " + request.getId() + " РѕР±РЅРѕРІР»С‘РЅ.");
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\AbstractServerCommandHandler.java
+========================================
+package server.command;
+
+import common.protocol.AbstractRequest;
+import common.protocol.AbstractResponse;
+
+public abstract class AbstractServerCommandHandler<T extends AbstractRequest> implements ServerCommandHandler<T> {
+
+    private final Class<T> requestType;
+    private final String commandName;
+    private final String commandDescription;
+
+    protected AbstractServerCommandHandler(Class<T> requestType, String commandName, String commandDescription) {
+        this.requestType = requestType;
+        this.commandName = commandName;
+        this.commandDescription = commandDescription;
+    }
+
+    @Override
+    public Class<T> supportedRequestType() {
+        return requestType;
+    }
+
+    @Override
+    public String commandName() {
+        return commandName;
+    }
+
+    @Override
+    public String commandDescription() {
+        return commandDescription;
+    }
+
+    @Override
+    public abstract AbstractResponse handle(T request, CollectionCommandContext context);
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\CollectionCommandContext.java
+========================================
+package server.command;
+
+import server.manager.CollectionManager;
+
+import java.net.SocketAddress;
+
+
+public final class CollectionCommandContext {
+
+    private final CollectionManager collectionManager;
+    private ServerCommandRegistry commandRegistry;
+    private volatile SocketAddress currentClient;
+
+    public CollectionCommandContext(CollectionManager collectionManager) {
+        this.collectionManager = collectionManager;
+    }
+
+    public CollectionManager collectionManager() {
+        return collectionManager;
+    }
+
+    public ServerCommandRegistry commandRegistry() {
+        return commandRegistry;
+    }
+
+    public void setCommandRegistry(ServerCommandRegistry commandRegistry) {
+        this.commandRegistry = commandRegistry;
+    }
+
+    public void setCurrentClient(SocketAddress client) {
+        this.currentClient = client;
+    }
+
+    public void clearCurrentClient() {
+        this.currentClient = null;
+    }
+
+    public SocketAddress currentClient() {
+        return currentClient;
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\CommandInfo.java
+========================================
+package server.command;
+
+
+public record CommandInfo(String name, String description) {
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\ServerCommandBootstrap.java
+========================================
+package server.command;
+
+import server.command.handlers.*;
+import server.manager.CollectionManager;
+
+public final class ServerCommandBootstrap {
+
+    private ServerCommandBootstrap() {
+    }
+
+    public static ServerCommandRegistry createRegistry(CollectionManager collectionManager) {
+        CollectionCommandContext ctx = new CollectionCommandContext(collectionManager);
+        ServerCommandRegistry registry = new ServerCommandRegistry(ctx);
+        ctx.setCommandRegistry(registry);
+
+        registry.register(new HelpCommandHandler());
+        registry.register(new InfoCommandHandler());
+        registry.register(new ShowCommandHandler());
+        registry.register(new InsertCommandHandler());
+        registry.register(new RemoveCommandHandler());
+        registry.register(new ClearCommandHandler());
+        registry.register(new GetByIdCommandHandler());
+        registry.register(new GetByKeyCommandHandler());
+        registry.register(new UpdateCommandHandler());
+        registry.register(new RemoveGreaterCommandHandler());
+        registry.register(new ReplaceGreaterCommandHandler());
+        registry.register(new ReplaceLowerCommandHandler());
+        registry.register(new AverageOfAlbumsCountCommandHandler());
+        registry.register(new FilterByAlbumsCountCommandHandler());
+        registry.register(new PrintFieldDescendingAlbumsCountCommandHandler());
+        registry.register(new ScriptSessionBeginCommandHandler());
+        registry.register(new ScriptSessionEndCommandHandler());
+        return registry;
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\ServerCommandHandler.java
+========================================
+package server.command;
+
+import common.protocol.AbstractRequest;
+import common.protocol.AbstractResponse;
+
+
+public interface ServerCommandHandler<T extends AbstractRequest> {
+
+    Class<T> supportedRequestType();
+
+    String commandName();
+
+    String commandDescription();
+
+    default boolean includeInHelp() {
+        return true;
+    }
+
+    AbstractResponse handle(T request, CollectionCommandContext context);
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\command\ServerCommandRegistry.java
+========================================
+package server.command;
+
+import common.protocol.AbstractRequest;
+import common.protocol.AbstractResponse;
+import common.protocol.response.ErrorResponse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public final class ServerCommandRegistry {
+
+    private static final Logger log = LogManager.getLogger(ServerCommandRegistry.class);
+
+    private final CollectionCommandContext context;
+    private final Map<Class<? extends AbstractRequest>, ServerCommandHandler<?>> handlers = new HashMap<>();
+
+    public ServerCommandRegistry(CollectionCommandContext context) {
+        this.context = context;
+    }
+
+    public CollectionCommandContext context() {
+        return context;
+    }
+
+    public <T extends AbstractRequest> void register(ServerCommandHandler<T> handler) {
+        handlers.put(handler.supportedRequestType(), handler);
+    }
+
+    public List<CommandInfo> commandInfos() {
+        List<CommandInfo> infos = new ArrayList<>();
+        for (ServerCommandHandler<?> handler : handlers.values()) {
+            if (!handler.includeInHelp()) {
+                continue;
+            }
+            infos.add(new CommandInfo(handler.commandName(), handler.commandDescription()));
+        }
+        return infos;
+    }
+
+    public AbstractResponse dispatch(AbstractRequest request) {
+        long rid = request.getRequestId();
+        try {
+            ServerCommandHandler<?> handler = handlers.get(request.getClass());
+            if (handler == null) {
+                log.warn("РќРµРёР·РІРµСЃС‚РЅС‹Р№ С‚РёРї Р·Р°РїСЂРѕСЃР°: {}", request.getClass().getName());
+                return new ErrorResponse(rid, "РќРµРёР·РІРµСЃС‚РЅС‹Р№ С‚РёРї Р·Р°РїСЂРѕСЃР°: " + request.getClass().getName());
+            }
+            log.debug("Р”РёСЃРїРµС‚С‡РµСЂРёР·Р°С†РёСЏ РєРѕРјР°РЅРґС‹: {} (requestId={})", handler.commandName(), rid);
+            return invoke(handler, request);
+        } catch (Exception e) {
+            log.error("РћС€РёР±РєР° РІС‹РїРѕР»РЅРµРЅРёСЏ РєРѕРјР°РЅРґС‹ (requestId={}): {}", rid, e.getMessage(), e);
+            return new ErrorResponse(rid, "РћС€РёР±РєР° РІС‹РїРѕР»РЅРµРЅРёСЏ: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T extends AbstractRequest> AbstractResponse invoke(ServerCommandHandler<T> handler,
+            AbstractRequest request) {
+        return handler.handle((T) request, context);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\database\DatabaseManager.java
+========================================
+package server.database;
+
+import common.model.MusicBand;
+import common.model.Coordinates;
+import common.model.Person;
+import common.model.MusicGenre;
+import server.util.PasswordHasher;
+
+import java.sql.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+public class DatabaseManager {
+    private static final Logger logger = LogManager.getLogger(DatabaseManager.class);
+    
+    private static final String URL = "***REMOVED***";
+    private static final String USER = "С‚РІРѕР№_Р»РѕРіРёРЅ_РіРµР»РёРѕСЃ";
+    private static final String PASSWORD = "***REMOVED***";
+
+    private Connection connection;
+
+    public DatabaseManager() {
+        try {
+            // 1. Р РµРіРёСЃС‚СЂРёСЂСѓРµРј РґСЂР°Р№РІРµСЂ PostgreSQL
+            Class.forName("org.postgresql.Driver");
+            // 2. РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃРѕРµРґРёРЅРµРЅРёРµ
+            this.connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            logger.info("РЈСЃРїРµС€РЅРѕРµ РїРѕРґРєР»СЋС‡РµРЅРёРµ Рє Р±Р°Р·Рµ РґР°РЅРЅС‹С… РЅР° Р“РµР»РёРѕСЃРµ!");
+            
+            // 3. РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†С‹ РїСЂРё СЃС‚Р°СЂС‚Рµ, РµСЃР»Рё РѕРЅРё РЅРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‚
+            createTablesIfNotExist();
+        } catch (ClassNotFoundException e) {
+            logger.fatal("Р”СЂР°Р№РІРµСЂ PostgreSQL РЅРµ РЅР°Р№РґРµРЅ РІ classpath!", e);
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            logger.fatal("РќРµ СѓРґР°Р»РѕСЃСЊ РїРѕРґРєР»СЋС‡РёС‚СЊСЃСЏ Рє Р‘Р” РЅР° Р“РµР»РёРѕСЃРµ!", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * РЎРѕР·РґР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ С‚Р°Р±Р»РёС† Рё СЃРёРєРІРµРЅСЃР°.
+     */
+    private void createTablesIfNotExist() throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            // РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ РїРѕР»СЊР·РѕРІР°С‚РµР»РµР№
+            statement.executeUpdate(
+                "CREATE TABLE IF NOT EXISTS users (" +
+                "id SERIAL PRIMARY KEY, " +
+                "login VARCHAR(255) UNIQUE NOT NULL, " +
+                "password_hash VARCHAR(64) NOT NULL);"
+            );
+
+            // РЎРѕР·РґР°РµРј СЃРёРєРІРµРЅСЃ РґР»СЏ ID РјСѓР·С‹РєР°Р»СЊРЅС‹С… РіСЂСѓРїРї
+            statement.executeUpdate("CREATE SEQUENCE IF NOT EXISTS music_band_id_seq START WITH 1;");
+
+            // РЎРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ РјСѓР·С‹РєР°Р»СЊРЅС‹С… РіСЂСѓРїРї
+            statement.executeUpdate(
+                "CREATE TABLE IF NOT EXISTS music_bands (" +
+                "id BIGINT PRIMARY KEY DEFAULT nextval('music_band_id_seq'), " +
+                "name TEXT NOT NULL CHECK (name <> ''), " +
+                "x DOUBLE PRECISION NOT NULL, " +
+                "y REAL NOT NULL CHECK (y <= 968), " +
+                "creation_date TIMESTAMPTZ NOT NULL, " +
+                "number_of_participants INT CHECK (number_of_participants > 0), " +
+                "albums_count INT NOT NULL CHECK (albums_count > 0), " +
+                "genre VARCHAR(50), " +
+                "frontman_name TEXT CHECK (frontman_name <> ''), " +
+                "frontman_birthday TIMESTAMP, " +
+                "frontman_height INT CHECK (frontman_height > 0), " +
+                "frontman_passport_id VARCHAR(28), " +
+                "owner_login VARCHAR(255) NOT NULL REFERENCES users(login));"
+            );
+            logger.info("РџСЂРѕРІРµСЂРєР°/СЃРѕР·РґР°РЅРёРµ СЃС‚СЂСѓРєС‚СѓСЂС‹ С‚Р°Р±Р»РёС† РІ Р‘Р” СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅРѕ.");
+        }
+    }
+
+    /**
+     * Р РµРіРёСЃС‚СЂР°С†РёСЏ РЅРѕРІРѕРіРѕ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ РІ СЃРёСЃС‚РµРјРµ.
+     */
+    public synchronized boolean registerUser(String login, String password) {
+        String query = "INSERT INTO users (login, password_hash) VALUES (?, ?);";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, login);
+            // РҐСЌС€РёСЂСѓРµРј РїР°СЂРѕР»СЊ РїРµСЂРµРґ РѕС‚РїСЂР°РІРєРѕР№ РІ Р‘Р” (SHA-512 + РЎРѕР»СЊ/Р›РѕРіРёРЅ + РџРµСЂРµС†)
+            ps.setString(2, PasswordHasher.hashPassword(password, login));
+            
+            ps.executeUpdate();
+            logger.info("РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ {} СѓСЃРїРµС€РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°РЅ РІ Р‘Р”.", login);
+            return true;
+        } catch (SQLException e) {
+            logger.warn("РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ {} (РІРѕР·РјРѕР¶РЅРѕ, Р»РѕРіРёРЅ Р·Р°РЅСЏС‚).", login);
+            return false;
+        }
+    }
+
+    /**
+     * РџСЂРѕРІРµСЂРєР° РїРѕРґР»РёРЅРЅРѕСЃС‚Рё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ (РђРІС‚РѕСЂРёР·Р°С†РёСЏ).
+     */
+    public synchronized boolean validateUser(String login, String password) {
+        String query = "SELECT * FROM users WHERE login = ? AND password_hash = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, login);
+            ps.setString(2, PasswordHasher.hashPassword(password, login));
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next(); // Р•СЃР»Рё СЃС‚СЂРѕРєР° РЅР°С€Р»Р°СЃСЊ вЂ” РїР°СЂРѕР»СЊ РІРµСЂРЅС‹Р№
+            }
+        } catch (SQLException e) {
+            logger.error("РћС€РёР±РєР° РїСЂРё РІР°Р»РёРґР°С†РёРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ {} РІ Р‘Р”.", login, e);
+            return false;
+        }
+    }
+
+    /**
+     * Р—Р°РіСЂСѓР·РєР° РІСЃРµР№ РєРѕР»Р»РµРєС†РёРё РёР· Р‘Р” РІ РїР°РјСЏС‚СЊ РїСЂРё СЃС‚Р°СЂС‚Рµ СЃРµСЂРІРµСЂР°.
+     */
+    public synchronized TreeMap<Long, MusicBand> loadCollection() {
+        TreeMap<Long, MusicBand> collection = new TreeMap<>();
+        String query = "SELECT * FROM music_bands;";
+        
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(query)) {
+            
+            while (rs.next()) {
+                // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РѕР±СЉРµРєС‚ Coordinates
+                Coordinates coords = new Coordinates();
+                coords.setX(rs.getDouble("x"));
+                coords.setY(rs.getFloat("y"));
+                
+                // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РѕР±СЉРµРєС‚ Person (frontMan)
+                Person frontMan = null;
+                String fmName = rs.getString("frontman_name");
+                if (fmName != null) {
+                    frontMan = new Person();
+                    frontMan.setName(fmName);
+                    Timestamp bday = rs.getTimestamp("frontman_birthday");
+                    if (bday != null) {
+                        frontMan.setBirthday(bday.toLocalDateTime());
+                    }
+                    int height = rs.getInt("frontman_height");
+                    if (!rs.wasNull()) {
+                        frontMan.setHeight(height);
+                    }
+                    frontMan.setPassportID(rs.getString("frontman_passport_id"));
+                }
+                
+                // РЎРѕР±РёСЂР°РµРј РёС‚РѕРіРѕРІС‹Р№ MusicBand
+                MusicBand band = new MusicBand();
+                band.setId(rs.getLong("id"));
+                band.setName(rs.getString("name"));
+                band.setCoordinates(coords);
+                
+                // РљРѕРЅРІРµСЂС‚РёСЂСѓРµРј РґР°С‚Сѓ СЃРѕ РІСЂРµРјРµРЅРЅРѕР№ Р·РѕРЅРѕР№ РѕР±СЂР°С‚РЅРѕ РІ ZonedDateTime
+                Timestamp dbDate = rs.getTimestamp("creation_date");
+                band.setCreationDate(ZonedDateTime.ofInstant(dbDate.toInstant(), ZoneId.systemDefault()));
+                
+                int parts = rs.getInt("number_of_participants");
+                if (!rs.wasNull()) {
+                    band.setNumberOfParticipants(parts);
+                }
+                band.setAlbumsCount(rs.getInt("albums_count"));
+                
+                String genreStr = rs.getString("genre");
+                if (genreStr != null) {
+                    band.setGenre(MusicGenre.valueOf(genreStr));
+                }
+                
+                band.setFrontMan(frontMan);
+                band.setOwnerLogin(rs.getString("owner_login")); // РџРѕР»Рµ СЃРѕР·РґР°С‚РµР»СЏ
+                
+                collection.put(band.getId(), band);
+            }
+            logger.info("РљРѕР»Р»РµРєС†РёСЏ СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅР° РёР· Р‘Р”. Р’СЃРµРіРѕ СЌР»РµРјРµРЅС‚РѕРІ: {}", collection.size());
+        } catch (SQLException e) {
+            logger.error("РљСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РєРѕР»Р»РµРєС†РёРё РёР· Р‘Р”!", e);
+        }
+        return collection;
+    }
+
+    public synchronized long insertMusicBand(MusicBand band, String ownerLogin) {
+        String query = "INSERT INTO music_bands (name, x, y, creation_date, number_of_participants, " +
+                "albums_count, genre, frontman_name, frontman_birthday, frontman_height, " +
+                "frontman_passport_id, owner_login) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id;";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            // Р—Р°РїРѕР»РЅСЏРµРј Р±Р°Р·РѕРІС‹Рµ РїРѕР»СЏ
+            ps.setString(1, band.getName());
+            ps.setDouble(2, band.getCoordinates().getX());
+            ps.setFloat(3, band.getCoordinates().getY());
+
+            // РљРѕРЅРІРµСЂС‚РёСЂСѓРµРј ZonedDateTime СЃРµСЂРІРµСЂР° РІ Timestamp РґР»СЏ Р‘Р”
+            Timestamp timestamp = Timestamp.from(band.getCreationDate().toInstant());
+            ps.setTimestamp(4, timestamp);
+
+            // РћР±СЂР°Р±РѕС‚РєР° Nullable-РїРѕР»СЏ numberOfParticipants
+            if (band.getNumberOfParticipants() != null) {
+                ps.setInt(5, band.getNumberOfParticipants());
+            } else {
+                ps.setNull(5, Types.INTEGER);
+            }
+
+            ps.setInt(6, band.getAlbumsCount());
+
+            // РћР±СЂР°Р±РѕС‚РєР° Nullable-Enum РїРѕР»СЏ genre
+            if (band.getGenre() != null) {
+                ps.setString(7, band.getGenre().name());
+            } else {
+                ps.setNull(7, Types.VARCHAR);
+            }
+
+            // РћР±СЂР°Р±РѕС‚РєР° СЃР»РѕР¶РЅРѕРіРѕ Nullable-РѕР±СЉРµРєС‚Р° Person (frontMan)
+            Person fm = band.getFrontMan();
+            if (fm != null) {
+                ps.setString(8, fm.getName());
+                if (fm.getBirthday() != null) {
+                    ps.setTimestamp(9, Timestamp.valueOf(fm.getBirthday()));
+                } else {
+                    ps.setNull(9, Types.TIMESTAMP);
+                }
+                if (fm.getHeight() != null) {
+                    ps.setInt(10, fm.getHeight());
+                } else {
+                    ps.setNull(10, Types.INTEGER);
+                }
+                ps.setString(11, fm.getPassportID());
+            } else {
+                // Р•СЃР»Рё С„СЂРѕРЅС‚РјРµРЅР° РЅРµС‚, РІС‹СЃС‚Р°РІР»СЏРµРј null РІРѕ РІСЃРµ РµРіРѕ РїРѕР»СЏ РІ Р‘Р”
+                ps.setNull(8, Types.VARCHAR);
+                ps.setNull(9, Types.TIMESTAMP);
+                ps.setNull(10, Types.INTEGER);
+                ps.setNull(11, Types.VARCHAR);
+            }
+
+            ps.setString(12, ownerLogin);
+
+            // Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РїСЂРѕСЃ Рё СЃС‡РёС‚С‹РІР°РµРј СЃРіРµРЅРµСЂРёСЂРѕРІР°РЅРЅС‹Р№ ID С‡РµСЂРµР· RETURNING id
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    long generatedId = rs.getLong(1);
+                    logger.info("Р“СЂСѓРїРїР° '{}' СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅР° РІ Р‘Р” РїРѕРґ ID: {}. Р’Р»Р°РґРµР»РµС†: {}", band.getName(), generatedId, ownerLogin);
+                    return generatedId;
+                }
+            }
+        } catch (SQLException e) {
+            logger.error("РћС€РёР±РєР° РїСЂРё РІСЃС‚Р°РІРєРµ MusicBand РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…!", e);
+        }
+        return -1;
+    }
+
+    /**
+     * РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° РёР· Р‘Р” РїРѕ РµРіРѕ ID СЃ Р¶РµСЃС‚РєРѕР№ РїСЂРѕРІРµСЂРєРѕР№ РІР»Р°РґРµР»СЊС†Р°.
+     *
+     * @param id СѓРЅРёРєР°Р»СЊРЅС‹Р№ РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РіСЂСѓРїРїС‹
+     * @param username Р»РѕРіРёРЅ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ, РїС‹С‚Р°СЋС‰РµРіРѕСЃСЏ СѓРґР°Р»РёС‚СЊ РѕР±СЉРµРєС‚
+     * @return true, РµСЃР»Рё РѕР±СЉРµРєС‚ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅ РёР· Р‘Р”, false вЂ” РµСЃР»Рё РѕР±СЉРµРєС‚ РЅРµ РЅР°Р№РґРµРЅ РёР»Рё РїСЂРёРЅР°РґР»РµР¶РёС‚ РґСЂСѓРіРѕРјСѓ
+     */
+    public synchronized boolean deleteMusicBand(long id, String username) {
+        String query = "DELETE FROM music_bands WHERE id = ? AND owner_login = ?;";
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setLong(1, id);
+            ps.setString(2, username);
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                logger.info("РћР±СЉРµРєС‚ СЃ ID {} СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅ РёР· Р‘Р” РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј {}.", id, username);
+                return true;
+            } else {
+                logger.warn("РџРѕРїС‹С‚РєР° СѓРґР°Р»РµРЅРёСЏ ID {} РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј {} РѕС‚РєР»РѕРЅРµРЅР°: РѕР±СЉРµРєС‚ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ РёР»Рё РЅРµС‚ РїСЂР°РІ.", id, username);
+                return false;
+            }
+        } catch (SQLException e) {
+            logger.error("РћС€РёР±РєР° РїСЂРё СѓРґР°Р»РµРЅРёРё MusicBand РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…!", e);
+            return false;
+        }
+    }
+
+    /**
+     * РћР±РЅРѕРІР»РµРЅРёРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° РІ Р‘Р” РїРѕ РµРіРѕ ID (С‚РѕР»СЊРєРѕ РµСЃР»Рё С‚РµРєСѓС‰РёР№ СЋР·РµСЂ вЂ” РІР»Р°РґРµР»РµС†).
+     */
+    public synchronized boolean updateMusicBand(long id, MusicBand band, String username) {
+        String query = "UPDATE music_bands SET name = ?, x = ?, y = ?, number_of_participants = ?, " +
+                "albums_count = ?, genre = ?, frontman_name = ?, frontman_birthday = ?, " +
+                "frontman_height = ?, frontman_passport_id = ? " +
+                "WHERE id = ? AND owner_login = ?;";
+
+        try (PreparedStatement ps = connection.prepareStatement(query)) {
+            ps.setString(1, band.getName());
+            ps.setDouble(2, band.getCoordinates().getX());
+            ps.setFloat(3, band.getCoordinates().getY());
+
+            if (band.getNumberOfParticipants() != null) {
+                ps.setInt(4, band.getNumberOfParticipants());
+            } else {
+                ps.setNull(4, Types.INTEGER);
+            }
+
+            ps.setInt(5, band.getAlbumsCount());
+
+            if (band.getGenre() != null) {
+                ps.setString(6, band.getGenre().name());
+            } else {
+                ps.setNull(6, Types.VARCHAR);
+            }
+
+            Person fm = band.getFrontMan();
+            if (fm != null) {
+                ps.setString(7, fm.getName());
+                if (fm.getBirthday() != null) {
+                    ps.setTimestamp(8, Timestamp.valueOf(fm.getBirthday()));
+                } else {
+                    ps.setNull(8, Types.TIMESTAMP);
+                }
+                if (fm.getHeight() != null) {
+                    ps.setInt(9, fm.getHeight());
+                } else {
+                    ps.setNull(9, Types.INTEGER);
+                }
+                ps.setString(10, fm.getPassportID());
+            } else {
+                ps.setNull(7, Types.VARCHAR);
+                ps.setNull(8, Types.TIMESTAMP);
+                ps.setNull(9, Types.INTEGER);
+                ps.setNull(10, Types.VARCHAR);
+            }
+
+            ps.setLong(11, id);
+            ps.setString(12, username);
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows > 0) {
+                logger.info("РћР±СЉРµРєС‚ СЃ ID {} СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅ РІ Р‘Р” РІР»Р°РґРµР»СЊС†РµРј {}.", id, username);
+                return true;
+            }
+        } catch (SQLException e) {
+            logger.error("РћС€РёР±РєР° РїСЂРё РѕР±РЅРѕРІР»РµРЅРёРё MusicBand РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…!", e);
+        }
+        return false;
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\manager\CollectionManager.java
+========================================
+package server.manager;
+
+import common.model.MusicBand;
+import common.util.MusicBandOrdering;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.util.IdGenerator;
+
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.concurrent.locks.ReentrantLock; // РќР°С€ Р·Р°РјРѕРє РїРѕ РўР—
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+/**
+ * РЈРїСЂР°РІР»РµРЅРёРµ РєРѕР»Р»РµРєС†РёРµР№ РЅР° СЃРµСЂРІРµСЂРµ СЃ РїРѕРґРґРµСЂР¶РєРѕР№ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚Рё С‡РµСЂРµР· ReentrantLock.
+ */
+public class CollectionManager {
+
+    private static final Logger log = LogManager.getLogger(CollectionManager.class);
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+    private TreeMap<Long, MusicBand> collection;
+    private final ZonedDateTime initializationDate;
+
+    // РЎРѕР·РґР°РµРј С„РёРЅР°Р»СЊРЅС‹Р№ Р·Р°РјРѕРє РґР»СЏ СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёРё РїРѕС‚РѕРєРѕРІ
+    private final ReentrantLock lock = new ReentrantLock();
+
+    public CollectionManager() {
+        this.collection = new TreeMap<>();
+        this.initializationDate = ZonedDateTime.now();
+    }
+
+    // Р­РєСЃРїРѕРЅРёСЂСѓРµРј Р·Р°РјРѕРє РЅР°СЂСѓР¶Сѓ, С‡С‚РѕР±С‹ РµРіРѕ РјРѕР¶РЅРѕ Р±С‹Р»Рѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РІ RequestProcessor
+    public ReentrantLock getLock() {
+        return lock;
+    }
+
+    public long generateId() {
+        lock.lock();
+        try {
+            while (true) {
+                long newId = IdGenerator.nextId();
+                boolean exists = collection.values().stream().anyMatch(b -> b.getId() == newId);
+                if (!exists) {
+                    return newId;
+                }
+            }
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void syncIdCounter() {
+        lock.lock();
+        try {
+            collection.values().stream()
+                    .mapToLong(MusicBand::getId)
+                    .max()
+                    .ifPresent(IdGenerator::syncTo);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void insert(Long key, MusicBand band) {
+        lock.lock();
+        try {
+            collection.put(key, band);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean updateById(long id, MusicBand newBand) {
+        lock.lock();
+        try {
+            for (Map.Entry<Long, MusicBand> entry : collection.entrySet()) {
+                if (entry.getValue().getId() == id) {
+                    newBand.setId(id);
+                    newBand.setCreationDate(entry.getValue().getCreationDate());
+                    collection.put(entry.getKey(), newBand);
+                    return true;
+                }
+            }
+            return false;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean removeByKey(Long key) {
+        lock.lock();
+        try {
+            return collection.remove(key) != null;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void clear() {
+        lock.lock();
+        try {
+            collection.clear();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public int removeGreater(MusicBand band) {
+        lock.lock();
+        try {
+            log.debug("removeGreater РІС‹Р·РІР°РЅ РґР»СЏ: {}", band);
+            int before = collection.size();
+            collection.entrySet().removeIf(e -> e.getValue().compareTo(band) > 0);
+            return before - collection.size();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean replaceIfGreater(Long key, MusicBand newBand, boolean isAutoId) {
+        lock.lock();
+        try {
+            MusicBand existing = collection.get(key);
+            if (existing == null) {
+                return false;
+            }
+            if (newBand.compareTo(existing) > 0) {
+                if (isAutoId) {
+                    newBand.setId(IdGenerator.nextId());
+                } else {
+                    newBand.setId(existing.getId());
+                }
+                newBand.setCreationDate(existing.getCreationDate());
+                collection.put(key, newBand);
+                return true;
+            }
+            return false;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean replaceIfLower(Long key, MusicBand newBand, boolean isAutoId) {
+        lock.lock();
+        try {
+            MusicBand existing = collection.get(key);
+            if (existing == null) {
+                return false;
+            }
+            if (newBand.compareTo(existing) < 0) {
+                if (isAutoId) {
+                    newBand.setId(IdGenerator.nextId());
+                } else {
+                    newBand.setId(existing.getId());
+                }
+                newBand.setCreationDate(existing.getCreationDate());
+                collection.put(key, newBand);
+                return true;
+            }
+            return false;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public double averageOfAlbumsCount() {
+        lock.lock();
+        try {
+            return collection.values().stream()
+                    .mapToInt(MusicBand::getAlbumsCount)
+                    .average()
+                    .orElse(0);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public List<MusicBand> filterByAlbumsCount(int albumsCount) {
+        lock.lock();
+        try {
+            return collection.values().stream()
+                    .filter(b -> b.getAlbumsCount() == albumsCount)
+                    .sorted(MusicBandOrdering.BY_NAME_THEN_ID)
+                    .collect(Collectors.toList());
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public List<Integer> getAlbumsCountDescending() {
+        lock.lock();
+        try {
+            return collection.values().stream()
+                    .map(MusicBand::getAlbumsCount)
+                    .sorted(Comparator.reverseOrder())
+                    .collect(Collectors.toList());
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * Р’РќРРњРђРќРР•: РўР°Рє РєР°Рє РјРµС‚РѕРґ РІРѕР·РІСЂР°С‰Р°РµС‚ Р»РµРЅРёРІС‹Р№ Stream, Р·Р°РјРѕРє РЅРµР»СЊР·СЏ РѕСЃРІРѕР±РѕР¶РґР°С‚СЊ РґРѕ С‚РѕРіРѕ,
+     * РєР°Рє СЃС‚СЂРёРј Р±СѓРґРµС‚ РѕР±СЂР°Р±РѕС‚Р°РЅ (С‚РµСЂРјРёРЅР°Р»СЊРЅРѕР№ РѕРїРµСЂР°С†РёРµР№). РџРѕСЌС‚РѕРјСѓ РґР»СЏ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚Рё
+     * Р±РµР·РѕРїР°СЃРЅРµРµ СЃСЂР°Р·Сѓ СЃРѕР±РёСЂР°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚ РІ СЃРїРёСЃРѕРє, Р»РёР±Рѕ Р»РѕС‡РёС‚СЊ РІС‹РїРѕР»РЅРµРЅРёРµ РЅР° СѓСЂРѕРІРЅРµ РІС‹Р·С‹РІР°СЋС‰РµРіРѕ РїРѕС‚РѕРєР°.
+     */
+    public List<Map.Entry<Long, MusicBand>> bandsSortedForClientList() {
+        lock.lock();
+        try {
+            return collection.entrySet().stream()
+                    .sorted(Map.Entry.comparingByValue(MusicBandOrdering.BY_NAME_THEN_ID))
+                    .collect(Collectors.toList());
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public MusicBand getById(long id) {
+        lock.lock();
+        try {
+            return collection.values().stream().filter(b -> b.getId() == id).findFirst().orElse(null);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public MusicBand getByKey(Long key) {
+        lock.lock();
+        try {
+            return collection.get(key);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean containsKey(Long key) {
+        lock.lock();
+        try {
+            return collection.containsKey(key);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public TreeMap<Long, MusicBand> getCollection() {
+        // РџСЂСЏРјРѕР№ РІРѕР·РІСЂР°С‚ РЅРµ-РєРѕСЂРѕС‚РєРѕР¶РёРІСѓС‰РµР№ СЃСЃС‹Р»РєРё РЅР° TreeMap РѕРїР°СЃРµРЅ РІ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚Рё,
+        // РЅРѕ РјС‹ Р·Р°С‰РёС‚РёРј РµРіРѕ РІС‹Р·РѕРІС‹ РЅР° СѓСЂРѕРІРЅРµ РєРѕРјР°РЅРґ.
+        return collection;
+    }
+
+    public void setCollection(TreeMap<Long, MusicBand> collection) {
+        lock.lock();
+        try {
+            this.collection = collection;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public ZonedDateTime getInitializationDate() {
+        return initializationDate;
+    }
+
+    public int size() {
+        lock.lock();
+        try {
+            return collection.size();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public boolean isEmpty() {
+        lock.lock();
+        try {
+            return collection.isEmpty();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\network\ChunkReader.java
+========================================
+package server.network;
+
+import common.net.udp.SimpleUdpStreamFraming;
+import common.exception.ProtocolException;
+import server.manager.CollectionManager;
+import server.database.DatabaseManager;
+
+import java.net.SocketAddress;
+import java.nio.channels.DatagramChannel;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * Р—Р°РґР°С‡Р° РґР»СЏ FixedThreadPool С‡С‚РµРЅРёСЏ.
+ * РЎРѕР±РёСЂР°РµС‚ Р±Р°Р№С‚С‹ РїРѕ С‚РІРѕРµРјСѓ РїСЂРѕС‚РѕРєРѕР»Сѓ SimpleUdpStreamFraming.
+ */
+public final class ChunkReader implements Runnable {
+    private static final Logger log = LogManager.getLogger(ChunkReader.class);
+
+    // РўР°Р±Р»РёС†Р° СЂРµСЃРёРІРµСЂРѕРІ РґР»СЏ РєР°Р¶РґРѕРіРѕ РєР»РёРµРЅС‚Р°
+    private static final ConcurrentHashMap<SocketAddress, SimpleUdpStreamFraming.StreamReceiver> receivers = new ConcurrentHashMap<>();
+
+    private final RawPack rawPack;
+    private final CollectionManager collectionManager;
+    private final DatabaseManager databaseManager;
+    private final ExecutorService processingPool;
+    private final ExecutorService sendingPool;
+    private final DatagramChannel channel;
+
+    public ChunkReader(RawPack rawPack, CollectionManager collectionManager,
+                       DatabaseManager databaseManager, ExecutorService processingPool,
+                       ExecutorService sendingPool, DatagramChannel channel) {
+        this.rawPack = rawPack;
+        this.collectionManager = collectionManager;
+        this.databaseManager = databaseManager;
+        this.processingPool = processingPool;
+        this.sendingPool = sendingPool;
+        this.channel = channel;
+    }
+
+    @Override
+    public void run() {
+        SocketAddress clientAddress = rawPack.getClientAddress();
+        byte[] bytes = rawPack.getData();
+
+        try {
+            receivers.putIfAbsent(clientAddress, new SimpleUdpStreamFraming.StreamReceiver());
+            SimpleUdpStreamFraming.StreamReceiver receiver = receivers.get(clientAddress);
+
+            // РўРІРѕР№ СЂРѕРґРЅРѕР№ РјРµС‚РѕРґ СЃР±РѕСЂРєРё С‡Р°РЅРєРѕРІ РёР· РїСЂРѕС€Р»РѕР№ Р»Р°Р±С‹
+            byte[] completeBytes = receiver.feed(bytes, bytes.length);
+
+            if (completeBytes != null) {
+                log.info("РЎРѕРѕР±С‰РµРЅРёРµ РѕС‚ {} РїРѕР»РЅРѕСЃС‚СЊСЋ СЃРѕР±СЂР°РЅРѕ ({} Р±Р°Р№С‚). РџРµСЂРµРґР°РµРј РІ РїСѓР» РѕР±СЂР°Р±РѕС‚РєРё.",
+                        clientAddress, completeBytes.length);
+                receivers.remove(clientAddress);
+
+                // РџРµСЂРµРґР°РµРј СЃРѕР±СЂР°РЅРЅС‹Р№ РјР°СЃСЃРёРІ Р±Р°Р№С‚ РІ Fixed РїСѓР» РѕР±СЂР°Р±РѕС‚РєРё (processingPool)
+                processingPool.submit(new RequestProcessor(
+                        completeBytes, clientAddress, collectionManager, databaseManager, sendingPool, channel
+                ));
+            }
+        } catch (ProtocolException e) {
+            log.error("РћС€РёР±РєР° РїСЂРѕС‚РѕРєРѕР»Р° С„СЂР°РіРјРµРЅС‚Р°С†РёРё РѕС‚ РєР»РёРµРЅС‚Р° {}", clientAddress, e);
+            receivers.remove(clientAddress);
+        } catch (Exception e) {
+            log.error("РљСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР° РІ РїРѕС‚РѕРєРµ С‡С‚РµРЅРёСЏ С‡Р°РЅРєРѕРІ", e);
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\network\RawPack.java
+========================================
+package server.network;
+
+import java.net.SocketAddress;
+
+/**
+ * РљРѕРЅС‚РµР№РЅРµСЂ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ "СЃС‹СЂС‹С…" СЃС‡РёС‚Р°РЅРЅС‹С… РёР· СЃРµС‚Рё Р±Р°Р№С‚ Рё Р°РґСЂРµСЃР° РѕС‚РїСЂР°РІРёС‚РµР»СЏ.
+ * РќРµРѕР±С…РѕРґРёРј РґР»СЏ РїРµСЂРµРґР°С‡Рё РґР°РЅРЅС‹С… РјРµР¶РґСѓ РїСѓР»РѕРј С‡С‚РµРЅРёСЏ Рё РїСѓР»РѕРј РѕР±СЂР°Р±РѕС‚РєРё.
+ */
+public class RawPack {
+    private final byte[] data;
+    private final SocketAddress clientAddress;
+
+    public RawPack(byte[] data, SocketAddress clientAddress) {
+        this.data = data;
+        this.clientAddress = clientAddress;
+    }
+
+    public byte[] getData() { return data; }
+    public SocketAddress getClientAddress() { return clientAddress; }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\network\RequestProcessor.java
+========================================
+package server.network;
+
+import common.protocol.AbstractRequest; // Р—Р°РјРµРЅРё РЅР° СЃРІРѕРµ С‚РѕС‡РЅРѕРµ РёРјСЏ РєР»Р°СЃСЃР° Р·Р°РїСЂРѕСЃР° РёР· common
+import common.protocol.AbstractResponse;        // Р—Р°РјРµРЅРё РЅР° СЃРІРѕРµ С‚РѕС‡РЅРѕРµ РёРјСЏ РєР»Р°СЃСЃР° РѕС‚РІРµС‚Р° РёР· common
+import common.model.MusicBand;
+import server.manager.CollectionManager;
+import server.database.DatabaseManager;
+
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInputStream;
+import java.net.SocketAddress;
+import java.nio.channels.DatagramChannel;
+import java.util.concurrent.ExecutorService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * РљР»Р°СЃСЃ-Р·Р°РґР°С‡Р° РґР»СЏ FixedThreadPool РѕР±СЂР°Р±РѕС‚РєРё.
+ * РћС‚РІРµС‡Р°РµС‚ Р·Р° РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёСЋ, Р°РІС‚РѕСЂРёР·Р°С†РёСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ (SHA-224) Рё РІС‹РїРѕР»РЅРµРЅРёРµ РєРѕРјР°РЅРґ.
+ */
+public final class RequestProcessor implements Runnable {
+    private static final Logger log = LogManager.getLogger(RequestProcessor.class);
+
+    private final byte[] requestBytes;
+    private final SocketAddress clientAddress;
+    private final CollectionManager collectionManager;
+    private final DatabaseManager databaseManager;
+    private final ExecutorService sendingPool;
+    private final DatagramChannel channel;
+
+    public RequestProcessor(byte[] requestBytes, SocketAddress clientAddress, 
+                            CollectionManager collectionManager, DatabaseManager databaseManager, 
+                            ExecutorService sendingPool, DatagramChannel channel) {
+        this.requestBytes = requestBytes;
+        this.clientAddress = clientAddress;
+        this.collectionManager = collectionManager;
+        this.databaseManager = databaseManager;
+        this.sendingPool = sendingPool;
+        this.channel = channel;
+    }
+
+    @Override
+    public void run() {
+        try {
+            // 1. Р”РµСЃРµСЂРёР°Р»РёР·СѓРµРј РјР°СЃСЃРёРІ Р±Р°Р№С‚ РІ РѕР±СЉРµРєС‚ Р—Р°РїСЂРѕСЃР°
+            ByteArrayInputStream bais = new ByteArrayInputStream(requestBytes);
+            ObjectInputStream ois = new ObjectInputStream(bais);
+            AbstractRequest request = (AbstractRequest) ois.readObject();
+
+            log.info("РџСѓР» РѕР±СЂР°Р±РѕС‚РєРё РїСЂРёРЅСЏР» Р·Р°РїСЂРѕСЃ РѕС‚ {}. Р›РѕРіРёРЅ: {}", clientAddress, request.getLogin());
+
+            AbstractResponse response;
+
+            // 2. РћР±СЂР°Р±РѕС‚РєР° СЃРїРµС†РёР°Р»СЊРЅС‹С… РєРѕРјР°РЅРґ СЂРµРіРёСЃС‚СЂР°С†РёРё Рё Р°РІС‚РѕСЂРёР·Р°С†РёРё
+            if (request.getCommandName().equals("register")) {
+                boolean success = databaseManager.registerUser(request.getLogin(), request.getPassword());
+                if (success) {
+                    response = new Response("Р РµРіРёСЃС‚СЂР°С†РёСЏ СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅР°!", true);
+                } else {
+                    response = new Response("РћС€РёР±РєР°: РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃ С‚Р°РєРёРј Р»РѕРіРёРЅРѕРј СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚.", false);
+                }
+            } else if (request.getCommandName().equals("login")) {
+                boolean valid = databaseManager.validateUser(request.getLogin(), request.getPassword());
+                if (valid) {
+                    response = new Response("РђРІС‚РѕСЂРёР·Р°С†РёСЏ СѓСЃРїРµС€РЅР°!", true);
+                } else {
+                    response = new Response("РћС€РёР±РєР°: РќРµРІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ.", false);
+                }
+            } else {
+                // 3. Р–РµСЃС‚РєР°СЏ РїСЂРѕРІРµСЂРєР° Р°РІС‚РѕСЂРёР·Р°С†РёРё РґР»СЏ Р’РЎР•РҐ РѕСЃС‚Р°Р»СЊРЅС‹С… Р±РёР·РЅРµСЃ-РєРѕРјР°РЅРґ
+                boolean isAuthenticated = databaseManager.validateUser(request.getLogin(), request.getPassword());
+                
+                if (!isAuthenticated) {
+                    log.warn("РћС‚РєР°Р· РІ РґРѕСЃС‚СѓРїРµ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ {}: РЅРµРІРµСЂРЅС‹Рµ СѓС‡РµС‚РЅС‹Рµ РґР°РЅРЅС‹Рµ.", request.getLogin());
+                    response = new Response("РћС€РёР±РєР°: Р”РѕСЃС‚СѓРї Р·Р°РїСЂРµС‰РµРЅ. РќРµРѕР±С…РѕРґРёРјР° Р°РІС‚РѕСЂРёР·Р°С†РёСЏ.", false);
+                } else {
+                    // РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ СѓСЃРїРµС€РЅРѕ Р°РІС‚РѕСЂРёР·РѕРІР°РЅ, РІС‹РїРѕР»РЅСЏРµРј Р±РёР·РЅРµСЃ-Р»РѕРіРёРєСѓ РєРѕРјР°РЅРґС‹
+                    response = executeCommand(request);
+                }
+            }
+
+            // 4. РЎРўР РћР“Рћ РџРћ РљРћРќР’Р•Р™Р•Р РЈ: РџРµСЂРµРґР°РµРј РіРѕС‚РѕРІС‹Р№ Response РІ CACHED РїСѓР» РѕС‚РїСЂР°РІРєРё (sendingPool)
+            sendingPool.submit(new ResponseSender(response, clientAddress, channel));
+
+        } catch (Exception e) {
+            log.error("РљСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР° РїСЂРё РѕР±СЂР°Р±РѕС‚РєРµ Р·Р°РїСЂРѕСЃР° РІ FixedThreadPool", e);
+        }
+    }
+
+    /**
+     * Р›РѕРіРёРєР° РјР°СЂС€СЂСѓС‚РёР·Р°С†РёРё Рё РІС‹РїРѕР»РЅРµРЅРёСЏ РєРѕРјР°РЅРґ СЃ СѓС‡РµС‚РѕРј РїСЂР°РІ РІР»Р°РґРµРЅРёСЏ РѕР±СЉРµРєС‚Р°РјРё.
+     */
+    private Response executeCommand(AbstractRequest request) {
+        String command = request.getCommandName();
+        String user = request.getLogin();
+
+        // РџСЂРёРјРµСЂ СЂРµР°Р»РёР·Р°С†РёРё СЃРєРІРѕР·РЅРѕР№ Р»РѕРіРёРєРё РґР»СЏ РєРѕРјР°РЅРґС‹ INSERT
+        if (command.equals("insert")) {
+            MusicBand band = request.getMusicBandArgument(); // Р”РѕСЃС‚Р°РµРј РѕР±СЉРµРєС‚ РіСЂСѓРїРїС‹ РёР· Р·Р°РїСЂРѕСЃР°
+            
+            // РЎРЅР°С‡Р°Р»Р° РїРёС€РµРј РІ РЎРЈР‘Р” PostgreSQL РЅР° Р“РµР»РёРѕСЃРµ
+            long generatedId = databaseManager.insertMusicBand(band, user);
+            
+            if (generatedId != -1) {
+                // РћР±РЅРѕРІР»СЏРµРј РїРѕР»СЏ РѕР±СЉРµРєС‚Р° РґР°РЅРЅС‹РјРё, РєРѕС‚РѕСЂС‹Рµ СЃРіРµРЅРµСЂРёСЂРѕРІР°Р»Р° РЎРЈР‘Р”
+                band.setId(generatedId);
+                band.setOwnerLogin(user);
+                
+                // РўР—: В«РћР±РЅРѕРІР»СЏС‚СЊ СЃРѕСЃС‚РѕСЏРЅРёРµ РєРѕР»Р»РµРєС†РёРё РІ РїР°РјСЏС‚Рё С‚РѕР»СЊРєРѕ РїСЂРё СѓСЃРїРµС€РЅРѕРј РґРѕР±Р°РІР»РµРЅРёРё РѕР±СЉРµРєС‚Р° РІ Р‘Р”В»
+                collectionManager.insert(request.getKeyArgument(), band);
+                return new Response("РћР±СЉРµРєС‚ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… Рё РїР°РјСЏС‚СЊ СЃРµСЂРІРµСЂР° РїРѕРґ ID " + generatedId, true);
+            } else {
+                return new Response("РћС€РёР±РєР°: РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ РѕР±СЉРµРєС‚ РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С….", false);
+            }
+        }
+
+        // РџСЂРёРјРµСЂ СЂРµР°Р»РёР·Р°С†РёРё Р»РѕРіРёРєРё РґР»СЏ РєРѕРјР°РЅРґС‹ REMOVE_KEY (РЈРґР°Р»РµРЅРёРµ)
+        if (command.equals("remove_key")) {
+            long idToRemove = request.getKeyArgument();
+            
+            // РЎРЅР°С‡Р°Р»Р° РїСЂРѕРІРµСЂСЏРµРј Рё СѓРґР°Р»СЏРµРј РІ Р‘Р” (С‚Р°Рј Р·Р°Р»РѕР¶РµРЅР° РїСЂРѕРІРµСЂРєР° WHERE owner_login = ?)
+            boolean dbSuccess = databaseManager.deleteMusicBand(idToRemove, user);
+            
+            if (dbSuccess) {
+                // Р•СЃР»Рё Р‘Р” СЂР°Р·СЂРµС€РёР»Р° СѓРґР°Р»РµРЅРёРµ вЂ” СѓР±РёСЂР°РµРј РёР· TreeMap РІ РїР°РјСЏС‚Рё
+                collectionManager.removeByKey(idToRemove);
+                return new Response("РћР±СЉРµРєС‚ СЃ ID " + idToRemove + " СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РµРЅ.", true);
+            } else {
+                return new Response("РћС€РёР±РєР°: РћР±СЉРµРєС‚ РЅРµ РЅР°Р№РґРµРЅ РёР»Рё Сѓ РІР°СЃ РЅРµС‚ РїСЂР°РІ РЅР° РµРіРѕ РјРѕРґРёС„РёРєР°С†РёСЋ (РІС‹ РЅРµ СЏРІР»СЏРµС‚РµСЃСЊ РІР»Р°РґРµР»СЊС†РµРј).", false);
+            }
+        }
+
+        // РџСЂРёРјРµСЂ РґР»СЏ РєРѕРјР°РЅРґС‹ SHOW (РџРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С…)
+        if (command.equals("show")) {
+            // РўР—: В«Р’СЃРµ РєРѕРјР°РЅРґС‹ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С… РґРѕР»Р¶РЅС‹ СЂР°Р±РѕС‚Р°С‚СЊ СЃ РєРѕР»Р»РµРєС†РёРµР№ РІ РїР°РјСЏС‚Рё, Р° РЅРµ РІ Р‘Р”В»
+            // РњРµС‚РѕРґ РІРЅСѓС‚СЂРё Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРё Р·Р°С‰РёС‰РµРЅ Р·Р°РјРєРѕРј ReentrantLock
+            var sortedBands = collectionManager.bandsSortedForClientList();
+            if (sortedBands.isEmpty()) {
+                return new Response("РљРѕР»Р»РµРєС†РёСЏ РїСѓСЃС‚Р°.", true);
+            }
+            StringBuilder sb = new StringBuilder("Р­Р»РµРјРµРЅС‚С‹ РєРѕР»Р»РµРєС†РёРё (РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅС‹ РїРѕ РёРјРµРЅРё):\n");
+            for (var entry : sortedBands) {
+                sb.append("РљР»СЋС‡: ").append(entry.getKey()).append(" -> ").append(entry.getValue().toString()).append("\n");
+            }
+            return new Response(sb.toString(), true);
+        }
+
+        // Р”РµС„РѕР»С‚РЅС‹Р№ РѕС‚РІРµС‚, РµСЃР»Рё РѕР±СЂР°Р±РѕС‚С‡РёРє РґР»СЏ РєРѕРјР°РЅРґС‹ РµС‰Рµ РЅРµ РґРѕРїРёСЃР°РЅ
+        return new Response("РљРѕРјР°РЅРґР° '" + command + "' РїСЂРёРЅСЏС‚Р° СЃРµСЂРІРµСЂРѕРј, РЅРѕ Р»РѕРіРёРєР° РЅР°С…РѕРґРёС‚СЃСЏ РІ СЃС‚Р°РґРёРё РёРЅС‚РµРіСЂР°С†РёРё.", true);
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\script\ScriptRecursionGuard.java
+========================================
+package server.script;
+
+import java.net.SocketAddress;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.concurrent.ConcurrentHashMap;
+
+
+public final class ScriptRecursionGuard {
+
+    private static final ConcurrentHashMap<String, Deque<String>> STACKS = new ConcurrentHashMap<>();
+
+    private ScriptRecursionGuard() {
+    }
+
+    public static String key(SocketAddress client) {
+        return client == null ? "" : client.toString();
+    }
+
+    public static boolean contains(SocketAddress client, String pathToken) {
+        Deque<String> st = STACKS.get(key(client));
+        if (st == null) {
+            return false;
+        }
+        return st.contains(pathToken);
+    }
+
+    public static void push(SocketAddress client, String pathToken) {
+        String k = key(client);
+        STACKS.computeIfAbsent(k, x -> new ArrayDeque<>()).push(pathToken);
+    }
+
+    public static String tryPop(SocketAddress client, String pathToken) {
+        String k = key(client);
+        Deque<String> st = STACKS.get(k);
+        if (st == null || st.isEmpty()) {
+            return "РќРµС‚ РѕС‚РєСЂС‹С‚РѕРіРѕ СЃРєСЂРёРїС‚Р° РґР»СЏ Р·Р°РєСЂС‹С‚РёСЏ (РѕР¶РёРґР°Р»СЃСЏ script begin).";
+        }
+        if (!pathToken.equals(st.peek())) {
+            return "РќР°СЂСѓС€РµРЅРёРµ РїРѕСЂСЏРґРєР° РІР»РѕР¶РµРЅРЅРѕСЃС‚Рё СЃРєСЂРёРїС‚РѕРІ (СЃРЅР°С‡Р°Р»Р° Р·Р°РєСЂРѕР№С‚Рµ РІРЅСѓС‚СЂРµРЅРЅРёР№ С„Р°Р№Р»). РћР¶РёРґР°Р»СЃСЏ РєРѕРЅРµС†: "
+                    + st.peek();
+        }
+        st.pop();
+        if (st.isEmpty()) {
+            STACKS.remove(k);
+        }
+        return null;
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\transport\ChunkedUdpSocketTransport.java
+========================================
+package server.transport;
+
+import common.exception.ProtocolException;
+import common.net.udp.SimpleUdpStreamFraming;
+import common.util.BinaryProtocol;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.SocketAddress;
+import java.util.Objects;
+
+
+public final class ChunkedUdpSocketTransport {
+
+    private final DatagramSocket socket;
+    private final byte[] buffer;
+    private final SimpleUdpStreamFraming.StreamReceiver receiver = new SimpleUdpStreamFraming.StreamReceiver();
+    private SocketAddress expectedSender;
+
+    public ChunkedUdpSocketTransport(DatagramSocket socket, int maxPacketSize) {
+        this.socket = socket;
+        int buf = Math.max(maxPacketSize, SimpleUdpStreamFraming.PACKET_SIZE);
+        this.buffer = new byte[buf];
+    }
+
+    public record Received(byte[] payload, SocketAddress replyAddress) {
+    }
+
+    public Received receiveComplete() throws IOException, ProtocolException {
+        while (true) {
+            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
+            socket.receive(packet);
+            int len = packet.getLength();
+            SocketAddress from = packet.getSocketAddress();
+            byte[] data = new byte[len];
+            System.arraycopy(packet.getData(), packet.getOffset(), data, 0, len);
+
+            if (expectedSender == null) {
+                expectedSender = from;
+                receiver.reset();
+            } else if (!Objects.equals(expectedSender, from)) {
+                receiver.reset();
+                expectedSender = null;
+                throw new ProtocolException("Р¤СЂР°РіРјРµРЅС‚ РѕС‚ РґСЂСѓРіРѕРіРѕ Р°РґСЂРµСЃР° РІРѕ РІСЂРµРјСЏ СЃР±РѕСЂРєРё СЃРѕРѕР±С‰РµРЅРёСЏ: " + from);
+            }
+
+            try {
+                byte[] complete = receiver.feed(data, data.length);
+                if (complete != null) {
+                    expectedSender = null;
+                    return new Received(complete, from);
+                }
+            } catch (ProtocolException e) {
+                receiver.reset();
+                expectedSender = null;
+                throw e;
+            }
+        }
+    }
+
+    public void sendComplete(SocketAddress to, Serializable object) throws IOException, ProtocolException {
+        byte[] bytes = BinaryProtocol.serialize(object);
+        for (byte[] chunk : SimpleUdpStreamFraming.split(bytes)) {
+            DatagramPacket p = new DatagramPacket(chunk, chunk.length, to);
+            socket.send(p);
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\transport\IncomingDatagramProcessor.java
+========================================
+package server.transport;
+
+import common.exception.DeserializationException;
+import common.protocol.AbstractRequest;
+import common.protocol.AbstractResponse;
+import common.protocol.response.ErrorResponse;
+import common.util.BinaryProtocol;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.command.CollectionCommandContext;
+import server.command.ServerCommandRegistry;
+
+import java.net.SocketAddress;
+
+public final class IncomingDatagramProcessor {
+
+    private static final Logger log = LogManager.getLogger(IncomingDatagramProcessor.class);
+
+    private final ServerCommandRegistry commandRegistry;
+
+    public IncomingDatagramProcessor(ServerCommandRegistry commandRegistry) {
+        this.commandRegistry = commandRegistry;
+    }
+
+    public AbstractResponse process(byte[] payload, SocketAddress clientAddress) {
+        CollectionCommandContext ctx = commandRegistry.context();
+        ctx.setCurrentClient(clientAddress);
+        try {
+            return processWithoutClientBinding(payload);
+        } finally {
+            ctx.clearCurrentClient();
+        }
+    }
+
+    private AbstractResponse processWithoutClientBinding(byte[] payload) {
+        long fallbackRequestId = 0;
+        try {
+            AbstractRequest request = BinaryProtocol.deserialize(payload, AbstractRequest.class);
+            fallbackRequestId = request.getRequestId();
+            log.debug("РћР±СЂР°Р±РѕС‚РєР° Р·Р°РїСЂРѕСЃР°: {} (id={})", request.getClass().getSimpleName(), fallbackRequestId);
+            return commandRegistry.dispatch(request);
+        } catch (DeserializationException e) {
+            log.warn("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ Р·Р°РїСЂРѕСЃ РѕС‚ РєР»РёРµРЅС‚Р°: {}", e.getMessage());
+            return new ErrorResponse(fallbackRequestId, "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ Р·Р°РїСЂРѕСЃ: " + e.getMessage());
+        } catch (Exception e) {
+            log.error("Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР° РїСЂРё РѕР±СЂР°Р±РѕС‚РєРµ Р·Р°РїСЂРѕСЃР°: {}", e.getMessage(), e);
+            return new ErrorResponse(fallbackRequestId, "Р’РЅСѓС‚СЂРµРЅРЅСЏСЏ РѕС€РёР±РєР°: " + e.getMessage());
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\util\IdGenerator.java
+========================================
+package server.util;
+
+/**
+ * Р“РµРЅРµСЂР°С‚РѕСЂ СѓРЅРёРєР°Р»СЊРЅС‹С… ID РЅР° СЃРµСЂРІРµСЂРµ.
+ */
+public final class IdGenerator {
+
+    private static long counter = 0L;
+
+    private IdGenerator() {
+    }
+
+    public static long nextId() {
+        return ++counter;
+    }
+
+    public static void syncTo(long maxId) {
+        if (maxId >= counter) {
+            counter = maxId + 1;
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\util\PasswordHasher.java
+========================================
+package server.util;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
+public class PasswordHasher {
+
+    private static final String PEPPER = "Secret_Pepper_Volvo_2026_Helios_Crypto_#99!";
+
+    public static String hashPassword(String password, String login) {
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("SHA-224");
+
+            String complexPassword = PEPPER + password + login;
+
+            byte[] bytes = md.digest(complexPassword.getBytes(StandardCharsets.UTF_8));
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("РљСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР° Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё: Р°Р»РіРѕСЂРёС‚Рј SHA-224 РЅРµРґРѕСЃС‚СѓРїРµРЅ!", e);
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\util\XmlParser.java
+========================================
+package server.util;
+
+import common.model.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.manager.CollectionManager;
+
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+import java.util.TreeMap;
+
+/**
+ * Р—Р°РіСЂСѓР·РєР° РєРѕР»Р»РµРєС†РёРё РёР· XML.
+ */
+public class XmlParser {
+
+    private static final Logger log = LogManager.getLogger(XmlParser.class);
+
+    public void load(String filePath, CollectionManager collectionManager) throws IOException {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            throw new FileNotFoundException("Р¤Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ: " + filePath);
+        }
+        if (!file.canRead()) {
+            throw new IOException("РќРµС‚ РїСЂР°РІ РЅР° С‡С‚РµРЅРёРµ С„Р°Р№Р»Р°: " + filePath);
+        }
+
+        StringBuilder content = new StringBuilder();
+        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(file)))) {
+            while (scanner.hasNextLine()) {
+                content.append(scanner.nextLine()).append("\n");
+            }
+        }
+
+        TreeMap<Long, MusicBand> loaded = parseCollection(content.toString());
+        collectionManager.setCollection(loaded);
+        collectionManager.syncIdCounter();
+        log.info("Р—Р°РіСЂСѓР¶РµРЅРѕ {} СЌР»РµРјРµРЅС‚РѕРІ РёР· С„Р°Р№Р»Р°: {}", loaded.size(), filePath);
+    }
+
+    private TreeMap<Long, MusicBand> parseCollection(String xml) {
+        TreeMap<Long, MusicBand> result = new TreeMap<>();
+        int start = 0;
+        while (true) {
+            int entryStart = xml.indexOf("<entry>", start);
+            if (entryStart < 0) {
+                break;
+            }
+            int entryEnd = xml.indexOf("</entry>", entryStart);
+            if (entryEnd < 0) {
+                break;
+            }
+            String entryXml = xml.substring(entryStart, entryEnd + 8);
+            try {
+                long key = Long.parseLong(extract(entryXml, "key"));
+                String bandXml = extract(entryXml, "band");
+                MusicBand band = parseBand(bandXml);
+                result.put(key, band);
+            } catch (Exception e) {
+                log.warn("РћС€РёР±РєР° СЂР°Р·Р±РѕСЂР° СЌР»РµРјРµРЅС‚Р° РєРѕР»Р»РµРєС†РёРё, РїСЂРѕРїСѓСЃРєР°РµРј: {}", e.getMessage());
+            }
+            start = entryEnd + 8;
+        }
+        return result;
+    }
+
+    private MusicBand parseBand(String xml) {
+        MusicBand band = new MusicBand();
+
+        long id = Long.parseLong(extract(xml, "id"));
+        band.setId(id);
+        band.setName(extract(xml, "name"));
+
+        String coordXml = extract(xml, "coordinates");
+        double cx = Double.parseDouble(extract(coordXml, "x"));
+        float cy = Float.parseFloat(extract(coordXml, "y"));
+        band.setCoordinates(new Coordinates(cx, cy));
+
+        String dateStr = extract(xml, "creationDate");
+        band.setCreationDate(ZonedDateTime.parse(dateStr, MusicBand.DATE_FORMATTER));
+
+        String numOfParts = extractNullable(xml, "numberOfParticipants");
+        if (numOfParts != null) {
+            band.setNumberOfParticipants(Integer.parseInt(numOfParts));
+        }
+
+        band.setAlbumsCount(Integer.parseInt(extract(xml, "albumsCount")));
+
+        String genreStr = extractNullable(xml, "genre");
+        if (genreStr != null) {
+            band.setGenre(MusicGenre.valueOf(genreStr));
+        }
+
+        String frontManXml = extractNullable(xml, "frontMan");
+        if (frontManXml != null) {
+            Person person = new Person();
+            person.setName(extract(frontManXml, "personName"));
+            String birthday = extractNullable(frontManXml, "birthday");
+            if (birthday != null) {
+                try {
+                    person.setBirthday(LocalDateTime.parse(birthday, Person.DATE_FORMATTER));
+                } catch (DateTimeParseException ignored) {
+                }
+            }
+            String height = extractNullable(frontManXml, "height");
+            if (height != null) {
+                person.setHeight(Integer.parseInt(height));
+            }
+            person.setPassportID(extract(frontManXml, "passportID"));
+            band.setFrontMan(person);
+        }
+
+        return band;
+    }
+
+    private String extract(String xml, String tagName) {
+        String open = "<" + tagName + ">";
+        String close = "</" + tagName + ">";
+        int start = xml.indexOf(open);
+        int end = xml.indexOf(close);
+        if (start < 0 || end < 0) {
+            throw new IllegalArgumentException("РўРµРі РЅРµ РЅР°Р№РґРµРЅ: " + tagName);
+        }
+        return xml.substring(start + open.length(), end).trim();
+    }
+
+    private String extractNullable(String xml, String tagName) {
+        String open = "<" + tagName + ">";
+        String close = "</" + tagName + ">";
+        int start = xml.indexOf(open);
+        int end = xml.indexOf(close);
+        if (start < 0 || end < 0) {
+            return null;
+        }
+        String val = xml.substring(start + open.length(), end).trim();
+        return val.isEmpty() ? null : val;
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\util\XmlWriter.java
+========================================
+package server.util;
+
+import common.model.MusicBand;
+import common.model.Person;
+import server.manager.CollectionManager;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Comparator;
+import java.util.Map;
+
+/**
+ * РЎРѕС…СЂР°РЅРµРЅРёРµ РєРѕР»Р»РµРєС†РёРё РІ XML.
+ */
+public class XmlWriter {
+
+    public String save(String filePath, CollectionManager collectionManager) throws IOException {
+        File file = new File(filePath);
+
+        if (file.exists() && !file.canWrite()) {
+            String parent = file.getParent();
+            String name = file.getName();
+            String baseName;
+            String ext = "";
+
+            int dotIndex = name.lastIndexOf('.');
+            if (dotIndex != -1) {
+                baseName = name.substring(0, dotIndex);
+                ext = name.substring(dotIndex);
+            } else {
+                baseName = name;
+            }
+
+            int counter = 1;
+            File newFile;
+            do {
+                String newName = baseName + "+" + counter + ext;
+                newFile = parent == null ? new File(newName) : new File(parent, newName);
+                counter++;
+            } while (newFile.exists());
+
+            file = newFile;
+            System.out.println("РќРµС‚ РїСЂР°РІ РЅР° Р·Р°РїРёСЃСЊ РІ РёСЃС…РѕРґРЅС‹Р№ С„Р°Р№Р». РљРѕР»Р»РµРєС†РёСЏ Р±СѓРґРµС‚ СЃРѕС…СЂР°РЅРµРЅР° РІ РЅРѕРІС‹Р№ С„Р°Р№Р»: "
+                    + file.getAbsolutePath());
+            filePath = newFile.getAbsolutePath();
+        }
+
+        if (!file.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            file.createNewFile();
+        }
+
+        String xml = buildXml(collectionManager);
+        try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file))) {
+            bos.write(xml.getBytes(StandardCharsets.UTF_8));
+            bos.flush();
+        }
+        return filePath;
+    }
+
+    private String buildXml(CollectionManager collectionManager) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        sb.append("<collection>\n");
+        for (Map.Entry<Long, MusicBand> entry : collectionManager.getCollection().entrySet()) {
+            sb.append("  <entry>\n");
+            sb.append("    <key>").append(entry.getKey()).append("</key>\n");
+            sb.append(buildBandXml(entry.getValue()));
+            sb.append("  </entry>\n");
+        }
+        sb.append("</collection>\n");
+        return sb.toString();
+    }
+
+    private String buildBandXml(MusicBand band) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("    <band>\n");
+        sb.append("      <id>").append(band.getId()).append("</id>\n");
+        sb.append("      <name>").append(escapeXml(band.getName())).append("</name>\n");
+        sb.append("      <coordinates>\n");
+        sb.append("        <x>").append(band.getCoordinates().getX()).append("</x>\n");
+        sb.append("        <y>").append(band.getCoordinates().getY()).append("</y>\n");
+        sb.append("      </coordinates>\n");
+        sb.append("      <creationDate>")
+                .append(band.getCreationDate().format(MusicBand.DATE_FORMATTER))
+                .append("</creationDate>\n");
+        if (band.getNumberOfParticipants() != null) {
+            sb.append("      <numberOfParticipants>")
+                    .append(band.getNumberOfParticipants())
+                    .append("</numberOfParticipants>\n");
+        }
+        sb.append("      <albumsCount>").append(band.getAlbumsCount()).append("</albumsCount>\n");
+        if (band.getGenre() != null) {
+            sb.append("      <genre>").append(band.getGenre().name()).append("</genre>\n");
+        }
+        if (band.getFrontMan() != null) {
+            sb.append(buildPersonXml(band.getFrontMan()));
+        }
+        sb.append("    </band>\n");
+        return sb.toString();
+    }
+
+    private String buildPersonXml(Person person) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("      <frontMan>\n");
+        sb.append("        <personName>").append(escapeXml(person.getName())).append("</personName>\n");
+        if (person.getBirthday() != null) {
+            sb.append("        <birthday>")
+                    .append(person.getBirthday().format(Person.DATE_FORMATTER))
+                    .append("</birthday>\n");
+        }
+        if (person.getHeight() != null) {
+            sb.append("        <height>").append(person.getHeight()).append("</height>\n");
+        }
+        sb.append("        <passportID>").append(escapeXml(person.getPassportID())).append("</passportID>\n");
+        sb.append("      </frontMan>\n");
+        return sb.toString();
+    }
+
+    private String escapeXml(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&apos;");
+    }
+
+    private int fact(int n){
+        return tailfact(n,1);
+    }
+
+    private int tailfact(int n, int res){
+        if(n==1) return res;
+        return tailfact(n-1, n*res);
+    }
+}
+
+
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\Server.java
+========================================
+package server;
+
+import server.manager.CollectionManager;
+import server.database.DatabaseManager;
+import server.network.RawPack;
+import server.network.ChunkReader;
+
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.DatagramChannel;
+import java.util.concurrent.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+/**
+ * Р“Р»Р°РІРЅС‹Р№ РєР»Р°СЃСЃ СЃРµСЂРІРµСЂР°, СѓРїСЂР°РІР»СЏСЋС‰РёР№ СЃРµС‚РµРІС‹Рј РєРѕРЅРІРµР№РµСЂРѕРј РїРѕ РѕР±РЅРѕРІР»РµРЅРЅРѕРјСѓ РўР—.
+ */
+public class Server {
+    private static final Logger logger = LogManager.getLogger(Server.class);
+    private static final int PORT = 12345;
+    private static final int BUFFER_SIZE = 65535;
+
+    // РСЃРїРѕР»СЊР·СѓРµРј С‚РІРѕР№ СЂРµР°Р»СЊРЅС‹Р№ CollectionManager (РІРЅСѓС‚СЂРё РЅРµРіРѕ СЃРёРґСЏС‚ TreeMap Рё ReentrantLock)
+    private CollectionManager collectionManager;
+    private DatabaseManager databaseManager;
+
+    // РљРѕРЅС„РёРіСѓСЂР°С†РёСЏ РїСѓР»РѕРІ РїРѕС‚РѕРєРѕРІ СЃС‚СЂРѕРіРѕ РїРѕ С‚РІРѕРµРјСѓ РЅРѕРІРѕРјСѓ РўР—:
+    private ExecutorService readingPool;       // 1. Р§С‚РµРЅРёРµ: FIXED РїСѓР» РїРѕС‚РѕРєРѕРІ
+    private ExecutorService processingPool;    // 2. РћР±СЂР°Р±РѕС‚РєР°: FIXED РїСѓР» РїРѕС‚РѕРєРѕРІ
+    private ExecutorService sendingPool;       // 3. РћС‚РїСЂР°РІРєР°: CACHED РїСѓР» РїРѕС‚РѕРєРѕРІ
+
+    private DatagramChannel channel;
+
+    public void start() {
+        try {
+            logger.info("РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃРµСЂРІРµСЂР° РїРѕ РѕР±РЅРѕРІР»РµРЅРЅРѕРјСѓ РўР— Р›Р 3...");
+
+            // РЎРѕР·РґР°РµРј РјРµРЅРµРґР¶РµСЂ Р‘Р”
+            this.databaseManager = new DatabaseManager();
+
+            // РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј С‚РІРѕР№ CollectionManager
+            this.collectionManager = new CollectionManager();
+
+            // Р—Р°РіСЂСѓР¶Р°РµРј РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… СЃС‚Р°СЂС‚РѕРІСѓСЋ РєРѕР»Р»РµРєС†РёСЋ РІ TreeMap РІРЅСѓС‚СЂРё С‚РІРѕРµРіРѕ РјРµРЅРµРґР¶РµСЂР°
+            // (РњРµС‚РѕРґ loadCollection РјС‹ РґРѕР±Р°РІРёР»Рё РІ DatabaseManager РЅР° РїСЂРѕС€Р»С‹С… С€Р°РіР°С…)
+            this.collectionManager.setCollection(databaseManager.loadCollection());
+
+            // РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„Р°Р±СЂРёРє РїСѓР»РѕРІ РїРѕ РўР—
+            this.readingPool = Executors.newFixedThreadPool(10);   // Fixed РґР»СЏ С‡С‚РµРЅРёСЏ
+            this.processingPool = Executors.newFixedThreadPool(4);  // Fixed РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё (Р‘Р” + РљРѕРјР°РЅРґС‹)
+            this.sendingPool = Executors.newCachedThreadPool();     // Cached РґР»СЏ РѕС‚РїСЂР°РІРєРё РѕС‚РІРµС‚РѕРІ
+
+            // РќР°СЃС‚СЂРѕР№РєР° РЅРµР±Р»РѕРєРёСЂСѓСЋС‰РµРіРѕ UDP РєР°РЅР°Р»Р°
+            this.channel = DatagramChannel.open();
+            this.channel.configureBlocking(false);
+            this.channel.bind(new InetSocketAddress(PORT));
+            logger.info("UDP-СЃРµСЂРІРµСЂ СѓСЃРїРµС€РЅРѕ Р·Р°РїСѓС‰РµРЅ Рё СЃР»СѓС€Р°РµС‚ РїРѕСЂС‚ {}", PORT);
+
+            runMainLoop();
+
+        } catch (IOException e) {
+            logger.fatal("РљСЂРёС‚РёС‡РµСЃРєР°СЏ РѕС€РёР±РєР° Р·Р°РїСѓСЃРєР° СЃРµСЂРІРµСЂР°", e);
+        }
+    }
+
+    private void runMainLoop() {
+        ByteBuffer buffer = ByteBuffer.allocate(BUFFER_SIZE);
+
+        while (true) {
+            try {
+                buffer.clear();
+                SocketAddress clientAddress = channel.receive(buffer);
+
+                if (clientAddress != null) {
+                    buffer.flip();
+                    byte[] rawBytes = new byte[buffer.remaining()];
+                    buffer.get(rawBytes);
+
+                    // РЈРїР°РєРѕРІС‹РІР°РµРј Р±Р°Р№С‚С‹ С‡Р°РЅРєР° РІ РєРѕРЅС‚РµР№РЅРµСЂ
+                    RawPack rawPack = new RawPack(rawBytes, clientAddress);
+
+                    // РџРµСЂРµРґР°РµРј Р·Р°РґР°С‡Сѓ СЃР±РѕСЂРєРё РІ FIXED РїСѓР» С‡С‚РµРЅРёСЏ
+                    readingPool.submit(new ChunkReader(
+                            rawPack, collectionManager, databaseManager, processingPool, sendingPool, channel
+                    ));
+                }
+
+                // Р Р°Р·РіСЂСѓР·РєР° CPU
+                Thread.sleep(5);
+
+            } catch (Exception e) {
+                logger.error("РћС€РёР±РєР° РІ РЅРµР±Р»РѕРєРёСЂСѓСЋС‰РµРј СЃРµС‚РµРІРѕРј С†РёРєР»Рµ СЃРµСЂРІРµСЂР°", e);
+            }
+        }
+    }
+}
+
+
+
+========================================
+FILE: D:\Programming\semester 2\lab6\MusicBand\server\src\main\java\server\ServerMain.java
+========================================
+package server;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import server.command.ServerCommandBootstrap;
+import server.command.ServerCommandRegistry;
+import server.manager.CollectionManager;
+import server.transport.IncomingDatagramProcessor;
+import server.util.XmlParser;
+import server.util.XmlWriter;
+
+import java.io.IOException;
+
+public class ServerMain {
+
+    private static final Logger log = LogManager.getLogger(ServerMain.class);
+    private static final int DEFAULT_PORT = 5555;
+
+    public static void main(String[] args) {
+        if (args.length < 1) {
+            log.error("РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ: java -jar musicband-server.jar <РїСѓС‚СЊ_Рє_xml> [РїРѕСЂС‚]");
+            System.exit(1);
+        }
+        String filePath = args[0];
+        int port = args.length >= 2 ? parsePort(args[1]) : DEFAULT_PORT;
+
+        CollectionManager collectionManager = new CollectionManager();
+        XmlParser xmlParser = new XmlParser();
+        XmlWriter xmlWriter = new XmlWriter();
+        try {
+            xmlParser.load(filePath, collectionManager);
+        } catch (IOException e) {
+            log.warn("РќРµ СѓРґР°Р»РѕСЃСЊ Р·Р°РіСЂСѓР·РёС‚СЊ РєРѕР»Р»РµРєС†РёСЋ: {}. РќР°С‡Р°С‚Р° СЂР°Р±РѕС‚Р° СЃ РїСѓСЃС‚РѕР№ РєРѕР»Р»РµРєС†РёРµР№.", e.getMessage());
+        }
+
+        ServerCommandRegistry commandRegistry = ServerCommandBootstrap.createRegistry(collectionManager);
+        IncomingDatagramProcessor incomingProcessor = new IncomingDatagramProcessor(commandRegistry);
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                xmlWriter.save(filePath, collectionManager);
+                log.info("РљРѕР»Р»РµРєС†РёСЏ СЃРѕС…СЂР°РЅРµРЅР° РІ С„Р°Р№Р»: {}", filePath);
+            } catch (IOException e) {
+                log.error("РћС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё РєРѕР»Р»РµРєС†РёРё: {}", e.getMessage());
+            }
+        }));
+
+        try {
+            UdpServer server = new UdpServer(port, incomingProcessor);
+            log.info("UDP-СЃРµСЂРІРµСЂ СЃР»СѓС€Р°РµС‚ РїРѕСЂС‚ {}, С„Р°Р№Р»: {}", server.getLocalPort(), filePath);
+            server.run();
+        } catch (Exception e) {
+            log.error("РћС€РёР±РєР° СЃРµСЂРІРµСЂР°: {}", e.getMessage(), e);
+            System.exit(1);
+        }
+    }
+
+    private static int parsePort(String s) {
+        try {
+            int p = Integer.parseInt(s);
+            if (p <= 0 || p > 65535) {
+                throw new NumberFormatException();
+            }
+            return p;
+        } catch (NumberFormatException e) {
+            log.error("РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РїРѕСЂС‚: {}", s);
+            System.exit(1);
+            return 0;
+        }
+    }
+}
+
+
+

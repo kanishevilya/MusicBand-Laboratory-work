@@ -22,11 +22,19 @@ public final class ClientCommandContext {
     private LineDispatchHandler lineDispatcher;
     private final Deque<Path> scriptDirectoryStack = new ArrayDeque<>();
 
-    public ClientCommandContext(UdpClient client, InputHandler inputHandler, AtomicLong requestIds) {
+    private final String login;
+    private final String password;
+
+    public ClientCommandContext(UdpClient client, InputHandler inputHandler, AtomicLong requestIds, String login, String password) {
         this.client = client;
         this.inputHandler = inputHandler;
         this.requestIds = requestIds;
+        this.login = login;
+        this.password = password;
     }
+
+    public String getLogin() { return login; }
+    public String getPassword() { return password; }
 
     public long nextId() {
         return requestIds.incrementAndGet();
@@ -34,6 +42,8 @@ public final class ClientCommandContext {
 
     public AbstractResponse send(AbstractRequest request)
             throws IOException, TimeoutException, ProtocolException, DeserializationException {
+        request.setLogin(login);
+        request.setPassword(password);
         return client.sendAndReceive(request);
     }
 

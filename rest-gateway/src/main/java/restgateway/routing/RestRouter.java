@@ -82,7 +82,6 @@ public class RestRouter implements HttpHandler {
 
         RouteKey(String method, String rawPattern) {
             this.method = method;
-            // Превращаем формат /api/bands/{id} в регулярку с именованной группой (?<id>[^/]+)
             Matcher m = Pattern.compile("\\{([^}]+)\\}").matcher(rawPattern);
             StringBuilder sb = new StringBuilder();
             while (m.find()) {

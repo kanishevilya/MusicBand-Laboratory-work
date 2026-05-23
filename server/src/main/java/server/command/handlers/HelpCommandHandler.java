@@ -25,6 +25,7 @@ public final class HelpCommandHandler extends AbstractServerCommandHandler<HelpR
                         .map(info -> String.format("  %-37s : %s", info.name(), info.description()))
                         .collect(Collectors.joining(System.lineSeparator()));
         message += "\n"+String.format("  %-37s : %s", "execute_script <path>", "выполнить скрипт из файла");
+        message += "\n"+String.format("  %-37s : %s", "logout", "выйти из текущего аккаунта");
         return new HelpResponse(rid, true, message);
     }
 }

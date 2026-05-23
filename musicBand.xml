@@ -1,16 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <collection>
-  <entry>
-    <key>1</key>
-    <band>
-      <id>1</id>
-      <name>Aaaa</name>
-      <coordinates>
-        <x>3.0</x>
-        <y>3.0</y>
-      </coordinates>
-      <creationDate>2026-03-27 17:31:40+03:00</creationDate>
-      <albumsCount>4</albumsCount>
-    </band>
-  </entry>
 </collection>

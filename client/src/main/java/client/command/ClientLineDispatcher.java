@@ -18,8 +18,8 @@ public final class ClientLineDispatcher implements LineDispatchHandler {
     private final ClientCommandContext context;
     private final ClientCommandRegistry registry = new ClientCommandRegistry();
 
-    public ClientLineDispatcher(UdpClient client, InputHandler inputHandler, AtomicLong requestIds) {
-        this.context = new ClientCommandContext(client, inputHandler, requestIds);
+    public ClientLineDispatcher(UdpClient client, InputHandler inputHandler, AtomicLong requestIds, String login, String password) {
+        this.context = new ClientCommandContext(client, inputHandler, requestIds, login, password);
         registerCommands();
     }
 

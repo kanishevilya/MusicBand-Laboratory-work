@@ -19,8 +19,7 @@ public final class ShowCommandHandler extends AbstractServerCommandHandler<ShowR
     @Override
     public AbstractResponse handle(ShowRequest request, CollectionCommandContext context) {
         long rid = request.getRequestId();
-        TreeMap<Long, MusicBand> bands = context.collectionManager().bandsSortedForClient()
-                .collect(TreeMap::new, (m, e) -> m.put(e.getKey(), e.getValue()), Map::putAll);
+        TreeMap<Long, MusicBand> bands = context.collectionManager().bandsSortedForClient();
         return new ShowResponse(rid, true, "Элементов: " + bands.size(), bands);
     }
 }

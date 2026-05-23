@@ -18,6 +18,7 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
     private Integer albumsCount;
     private MusicGenre genre;
     private Person frontMan;
+    private String ownerLogin;
 
     public MusicBand() {
     }
@@ -36,6 +37,14 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
 
     public long getId() {
         return id;
+    }
+
+    public String getOwnerLogin() {
+        return ownerLogin;
+    }
+
+    public void setOwnerLogin(String ownerLogin) {
+        this.ownerLogin = ownerLogin;
     }
 
     public void setId(long id) {

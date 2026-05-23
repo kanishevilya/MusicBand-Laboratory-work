@@ -1,9 +1,9 @@
 package server.command.handlers;
 
+import common.model.MusicBand;
 import common.protocol.AbstractResponse;
 import common.protocol.request.ReplaceLowerRequest;
 import common.protocol.response.ReplaceLowerResponse;
-import server.manager.CollectionManager;
 import server.command.AbstractServerCommandHandler;
 import server.command.CollectionCommandContext;
 
@@ -17,14 +17,30 @@ public final class ReplaceLowerCommandHandler extends AbstractServerCommandHandl
     @Override
     public AbstractResponse handle(ReplaceLowerRequest request, CollectionCommandContext context) {
         long rid = request.getRequestId();
-        CollectionManager cm = context.collectionManager();
-        if (!cm.containsKey(request.getKey())) {
+
+        MusicBand existingBand = context.collectionManager().getByKey(request.getKey());
+        if (existingBand == null) {
             return new ReplaceLowerResponse(rid, false, "Элемент с ключом " + request.getKey() + " не найден.");
         }
-        boolean replaceIfLower = cm.replaceIfLower(request.getKey(), request.getBand(), true);
-        if (replaceIfLower) {
-            return new ReplaceLowerResponse(rid, true, "Элемент заменён (новое значение меньше старого).");
+
+        if (request.getBand().compareTo(existingBand) < 0) {
+
+            boolean dbSuccess = context.databaseManager().updateMusicBand(
+                    existingBand.getId(), request.getBand(), request.getLogin()
+            );
+
+            if (dbSuccess) {
+                request.getBand().setId(existingBand.getId());
+                request.getBand().setCreationDate(existingBand.getCreationDate());
+                request.getBand().setOwnerLogin(request.getLogin());
+
+                context.collectionManager().insert(request.getKey(), request.getBand());
+                return new ReplaceLowerResponse(rid, true, "Элемент успешно заменён (новое значение меньше старого).");
+            } else {
+                return new ReplaceLowerResponse(rid, false, "Ошибка: У вас нет прав на изменение этого элемента.");
+            }
         }
+
         return new ReplaceLowerResponse(rid, true, "Замена не выполнена: новое значение не меньше старого.");
     }
 }

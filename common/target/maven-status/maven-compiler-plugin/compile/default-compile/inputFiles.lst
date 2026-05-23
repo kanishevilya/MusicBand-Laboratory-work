@@ -9,6 +9,8 @@ D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\model\Perso
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\net\udp\SimpleUdpStreamFraming.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\AbstractRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\AbstractResponse.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\auth\LoginRequest.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\auth\RegisterRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\AverageOfAlbumsCountRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\ClearRequest.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\request\FilterByAlbumsCountRequest.java
@@ -44,3 +46,4 @@ D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\re
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\protocol\response\UpdateResponse.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\util\BinaryProtocol.java
 D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\util\MusicBandOrdering.java
+D:\Programming\semester 2\lab6\MusicBand\common\src\main\java\common\util\RequestIdGenerator.java

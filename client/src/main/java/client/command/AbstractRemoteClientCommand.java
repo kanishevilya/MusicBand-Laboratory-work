@@ -25,6 +25,7 @@ public abstract class AbstractRemoteClientCommand implements ClientCommand {
     @Override
     public void execute(String[] args, ClientCommandContext context)
             throws IOException, TimeoutException, ProtocolException, DeserializationException {
+
         context.sendAndPrint(createRequest(context));
     }
 }

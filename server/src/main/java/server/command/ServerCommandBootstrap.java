@@ -1,6 +1,7 @@
 package server.command;
 
 import server.command.handlers.*;
+import server.database.DatabaseManager;
 import server.manager.CollectionManager;
 
 public final class ServerCommandBootstrap {
@@ -8,8 +9,8 @@ public final class ServerCommandBootstrap {
     private ServerCommandBootstrap() {
     }
 
-    public static ServerCommandRegistry createRegistry(CollectionManager collectionManager) {
-        CollectionCommandContext ctx = new CollectionCommandContext(collectionManager);
+    public static ServerCommandRegistry createRegistry(CollectionManager collectionManager, DatabaseManager databaseManager) {
+        CollectionCommandContext ctx = new CollectionCommandContext(collectionManager, databaseManager);
         ServerCommandRegistry registry = new ServerCommandRegistry(ctx);
         ctx.setCommandRegistry(registry);
 

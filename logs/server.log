@@ -1,9 +1,64 @@
-2026-05-20 18:48:10 [INFO ] server.util.XmlParser - Загружено 1 элементов из файла: musicBand.xml
-2026-05-20 18:48:10 [INFO ] server.ServerMain - UDP-сервер слушает порт 5555, файл: musicBand.xml
-2026-05-20 18:49:39 [INFO ] server.UdpServer - Получено от: /127.0.0.1:63969
-2026-05-20 18:49:39 [WARN ] server.transport.IncomingDatagramProcessor - Некорректный запрос от клиента: Ошибка чтения объекта
-2026-05-20 18:49:39 [DEBUG] server.UdpServer - Ответ отправлен клиенту: /127.0.0.1:63969
-2026-05-20 18:52:49 [INFO ] server.UdpServer - Получено от: /127.0.0.1:56819
-2026-05-20 18:52:49 [DEBUG] server.transport.IncomingDatagramProcessor - Обработка запроса: ShowRequest (id=1)
-2026-05-20 18:52:49 [DEBUG] server.command.ServerCommandRegistry - Диспетчеризация команды: show (requestId=1)
-2026-05-20 18:52:49 [DEBUG] server.UdpServer - Ответ отправлен клиенту: /127.0.0.1:56819
+2026-05-23 00:12:08 [INFO ] server.ServerMain - Запуск приложения MusicBand Server...
+2026-05-23 00:12:08 [INFO ] server.Server - Инициализация сервера по обновленному ТЗ ЛР3...
+2026-05-23 00:12:08 [FATAL] server.database.DatabaseManager - Драйвер PostgreSQL не найден в classpath!
+java.lang.ClassNotFoundException: org.postgresql.Driver
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[?:?]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[?:?]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525) ~[?:?]
+	at java.base/java.lang.Class.forName0(Native Method) ~[?:?]
+	at java.base/java.lang.Class.forName(Class.java:375) ~[?:?]
+	at server.database.DatabaseManager.<init>(DatabaseManager.java:30) [classes/:?]
+	at server.Server.start(Server.java:42) [classes/:?]
+	at server.ServerMain.main(ServerMain.java:16) [classes/:?]
+2026-05-23 00:15:27 [INFO ] server.ServerMain - Запуск приложения MusicBand Server...
+2026-05-23 00:15:27 [INFO ] server.Server - Инициализация сервера по обновленному ТЗ ЛР3...
+2026-05-23 00:15:30 [FATAL] server.database.DatabaseManager - Не удалось подключиться к БД на Гелиосе!
+org.postgresql.util.PSQLException: Ошибка при попытке подсоединения.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:358) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.Driver.makeConnection(Driver.java:446) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.3.jar:42.7.3]
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681) ~[java.sql:?]
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:229) ~[java.sql:?]
+	at server.database.DatabaseManager.<init>(DatabaseManager.java:32) [classes/:?]
+	at server.Server.start(Server.java:42) [classes/:?]
+	at server.ServerMain.main(ServerMain.java:16) [classes/:?]
+Caused by: java.net.UnknownHostException: pg
+	at java.base/sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:572) ~[?:?]
+	at java.base/java.net.SocksSocketImpl.connect(SocksSocketImpl.java:327) ~[?:?]
+	at java.base/java.net.Socket.connect(Socket.java:633) ~[?:?]
+	at org.postgresql.core.PGStream.createSocket(PGStream.java:243) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.PGStream.<init>(PGStream.java:98) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:136) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:262) ~[postgresql-42.7.3.jar:42.7.3]
+	... 9 more
+2026-05-23 01:01:27 [INFO ] server.ServerMain - Запуск приложения MusicBand Server...
+2026-05-23 01:01:27 [INFO ] server.Server - Инициализация сервера по обновленному ТЗ ЛР3...
+2026-05-23 01:01:32 [FATAL] server.database.DatabaseManager - Не удалось подключиться к БД на Гелиосе!
+org.postgresql.util.PSQLException: Ошибка при попытке подсоединения.
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:358) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.ConnectionFactory.openConnection(ConnectionFactory.java:54) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.jdbc.PgConnection.<init>(PgConnection.java:273) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.Driver.makeConnection(Driver.java:446) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.Driver.connect(Driver.java:298) ~[postgresql-42.7.3.jar:42.7.3]
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:681) ~[java.sql:?]
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:229) ~[java.sql:?]
+	at server.database.DatabaseManager.<init>(DatabaseManager.java:32) [classes/:?]
+	at server.Server.start(Server.java:42) [classes/:?]
+	at server.ServerMain.main(ServerMain.java:16) [classes/:?]
+Caused by: java.net.SocketTimeoutException: Read timed out
+	at java.base/sun.nio.ch.NioSocketImpl.timedRead(NioSocketImpl.java:288) ~[?:?]
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:314) ~[?:?]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:355) ~[?:?]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:808) ~[?:?]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:966) ~[?:?]
+	at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:162) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:129) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:114) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:74) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:467) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.enableSSL(ConnectionFactoryImpl.java:594) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.tryConnect(ConnectionFactoryImpl.java:195) ~[postgresql-42.7.3.jar:42.7.3]
+	at org.postgresql.core.v3.ConnectionFactoryImpl.openConnectionImpl(ConnectionFactoryImpl.java:262) ~[postgresql-42.7.3.jar:42.7.3]
+	... 9 more
