@@ -32,7 +32,7 @@ public class DatabaseManager {
             logger.fatal("Драйвер PostgreSQL не найден в classpath!", e);
             throw new RuntimeException(e);
         } catch (SQLException e) {
-            logger.error("Не удалось первично подключиться к БД! Сервер продолжит работу, переподключение будет выполнено при первой необходимости.", e);
+            logger.error("Не удалось первично подключиться к БД! Сервер продолжит работу, переподключение будет выполнено при первой необходимости.");
         }
     }
 

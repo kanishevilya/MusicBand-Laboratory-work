@@ -1,0 +1,1507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>D:/Programming/semester 2/lab6/MusicBand</OriginalElement>
+  <nodes>
+    <node x="7589.5" y="7922.5">common.exception.ScriptEndException</node>
+    <node x="6754.0" y="4936.0">util.InputHandler</node>
+    <node x="6655.5" y="6749.0">server.command.AbstractServerCommandHandler</node>
+    <node x="-243.0" y="2305.0">client.command.commands.PrintFieldDescendingAlbumsCountClientCommand</node>
+    <node x="7165.0" y="7905.0">restgateway.config.RouteConfigurator</node>
+    <node x="6970.0" y="7773.0">client.util.PersonReader</node>
+    <node x="2064.5" y="7573.0">server.transport.IncomingDatagramProcessor</node>
+    <node x="1098.5" y="2145.0">client.command.commands.ClearClientCommand</node>
+    <node x="5493.0" y="5572.5">common.protocol.request.FilterByAlbumsCountRequest</node>
+    <node x="2693.5" y="6408.0">server.command.CollectionCommandContext</node>
+    <node x="2616.0" y="4396.0">common.model.MusicBand</node>
+    <node x="4415.5" y="7245.0">server.command.handlers.FilterByAlbumsCountCommandHandler</node>
+    <node x="6832.0" y="7893.0">common.util.BinaryProtocol</node>
+    <node x="7596.5" y="7053.0">common.net.udp.SimpleUdpStreamFraming.StreamReceiver</node>
+    <node x="7387.0" y="6749.0">client.ClientMain</node>
+    <node x="-125.5" y="5602.5">common.protocol.response.RemoveResponse</node>
+    <node x="7244.5" y="6505.0">common.net.udp.SimpleUdpStreamFraming</node>
+    <node x="2525.5" y="7053.0">server.command.handlers.ScriptSessionEndCommandHandler</node>
+    <node x="178.0" y="3585.0">restgateway.routing.actions.AverageAlbumsAction</node>
+    <node x="5939.0" y="5972.5">common.protocol.request.RemoveRequest</node>
+    <node x="-109.0" y="1693.0">client.command.ClientCommandRegistry</node>
+    <node x="7119.0" y="6760.5">command.ShowPricesCommand</node>
+    <node x="4552.5" y="6002.5">common.protocol.request.HelpRequest</node>
+    <node x="-12.5" y="6002.5">common.protocol.response.ReplaceGreaterResponse</node>
+    <node x="6246.0" y="5602.5">common.protocol.request.PrintFieldDescendingAlbumsCountRequest</node>
+    <node x="6701.0" y="7802.5">common.exception.CancelInputException</node>
+    <node x="6636.0" y="4642.5">command.BenchmarkRatesCommand.BenchmarkResult</node>
+    <node x="6275.5" y="7905.0">server.command.ServerCommandBootstrap</node>
+    <node x="4964.0" y="3782.5">restgateway.routing.RestRouter.RouteKey</node>
+    <node x="946.0" y="6002.5">common.protocol.response.ErrorResponse</node>
+    <node x="898.5" y="2305.0">client.command.commands.HelpClientCommand</node>
+    <node x="6971.5" y="6480.5">command.ExecuteScriptCommand</node>
+    <node x="666.0" y="1053.0">client.command.ClientCommand</node>
+    <node x="2487.0" y="5972.5">common.protocol.response.GetByKeyResponse</node>
+    <node x="458.0" y="3445.0">restgateway.routing.actions.InfoAction</node>
+    <node x="3622.5" y="7065.0">server.command.handlers.HelpCommandHandler</node>
+    <node x="6513.0" y="6409.0">util.RedisRespClient</node>
+    <node x="2043.0" y="1065.0">client.command.LineDispatchHandler</node>
+    <node x="-244.0" y="-308.0">model.MusicBand</node>
+    <node x="2858.0" y="2445.0">restgateway.routing.HttpAction</node>
+    <node x="6049.5" y="5602.5">common.protocol.auth.LoginRequest</node>
+    <node x="6336.5" y="6700.0">manager.CommandManager</node>
+    <node x="5996.0" y="7028.5">server.network.RawPack</node>
+    <node x="5110.0" y="6002.5">common.protocol.request.ClearRequest</node>
+    <node x="4112.0" y="7065.0">server.command.handlers.AverageOfAlbumsCountCommandHandler</node>
+    <node x="6217.0" y="6480.5">command.ShowCommand</node>
+    <node x="6003.0" y="6749.0">server.script.ScriptRecursionGuard</node>
+    <node x="-253.0" y="3585.0">restgateway.network.UdpGatewayImpl</node>
+    <node x="2698.0" y="3445.0">restgateway.routing.actions.GetByIdAction</node>
+    <node x="6144.5" y="7785.0">common.util.RequestIdGenerator</node>
+    <node x="5880.0" y="6469.0">model.MusicGenre</node>
+    <node x="3538.0" y="3585.0">restgateway.routing.actions.InsertAction</node>
+    <node x="1298.0" y="3585.0">restgateway.routing.actions.RemoveGreaterAction</node>
+    <node x="3818.0" y="3445.0">restgateway.routing.actions.UpdateAction</node>
+    <node x="5577.5" y="6760.5">command.PrintFieldDescendingAlbumsCountCommand</node>
+    <node x="5394.5" y="6480.5">command.AverageOfAlbumsCountCommand</node>
+    <node x="5274.0" y="6760.5">command.UpdateCommand</node>
+    <node x="1193.0" y="6002.5">common.protocol.response.ReplaceLowerResponse</node>
+    <node x="5812.5" y="5572.5">common.protocol.request.GetByKeyRequest</node>
+    <node x="6695.5" y="7245.0">server.command.handlers.UpdateCommandHandler</node>
+    <node x="7220.5" y="7245.0">server.command.handlers.ClearCommandHandler</node>
+    <node x="746.0" y="1393.0">client.command.commands.ReplaceLowerClientCommand</node>
+    <node x="3258.0" y="3445.0">restgateway.routing.actions.HelpAction</node>
+    <node x="4882.5" y="5602.5">common.protocol.request.AverageOfAlbumsCountRequest</node>
+    <node x="4957.0" y="6700.0">util.ApiRateProviderRedisCache</node>
+    <node x="26.0" y="1393.0">client.command.commands.RemoveGreaterClientCommand</node>
+    <node x="2138.0" y="3445.0">restgateway.routing.actions.DescendingAlbumsAction</node>
+    <node x="4837.0" y="6480.5">command.InsertCommand</node>
+    <node x="376.0" y="5560.5">common.protocol.response.AverageOfAlbumsCountResponse</node>
+    <node x="5011.0" y="7245.0">server.command.handlers.RemoveGreaterCommandHandler</node>
+    <node x="5325.0" y="7065.0">server.command.handlers.InfoCommandHandler</node>
+    <node x="386.0" y="1393.0">client.command.commands.UpdateClientCommand</node>
+    <node x="164.0" y="5602.5">common.protocol.response.ClearResponse</node>
+    <node x="6046.0" y="7893.0">server.command.CommandInfo</node>
+    <node x="4667.0" y="6760.0">util.ApiRateProviderNoCache</node>
+    <node x="5867.0" y="7785.0">util.RateProvider</node>
+    <node x="5748.0" y="7922.5">common.util.MusicBandOrdering</node>
+    <node x="2418.0" y="3585.0">restgateway.routing.actions.FilterByAlbumsCountAction</node>
+    <node x="4172.0" y="5972.5">common.protocol.request.RemoveGreaterRequest</node>
+    <node x="5648.0" y="7773.0">util.IdGenerator</node>
+    <node x="1627.0" y="6002.5">common.protocol.response.HelpResponse</node>
+    <node x="6953.5" y="7053.0">server.command.handlers.GetByIdCommandHandler</node>
+    <node x="-248.0" y="7585.0">server.network.RequestProcessor</node>
+    <node x="4639.5" y="5602.5">common.protocol.auth.RegisterRequest</node>
+    <node x="738.0" y="3585.0">restgateway.routing.actions.ScriptSessionEndAction</node>
+    <node x="4548.0" y="6469.0">model.Currency</node>
+    <node x="-249.0" y="304.0">manager.CollectionManager</node>
+    <node x="2094.5" y="2421.0">restgateway.json.JsonMapper</node>
+    <node x="805.0" y="7453.0">server.Server</node>
+    <node x="4384.5" y="6760.5">command.RemoveGreaterCommand</node>
+    <node x="206.0" y="1693.0">client.command.commands.RemoveClientCommand</node>
+    <node x="2545.0" y="6760.5">command.ReplaceGreaterCommand</node>
+    <node x="5425.5" y="7905.0">restgateway.routing.util.UriParser</node>
+    <node x="6455.5" y="5937.0">server.command.ServerCommandHandler</node>
+    <node x="218.5" y="2305.0">client.command.commands.InfoClientCommand</node>
+    <node x="2437.0" y="6480.5">command.ClearCommand</node>
+    <node x="-89.0" y="4564.5">common.protocol.AbstractResponse</node>
+    <node x="-173.0" y="2445.0">restgateway.network.UdpGateway</node>
+    <node x="7454.0" y="7482.5">common.exception.ProtocolException</node>
+    <node x="18.5" y="2145.0">client.command.commands.AverageOfAlbumsCountClientCommand</node>
+    <node x="2229.5" y="6713.0">server.util.XmlWriter</node>
+    <node x="3997.5" y="5548.5">common.protocol.request.ReplaceLowerRequest</node>
+    <node x="5107.5" y="7785.0">client.command.ExecuteScriptRunner</node>
+    <node x="4658.0" y="3585.0">restgateway.routing.actions.GetByKeyAction</node>
+    <node x="1997.0" y="6456.0">command.SaveCommand</node>
+    <node x="3841.0" y="5948.5">common.protocol.request.UpdateRequest</node>
+    <node x="4973.5" y="7905.0">client.command.ClientCommandArgs</node>
+    <node x="6397.0" y="4600.5">command.HelpCommand</node>
+    <node x="1786.0" y="6760.5">command.FilterByAlbumsCountCommand</node>
+    <node x="1319.0" y="5560.5">common.protocol.response.PrintFieldDescendingAlbumsCountResponse</node>
+    <node x="4866.5" y="7785.0">Main</node>
+    <node x="2798.0" y="5960.5">common.protocol.response.ShowResponse</node>
+    <node x="4729.5" y="7893.0">restgateway.RestApp</node>
+    <node x="553.5" y="5865.0">server.database.DatabaseManager</node>
+    <node x="4378.0" y="3445.0">restgateway.routing.actions.ClearBandsAction</node>
+    <node x="6277.0" y="5140.5">command.Command</node>
+    <node x="842.5" y="5602.5">common.protocol.response.InsertResponse</node>
+    <node x="4450.0" y="7773.0">util.PersonReader</node>
+    <node x="1673.0" y="6408.0">model.Person</node>
+    <node x="2279.5" y="896.0">client.util.InputHandler</node>
+    <node x="1578.0" y="3445.0">restgateway.routing.actions.ScriptSessionBeginAction</node>
+    <node x="4348.0" y="7893.0">server.util.IdGenerator</node>
+    <node x="1736.5" y="5602.5">common.protocol.response.UpdateResponse</node>
+    <node x="2270.0" y="7197.0">server.command.ServerCommandRegistry</node>
+    <node x="1391.0" y="6737.0">util.XmlParser</node>
+    <node x="5023.0" y="3549.0">restgateway.routing.RestRouter</node>
+    <node x="3859.5" y="7245.0">server.command.handlers.InsertCommandHandler</node>
+    <node x="1326.0" y="1693.0">client.command.commands.ExecuteScriptClientCommand</node>
+    <node x="3007.5" y="5560.5">common.protocol.response.FilterByAlbumsCountResponse</node>
+    <node x="-243.5" y="5985.0">server.network.ResponseSender</node>
+    <node x="4740.0" y="5972.5">common.protocol.request.ScriptSessionBeginRequest</node>
+    <node x="269.5" y="6002.5">common.protocol.response.InfoResponse</node>
+    <node x="1858.0" y="3585.0">restgateway.routing.actions.ReplaceLowerAction</node>
+    <node x="1293.0" y="6456.0">model.Coordinates</node>
+    <node x="925.5" y="1693.0">client.command.commands.FilterByAlbumsCountClientCommand</node>
+    <node x="6546.0" y="3904.5">command.BenchmarkRatesCommand</node>
+    <node x="4735.5" y="7065.0">server.command.handlers.ReplaceLowerCommandHandler</node>
+    <node x="5206.0" y="5572.5">common.protocol.request.ScriptSessionEndRequest</node>
+    <node x="2806.5" y="7245.0">server.command.handlers.PrintFieldDescendingAlbumsCountCommandHandler</node>
+    <node x="2653.5" y="5572.5">common.protocol.response.GetByIdResponse</node>
+    <node x="5709.0" y="6002.5">common.protocol.request.ShowRequest</node>
+    <node x="1647.0" y="1053.0">client.network.UdpClient</node>
+    <node x="1846.0" y="1393.0">client.command.commands.ReplaceGreaterClientCommand</node>
+    <node x="3112.5" y="7065.0">server.command.handlers.RemoveCommandHandler</node>
+    <node x="6517.0" y="5092.0">common.protocol.AbstractRequest</node>
+    <node x="4098.0" y="3585.0">restgateway.routing.actions.ReplaceGreaterAction</node>
+    <node x="7431.5" y="7802.5">common.exception.DeserializationException</node>
+    <node x="2497.0" y="5140.5">command.InfoCommand</node>
+    <node x="4131.0" y="7773.0">util.ExchangeRateClient</node>
+    <node x="2633.0" y="3868.0">common.model.Person</node>
+    <node x="566.0" y="1693.0">client.command.commands.InsertClientCommand</node>
+    <node x="-243.0" y="5140.5">command.ExitCommand</node>
+    <node x="2773.0" y="4156.0">common.model.Coordinates</node>
+    <node x="5980.0" y="7573.0">server.transport.ChunkedUdpSocketTransport</node>
+    <node x="1298.5" y="2305.0">client.command.commands.ShowClientCommand</node>
+    <node x="1018.0" y="3445.0">restgateway.routing.actions.RemoveAction</node>
+    <node x="1680.0" y="1524.0">client.command.ClientCommandContext</node>
+    <node x="628.0" y="2072.0">client.command.ClientLineDispatcher</node>
+    <node x="1098.5" y="1381.0">client.command.AbstractRemoteClientCommand</node>
+    <node x="4026.5" y="7905.0">server.ServerMain</node>
+    <node x="3881.0" y="7802.5">exception.CancelInputException</node>
+    <node x="3379.5" y="7245.0">server.command.handlers.ShowCommandHandler</node>
+    <node x="2500.0" y="4169.0">common.model.MusicGenre</node>
+    <node x="5559.5" y="7233.0">server.command.handlers.ScriptSessionBeginCommandHandler</node>
+    <node x="1047.5" y="5602.5">common.protocol.response.RemoveGreaterResponse</node>
+    <node x="3330.5" y="5708.0">server.manager.CollectionManager</node>
+    <node x="3453.5" y="7893.0">server.transport.ChunkedUdpSocketTransport.Received</node>
+    <node x="6131.5" y="7245.0">server.command.handlers.ReplaceGreaterCommandHandler</node>
+    <node x="906.0" y="6749.0">util.MusicBandReader</node>
+    <node x="426.0" y="6761.0">client.util.MusicBandReader</node>
+    <node x="6139.0" y="5972.5">common.protocol.request.GetByIdRequest</node>
+    <node x="3707.0" y="5548.5">common.protocol.request.InsertRequest</node>
+    <node x="3718.5" y="7905.0">server.util.PasswordHasher</node>
+    <node x="5395.0" y="6002.5">common.protocol.request.InfoRequest</node>
+    <node x="14.5" y="3421.0">restgateway.json.JacksonMapper</node>
+    <node x="2978.0" y="3585.0">restgateway.routing.actions.ShowAction</node>
+    <node x="312.0" y="6480.5">command.RemoveCommand</node>
+    <node x="4372.5" y="5548.5">common.protocol.request.ReplaceGreaterRequest</node>
+    <node x="150.5" y="6760.5">command.ReplaceLowerCommand</node>
+    <node x="2368.5" y="7465.0">server.network.ChunkReader</node>
+    <node x="6427.5" y="7053.0">server.command.handlers.GetByKeyCommandHandler</node>
+    <node x="-109.0" y="6457.0">server.util.XmlParser</node>
+    <node x="3609.5" y="7802.5">exception.ScriptEndException</node>
+    <node x="-270.5" y="6737.0">util.XmlWriter</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="server.network.ChunkReader" target="server.network.RawPack" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="2443.0" y="7376.0" />
+      <point x="6103.0" y="7376.0" />
+      <point x="0.0" y="67.5" />
+    </edge>
+    <edge source="command.BenchmarkRatesCommand.BenchmarkResult" target="command.BenchmarkRatesCommand" relationship="INNER_CLASS">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="91.5" />
+    </edge>
+    <edge source="server.command.handlers.InsertCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="4083.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="client.command.ClientCommandContext" target="client.util.InputHandler" relationship="TO_ONE">
+      <point x="0.0" y="-212.0" />
+      <point x="1823.0" y="1336.0" />
+      <point x="2423.0" y="1336.0" />
+      <point x="0.0" y="200.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionEndAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="820.5" y="3556.0" />
+      <point x="823.0" y="3556.0" />
+      <point x="823.0" y="3036.0" />
+      <point x="2263.0" y="3036.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.AverageAlbumsAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="425.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.Server" target="server.command.ServerCommandRegistry" relationship="TO_ONE">
+      <point x="0.0" y="-43.0" />
+      <point x="883.0" y="7436.0" />
+      <point x="2243.0" y="7436.0" />
+      <point x="2243.0" y="7176.0" />
+      <point x="2503.0" y="7176.0" />
+      <point x="0.0" y="-79.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByKeyAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4740.5" y="3396.0" />
+      <point x="2583.0" y="3396.0" />
+      <point x="2583.0" y="2596.0" />
+      <point x="2263.0" y="2596.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="common.protocol.request.ShowRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="5783.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="server.network.ResponseSender" target="common.protocol.AbstractResponse" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="-157.0" y="5516.0" />
+      <point x="-43.0" y="5516.0" />
+      <point x="-46.0" y="91.5" />
+    </edge>
+    <edge source="server.command.ServerCommandRegistry" target="server.command.ServerCommandHandler" relationship="TO_MANY">
+      <point x="0.0" y="-79.0" />
+      <point x="2503.0" y="7036.0" />
+      <point x="2743.0" y="7036.0" />
+      <point x="2743.0" y="6996.0" />
+      <point x="5243.0" y="6996.0" />
+      <point x="5243.0" y="6396.0" />
+      <point x="6549.25" y="6396.0" />
+      <point x="-93.75" y="79.0" />
+    </edge>
+    <edge source="common.protocol.request.ReplaceLowerRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="52.75" y="-67.5" />
+      <point x="4155.75" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.GetByIdResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="-44.75" y="-43.5" />
+      <point x="2698.25" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.InfoAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="705.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.protocol.response.FilterByAlbumsCountResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="-67.75" y="-55.5" />
+      <point x="3075.25" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.FilterByAlbumsCountAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2500.5" y="3256.0" />
+      <point x="2263.0" y="3256.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.UpdateAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="4065.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.transport.IncomingDatagramProcessor" target="server.command.ServerCommandRegistry" relationship="TO_ONE">
+      <point x="0.0" y="-43.0" />
+      <point x="2243.0" y="7176.0" />
+      <point x="2503.0" y="7176.0" />
+      <point x="0.0" y="-79.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ShowAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3060.5" y="3276.0" />
+      <point x="2343.0" y="3276.0" />
+      <point x="2343.0" y="2856.0" />
+      <point x="1103.0" y="2856.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.HelpClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="1083.0" y="2016.0" />
+      <point x="1283.0" y="2016.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="common.protocol.request.UpdateRequest" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="-41.0" y="-67.5" />
+      <point x="3882.0" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="client.command.commands.ReplaceGreaterClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="2003.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="client.command.commands.InfoClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="403.0" y="2016.0" />
+      <point x="1283.0" y="2016.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="common.protocol.request.RemoveRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="6023.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.ClearResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="243.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1100.5" y="3416.0" />
+      <point x="1103.0" y="3416.0" />
+      <point x="1103.0" y="3116.0" />
+      <point x="2263.0" y="3116.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="server.command.handlers.ScriptSessionBeginCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="5823.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.InfoAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="540.5" y="3416.0" />
+      <point x="543.0" y="3416.0" />
+      <point x="543.0" y="2976.0" />
+      <point x="2263.0" y="2976.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="common.protocol.request.HelpRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="4623.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="client.command.commands.ExecuteScriptClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="1483.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="common.protocol.request.InsertRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="38.0" y="-67.5" />
+      <point x="3821.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ClearBandsAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4460.5" y="3376.0" />
+      <point x="2543.0" y="3376.0" />
+      <point x="2543.0" y="2656.0" />
+      <point x="1103.0" y="2656.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.ShowClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="1483.0" y="2016.0" />
+      <point x="1283.0" y="2016.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="client.command.AbstractRemoteClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-55.0" />
+      <point x="1283.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="common.protocol.auth.LoginRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="6123.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.ReplaceLowerResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="1303.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="server.network.ChunkReader" target="common.net.udp.SimpleUdpStreamFraming.StreamReceiver" relationship="TO_MANY">
+      <point x="0.0" y="-31.0" />
+      <point x="2443.0" y="7436.0" />
+      <point x="6143.0" y="7436.0" />
+      <point x="6143.0" y="7336.0" />
+      <point x="7683.0" y="7336.0" />
+      <point x="0.0" y="43.0" />
+    </edge>
+    <edge source="common.protocol.request.FilterByAlbumsCountRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="5623.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ClearBandsAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="4625.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.command.handlers.InfoCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="5543.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="server.command.handlers.UpdateCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="6923.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.response.GetByIdResponse" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="44.75" y="-43.5" />
+      <point x="2787.75" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="common.net.udp.SimpleUdpStreamFraming.StreamReceiver" target="common.net.udp.SimpleUdpStreamFraming" relationship="INNER_CLASS">
+      <point x="0.0" y="-43.0" />
+      <point x="7683.0" y="6996.0" />
+      <point x="7363.0" y="6996.0" />
+      <point x="0.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.DescendingAlbumsAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2220.5" y="3416.0" />
+      <point x="2223.0" y="3416.0" />
+      <point x="2223.0" y="2996.0" />
+      <point x="1103.0" y="2996.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.InfoRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="5463.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="1265.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.model.MusicBand" target="common.model.MusicGenre" relationship="TO_ONE">
+      <point x="0.0" y="-260.0" />
+      <point x="2723.0" y="4336.0" />
+      <point x="2603.0" y="4336.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.response.ErrorResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="1023.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="common.protocol.response.FilterByAlbumsCountResponse" target="common.model.MusicBand" relationship="TO_MANY">
+      <point x="67.75" y="-55.5" />
+      <point x="3210.75" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionBeginAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1660.5" y="3416.0" />
+      <point x="1663.0" y="3416.0" />
+      <point x="1663.0" y="3156.0" />
+      <point x="2263.0" y="3156.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="server.command.handlers.GetByIdCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="7183.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="client.command.ClientCommandContext" target="client.command.LineDispatchHandler" relationship="TO_ONE">
+      <point x="0.0" y="-212.0" />
+      <point x="1823.0" y="1336.0" />
+      <point x="2093.0" y="1336.0" />
+      <point x="-50.0" y="31.0" />
+    </edge>
+    <edge source="server.network.RequestProcessor" target="server.command.ServerCommandRegistry" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="-157.0" y="7396.0" />
+      <point x="2243.0" y="7396.0" />
+      <point x="2243.0" y="7176.0" />
+      <point x="2503.0" y="7176.0" />
+      <point x="0.0" y="-79.0" />
+    </edge>
+    <edge source="server.command.handlers.GetByKeyCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="6663.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.HelpAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3340.5" y="3296.0" />
+      <point x="2383.0" y="3296.0" />
+      <point x="2383.0" y="2796.0" />
+      <point x="2263.0" y="2796.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="common.protocol.response.RemoveResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="-37.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="common.exception.DeserializationException" target="common.exception.ProtocolException" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="0.0" y="13.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.InfoAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="540.5" y="3416.0" />
+      <point x="543.0" y="3416.0" />
+      <point x="543.0" y="2956.0" />
+      <point x="1103.0" y="2956.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ClearBandsAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4460.5" y="3376.0" />
+      <point x="2543.0" y="3376.0" />
+      <point x="2543.0" y="2616.0" />
+      <point x="2263.0" y="2616.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="client.command.ClientLineDispatcher" target="client.command.LineDispatchHandler" relationship="REALIZATION">
+      <point x="57.5" y="-104.0" />
+      <point x="800.5" y="1996.0" />
+      <point x="2183.0" y="1996.0" />
+      <point x="2183.0" y="1716.0" />
+      <point x="2193.0" y="1716.0" />
+      <point x="50.0" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.PrintFieldDescendingAlbumsCountClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="-37.0" y="2016.0" />
+      <point x="1283.0" y="2016.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="client.command.commands.ReplaceLowerClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="server.command.handlers.RemoveGreaterCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="5263.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.RestRouter.RouteKey" target="restgateway.routing.RestRouter" relationship="INNER_CLASS">
+      <point x="29.5" y="-13.5" />
+      <point x="5052.5" y="3756.0" />
+      <point x="5163.0" y="3756.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.FilterByAlbumsCountAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2500.5" y="3256.0" />
+      <point x="2263.0" y="3256.0" />
+      <point x="2263.0" y="3216.0" />
+      <point x="1103.0" y="3216.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.network.UdpGatewayImpl" target="restgateway.network.UdpGateway" relationship="REALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="-77.0" y="3556.0" />
+      <point x="-85.0" y="3556.0" />
+      <point x="-88.0" y="31.0" />
+    </edge>
+    <edge source="server.command.handlers.RemoveCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="3343.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.HelpAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="3505.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.InsertClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="723.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="server.command.handlers.ClearCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="7443.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.HelpAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3340.5" y="3296.0" />
+      <point x="2383.0" y="3296.0" />
+      <point x="2383.0" y="2816.0" />
+      <point x="1103.0" y="2816.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.GetByIdRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="6223.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.model.MusicBand" target="common.model.Person" relationship="TO_ONE">
+      <point x="0.0" y="-260.0" />
+      <point x="0.0" y="128.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionEndAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="820.5" y="3556.0" />
+      <point x="823.0" y="3556.0" />
+      <point x="823.0" y="3016.0" />
+      <point x="1103.0" y="3016.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.RemoveGreaterRequest" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="-55.5" y="-43.5" />
+      <point x="4227.5" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="common.protocol.response.UpdateResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="1823.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.RestRouter" target="restgateway.routing.HttpAction" relationship="TO_MANY">
+      <point x="0.0" y="-67.0" />
+      <point x="5163.0" y="3496.0" />
+      <point x="4943.0" y="3496.0" />
+      <point x="4943.0" y="2536.0" />
+      <point x="3105.5" y="2536.0" />
+      <point x="82.5" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceGreaterAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4180.5" y="3356.0" />
+      <point x="2503.0" y="3356.0" />
+      <point x="2503.0" y="2696.0" />
+      <point x="1103.0" y="2696.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="server.command.AbstractServerCommandHandler" target="server.command.ServerCommandHandler" relationship="REALIZATION">
+      <point x="-93.75" y="-67.0" />
+      <point x="6749.25" y="6396.0" />
+      <point x="6736.75" y="6396.0" />
+      <point x="93.75" y="79.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionEndAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="985.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.ReplaceGreaterRequest" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="-55.25" y="-67.5" />
+      <point x="4427.75" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="server.command.handlers.ShowCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="3603.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.request.PrintFieldDescendingAlbumsCountRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.request.ScriptSessionEndRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="5323.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.InsertResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="923.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.FilterByAlbumsCountAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="2665.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.RemoveClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="363.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="server.command.CollectionCommandContext" target="server.command.ServerCommandRegistry" relationship="TO_ONE">
+      <point x="0.0" y="128.0" />
+      <point x="2843.0" y="6936.0" />
+      <point x="2503.0" y="6936.0" />
+      <point x="0.0" y="-79.0" />
+    </edge>
+    <edge source="server.network.ChunkReader" target="server.database.DatabaseManager" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="2443.0" y="7376.0" />
+      <point x="2203.0" y="7376.0" />
+      <point x="2203.0" y="6396.0" />
+      <point x="723.0" y="6396.0" />
+      <point x="0.0" y="151.0" />
+    </edge>
+    <edge source="server.command.ServerCommandRegistry" target="server.command.CollectionCommandContext" relationship="TO_ONE">
+      <point x="0.0" y="-79.0" />
+      <point x="2503.0" y="7036.0" />
+      <point x="2743.0" y="7036.0" />
+      <point x="2743.0" y="6996.0" />
+      <point x="2843.0" y="6996.0" />
+      <point x="0.0" y="128.0" />
+    </edge>
+    <edge source="common.protocol.request.GetByKeyRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="5903.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1100.5" y="3416.0" />
+      <point x="1103.0" y="3416.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.ScriptSessionBeginRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.5" />
+      <point x="4863.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="server.transport.ChunkedUdpSocketTransport" target="common.net.udp.SimpleUdpStreamFraming.StreamReceiver" relationship="TO_ONE">
+      <point x="0.0" y="-43.0" />
+      <point x="6143.0" y="7336.0" />
+      <point x="7683.0" y="7336.0" />
+      <point x="0.0" y="43.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceGreaterAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4180.5" y="3356.0" />
+      <point x="2503.0" y="3356.0" />
+      <point x="2503.0" y="2676.0" />
+      <point x="2263.0" y="2676.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="client.command.ClientLineDispatcher" target="client.command.ClientCommandRegistry" relationship="TO_ONE">
+      <point x="-57.5" y="-104.0" />
+      <point x="685.5" y="2036.0" />
+      <point x="-137.0" y="2036.0" />
+      <point x="-137.0" y="1656.0" />
+      <point x="3.0" y="1656.0" />
+      <point x="0.0" y="-43.0" />
+    </edge>
+    <edge source="common.protocol.request.UpdateRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="41.0" y="-67.5" />
+      <point x="3964.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.RestRouter" target="restgateway.routing.RestRouter.RouteKey" relationship="TO_MANY">
+      <point x="0.0" y="-67.0" />
+      <point x="5163.0" y="3516.0" />
+      <point x="5003.0" y="3516.0" />
+      <point x="5003.0" y="3756.0" />
+      <point x="4993.5" y="3756.0" />
+      <point x="-29.5" y="-13.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceGreaterAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="4345.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.ReplaceLowerRequest" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="-52.75" y="-67.5" />
+      <point x="4050.25" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="client.command.ClientCommandContext" target="client.network.UdpClient" relationship="TO_ONE">
+      <point x="0.0" y="-212.0" />
+      <point x="0.0" y="43.0" />
+    </edge>
+    <edge source="common.protocol.response.ShowResponse" target="common.model.MusicBand" relationship="TO_MANY">
+      <point x="62.5" y="-55.5" />
+      <point x="2985.5" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ShowAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3060.5" y="3276.0" />
+      <point x="2343.0" y="3276.0" />
+      <point x="2343.0" y="2836.0" />
+      <point x="2263.0" y="2836.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="server.Server" target="server.database.DatabaseManager" relationship="TO_ONE">
+      <point x="0.0" y="-43.0" />
+      <point x="883.0" y="6396.0" />
+      <point x="723.0" y="6396.0" />
+      <point x="0.0" y="151.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveGreaterAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1380.5" y="3556.0" />
+      <point x="1383.0" y="3556.0" />
+      <point x="1383.0" y="3076.0" />
+      <point x="1103.0" y="3076.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.DescendingAlbumsAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="2385.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.command.handlers.ReplaceLowerCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="4983.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.request.ReplaceGreaterRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="55.25" y="-67.5" />
+      <point x="4538.25" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="server.command.handlers.AverageOfAlbumsCountCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="4383.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceLowerAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1940.5" y="3556.0" />
+      <point x="1943.0" y="3556.0" />
+      <point x="1943.0" y="3056.0" />
+      <point x="1103.0" y="3056.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="client.command.commands.RemoveGreaterClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="183.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="common.protocol.response.PrintFieldDescendingAlbumsCountResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-55.5" />
+      <point x="1503.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="server.command.CollectionCommandContext" target="server.database.DatabaseManager" relationship="TO_ONE">
+      <point x="0.0" y="128.0" />
+      <point x="2843.0" y="6836.0" />
+      <point x="3303.0" y="6836.0" />
+      <point x="3303.0" y="6376.0" />
+      <point x="723.0" y="6376.0" />
+      <point x="0.0" y="151.0" />
+    </edge>
+    <edge source="server.command.handlers.PrintFieldDescendingAlbumsCountCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="3063.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.response.GetByKeyResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="-48.0" y="-43.5" />
+      <point x="2535.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="client.command.commands.FilterByAlbumsCountClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="1083.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="common.protocol.response.GetByKeyResponse" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="48.0" y="-43.5" />
+      <point x="2631.0" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="server.command.handlers.HelpCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="3843.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionBeginAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1660.5" y="3416.0" />
+      <point x="1663.0" y="3416.0" />
+      <point x="1663.0" y="3096.0" />
+      <point x="1103.0" y="3096.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.DescendingAlbumsAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2220.5" y="3416.0" />
+      <point x="2223.0" y="3416.0" />
+      <point x="2223.0" y="3196.0" />
+      <point x="2263.0" y="3196.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ShowAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="3225.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.command.CollectionCommandContext" target="server.manager.CollectionManager" relationship="TO_ONE">
+      <point x="0.0" y="128.0" />
+      <point x="2843.0" y="6836.0" />
+      <point x="3303.0" y="6836.0" />
+      <point x="3303.0" y="5676.0" />
+      <point x="3503.0" y="5676.0" />
+      <point x="0.0" y="-308.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceLowerAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1940.5" y="3556.0" />
+      <point x="1943.0" y="3556.0" />
+      <point x="1943.0" y="3176.0" />
+      <point x="2263.0" y="3176.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.json.JacksonMapper" target="restgateway.json.JsonMapper" relationship="REALIZATION">
+      <point x="0.0" y="-55.0" />
+      <point x="123.0" y="2876.0" />
+      <point x="2148.75" y="2876.0" />
+      <point x="-54.25" y="55.0" />
+    </edge>
+    <edge source="common.protocol.response.ReplaceGreaterResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="103.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="common.protocol.request.AverageOfAlbumsCountRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="5023.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.ShowResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="-62.5" y="-55.5" />
+      <point x="2860.5" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.InsertAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3620.5" y="3316.0" />
+      <point x="2423.0" y="3316.0" />
+      <point x="2423.0" y="2756.0" />
+      <point x="2263.0" y="2756.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveGreaterAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="1545.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.ClearRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="5183.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.request.RemoveGreaterRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="55.5" y="-43.5" />
+      <point x="4338.5" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="common.protocol.response.InfoResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="343.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.ScriptSessionBeginAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="1825.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.network.ChunkReader" target="server.command.ServerCommandRegistry" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="2443.0" y="7416.0" />
+      <point x="2243.0" y="7416.0" />
+      <point x="2243.0" y="7176.0" />
+      <point x="2503.0" y="7176.0" />
+      <point x="0.0" y="-79.0" />
+    </edge>
+    <edge source="client.command.ClientLineDispatcher" target="client.command.ClientCommandContext" relationship="TO_ONE">
+      <point x="-57.5" y="-104.0" />
+      <point x="685.5" y="2036.0" />
+      <point x="-137.0" y="2036.0" />
+      <point x="-137.0" y="1976.0" />
+      <point x="1663.0" y="1976.0" />
+      <point x="1663.0" y="1496.0" />
+      <point x="1823.0" y="1496.0" />
+      <point x="0.0" y="-212.0" />
+    </edge>
+    <edge source="common.protocol.response.RemoveGreaterResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.RestRouter" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="0.0" y="-67.0" />
+      <point x="5163.0" y="3496.0" />
+      <point x="4943.0" y="3496.0" />
+      <point x="4943.0" y="2576.0" />
+      <point x="2263.0" y="2576.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="server.manager.CollectionManager" target="common.model.MusicBand" relationship="TO_MANY">
+      <point x="0.0" y="-308.0" />
+      <point x="3503.0" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.RemoveGreaterAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="1380.5" y="3556.0" />
+      <point x="1383.0" y="3556.0" />
+      <point x="1383.0" y="3136.0" />
+      <point x="2263.0" y="3136.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByIdAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2780.5" y="3416.0" />
+      <point x="2303.0" y="3416.0" />
+      <point x="2303.0" y="2896.0" />
+      <point x="2263.0" y="2896.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByIdAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="2780.5" y="3416.0" />
+      <point x="2303.0" y="3416.0" />
+      <point x="2303.0" y="2936.0" />
+      <point x="1103.0" y="2936.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="server.network.RequestProcessor" target="server.database.DatabaseManager" relationship="TO_ONE">
+      <point x="0.0" y="-31.0" />
+      <point x="-157.0" y="7556.0" />
+      <point x="-297.0" y="7556.0" />
+      <point x="-297.0" y="6396.0" />
+      <point x="723.0" y="6396.0" />
+      <point x="0.0" y="151.0" />
+    </edge>
+    <edge source="server.command.handlers.ReplaceGreaterCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="6383.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.auth.RegisterRequest" target="common.protocol.AbstractRequest" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="4723.0" y="5356.0" />
+      <point x="6423.0" y="5356.0" />
+      <point x="6423.0" y="5336.0" />
+      <point x="6560.0" y="5336.0" />
+      <point x="-43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.InsertAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="3785.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="common.protocol.request.InsertRequest" target="common.model.MusicBand" relationship="TO_ONE">
+      <point x="-38.0" y="-67.5" />
+      <point x="3745.0" y="5516.0" />
+      <point x="2863.0" y="5516.0" />
+      <point x="2863.0" y="4376.0" />
+      <point x="2723.0" y="4376.0" />
+      <point x="0.0" y="-260.0" />
+    </edge>
+    <edge source="common.model.MusicBand" target="common.model.Coordinates" relationship="TO_ONE">
+      <point x="0.0" y="-260.0" />
+      <point x="2723.0" y="4336.0" />
+      <point x="2843.0" y="4336.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="server.command.AbstractServerCommandHandler" target="common.protocol.AbstractRequest" relationship="DEPENDENCY">
+      <point x="93.75" y="-67.0" />
+      <point x="6936.75" y="6716.0" />
+      <point x="6943.0" y="6716.0" />
+      <point x="6943.0" y="5916.0" />
+      <point x="6643.0" y="5916.0" />
+      <point x="6643.0" y="5336.0" />
+      <point x="6646.0" y="5336.0" />
+      <point x="43.0" y="104.0" />
+    </edge>
+    <edge source="client.command.commands.ClearClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.InsertAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3620.5" y="3316.0" />
+      <point x="2423.0" y="3316.0" />
+      <point x="2423.0" y="2776.0" />
+      <point x="1103.0" y="2776.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.ReplaceLowerAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="2105.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByKeyAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="4740.5" y="3396.0" />
+      <point x="2583.0" y="3396.0" />
+      <point x="2583.0" y="2636.0" />
+      <point x="1103.0" y="2636.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="server.transport.ChunkedUdpSocketTransport.Received" target="server.transport.ChunkedUdpSocketTransport" relationship="INNER_CLASS">
+      <point x="0.0" y="-43.0" />
+      <point x="3563.0" y="7756.0" />
+      <point x="6143.0" y="7756.0" />
+      <point x="0.0" y="43.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByIdAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="2945.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.GetByKeyAction" target="restgateway.routing.HttpAction" relationship="REALIZATION">
+      <point x="82.5" y="-31.0" />
+      <point x="4905.5" y="3236.0" />
+      <point x="2943.0" y="3236.0" />
+      <point x="2943.0" y="2536.0" />
+      <point x="2940.5" y="2536.0" />
+      <point x="-82.5" y="31.0" />
+    </edge>
+    <edge source="server.command.handlers.FilterByAlbumsCountCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="4683.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="client.command.commands.UpdateClientCommand" target="client.command.ClientCommand" relationship="REALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="543.0" y="1356.0" />
+      <point x="903.0" y="1356.0" />
+      <point x="903.0" y="1176.0" />
+      <point x="901.5" y="1176.0" />
+      <point x="78.5" y="43.0" />
+    </edge>
+    <edge source="client.command.ClientCommandRegistry" target="client.command.ClientCommand" relationship="TO_MANY">
+      <point x="0.0" y="-43.0" />
+      <point x="3.0" y="1176.0" />
+      <point x="744.5" y="1176.0" />
+      <point x="-78.5" y="43.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.AverageAlbumsAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="260.5" y="3556.0" />
+      <point x="263.0" y="3556.0" />
+      <point x="263.0" y="2896.0" />
+      <point x="1103.0" y="2896.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+    <edge source="server.command.ServerCommandHandler" target="common.protocol.AbstractRequest" relationship="DEPENDENCY">
+      <point x="0.0" y="-79.0" />
+      <point x="6643.0" y="5336.0" />
+      <point x="6646.0" y="5336.0" />
+      <point x="43.0" y="104.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.AverageAlbumsAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="260.5" y="3556.0" />
+      <point x="263.0" y="3556.0" />
+      <point x="263.0" y="2916.0" />
+      <point x="2263.0" y="2916.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="client.command.commands.AverageOfAlbumsCountClientCommand" target="client.command.AbstractRemoteClientCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-31.0" />
+      <point x="203.0" y="2016.0" />
+      <point x="1283.0" y="2016.0" />
+      <point x="0.0" y="55.0" />
+    </edge>
+    <edge source="common.protocol.response.HelpResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-13.5" />
+      <point x="1703.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="server.command.handlers.ScriptSessionEndCommandHandler" target="server.command.AbstractServerCommandHandler" relationship="GENERALIZATION">
+      <point x="0.0" y="-43.0" />
+      <point x="2783.0" y="7016.0" />
+      <point x="6843.0" y="7016.0" />
+      <point x="0.0" y="67.0" />
+    </edge>
+    <edge source="common.protocol.response.AverageOfAlbumsCountResponse" target="common.protocol.AbstractResponse" relationship="GENERALIZATION">
+      <point x="0.0" y="-55.5" />
+      <point x="523.0" y="5536.0" />
+      <point x="1163.0" y="5536.0" />
+      <point x="1163.0" y="4776.0" />
+      <point x="49.0" y="4776.0" />
+      <point x="46.0" y="91.5" />
+    </edge>
+    <edge source="restgateway.routing.actions.UpdateAction" target="restgateway.json.JsonMapper" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3900.5" y="3336.0" />
+      <point x="2463.0" y="3336.0" />
+      <point x="2463.0" y="2716.0" />
+      <point x="2263.0" y="2716.0" />
+      <point x="2263.0" y="2556.0" />
+      <point x="2257.25" y="2556.0" />
+      <point x="54.25" y="55.0" />
+    </edge>
+    <edge source="restgateway.routing.actions.UpdateAction" target="restgateway.network.UdpGateway" relationship="TO_ONE">
+      <point x="-82.5" y="-31.0" />
+      <point x="3900.5" y="3336.0" />
+      <point x="2463.0" y="3336.0" />
+      <point x="2463.0" y="2736.0" />
+      <point x="1103.0" y="2736.0" />
+      <point x="1103.0" y="2536.0" />
+      <point x="91.0" y="2536.0" />
+      <point x="88.0" y="31.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.38723473811305964" showDependencies="true" x="2077.5524796404493" y="1186.104488988764" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
